@@ -339,45 +339,45 @@
     },
     {
       "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "prev",
       "cmpText": "the previous comparable period",
-      "expected": "Analyse the the selected period, compared to the previous comparable period.\n\nSummarise."
+      "expected": "Analyse the selected period, compared to the previous comparable period.\n\nSummarise."
     },
     {
       "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "yoy",
       "cmpText": "the same period last year",
-      "expected": "Analyse the the selected period, compared to the same period last year.\n\nSummarise."
+      "expected": "Analyse the selected period, compared to the same period last year.\n\nSummarise."
     },
     {
       "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "none",
       "cmpText": null,
-      "expected": "Analyse the the selected period.\n\nSummarise."
+      "expected": "Analyse the selected period.\n\nSummarise."
     },
     {
       "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "",
       "cmpText": null,
-      "expected": "Analyse the the selected period.\n\nSummarise."
+      "expected": "Analyse the selected period.\n\nSummarise."
     },
     {
       "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": null,
       "cmpText": null,
-      "expected": "Analyse the the selected period.\n\nSummarise."
+      "expected": "Analyse the selected period.\n\nSummarise."
     },
     {
       "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "the week before launch",
       "cmpText": "the week before launch",
-      "expected": "Analyse the the selected period, compared to the week before launch.\n\nSummarise."
+      "expected": "Analyse the selected period, compared to the week before launch.\n\nSummarise."
     },
     {
       "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
@@ -759,45 +759,45 @@
     },
     {
       "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "prev",
       "cmpText": "the previous comparable period",
-      "expected": "Review the the selected period and compare it to the previous comparable period. Then list wins."
+      "expected": "Review the selected period and compare it to the previous comparable period. Then list wins."
     },
     {
       "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "yoy",
       "cmpText": "the same period last year",
-      "expected": "Review the the selected period and compare it to the same period last year. Then list wins."
+      "expected": "Review the selected period and compare it to the same period last year. Then list wins."
     },
     {
       "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "none",
       "cmpText": null,
-      "expected": "Review the the selected period. Then list wins."
+      "expected": "Review the selected period. Then list wins."
     },
     {
       "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "",
       "cmpText": null,
-      "expected": "Review the the selected period. Then list wins."
+      "expected": "Review the selected period. Then list wins."
     },
     {
       "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": null,
       "cmpText": null,
-      "expected": "Review the the selected period. Then list wins."
+      "expected": "Review the selected period. Then list wins."
     },
     {
       "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "the week before launch",
       "cmpText": "the week before launch",
-      "expected": "Review the the selected period and compare it to the week before launch. Then list wins."
+      "expected": "Review the selected period and compare it to the week before launch. Then list wins."
     },
     {
       "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
@@ -1179,45 +1179,45 @@
     },
     {
       "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "prev",
       "cmpText": "the previous comparable period",
-      "expected": "Look at the the selected period compared to the previous comparable period for [Campaign Name]."
+      "expected": "Look at the selected period compared to the previous comparable period for [Campaign Name]."
     },
     {
       "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "yoy",
       "cmpText": "the same period last year",
-      "expected": "Look at the the selected period compared to the same period last year for [Campaign Name]."
+      "expected": "Look at the selected period compared to the same period last year for [Campaign Name]."
     },
     {
       "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "none",
       "cmpText": null,
-      "expected": "Look at the the selected period for [Campaign Name]."
+      "expected": "Look at the selected period for [Campaign Name]."
     },
     {
       "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "",
       "cmpText": null,
-      "expected": "Look at the the selected period for [Campaign Name]."
+      "expected": "Look at the selected period for [Campaign Name]."
     },
     {
       "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": null,
       "cmpText": null,
-      "expected": "Look at the the selected period for [Campaign Name]."
+      "expected": "Look at the selected period for [Campaign Name]."
     },
     {
       "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "the week before launch",
       "cmpText": "the week before launch",
-      "expected": "Look at the the selected period compared to the week before launch for [Campaign Name]."
+      "expected": "Look at the selected period compared to the week before launch for [Campaign Name]."
     },
     {
       "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
@@ -1599,45 +1599,45 @@
     },
     {
       "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "prev",
       "cmpText": "the previous comparable period",
-      "expected": "Standalone the previous comparable period mention over the the selected period, again the the selected period."
+      "expected": "Standalone the previous comparable period mention over the selected period, again the selected period."
     },
     {
       "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "yoy",
       "cmpText": "the same period last year",
-      "expected": "Standalone the same period last year mention over the the selected period, again the the selected period."
+      "expected": "Standalone the same period last year mention over the selected period, again the selected period."
     },
     {
       "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "none",
       "cmpText": null,
-      "expected": "Standalone the previous comparable period mention over the the selected period, again the the selected period."
+      "expected": "Standalone the previous comparable period mention over the selected period, again the selected period."
     },
     {
       "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "",
       "cmpText": null,
-      "expected": "Standalone the previous comparable period mention over the the selected period, again the the selected period."
+      "expected": "Standalone the previous comparable period mention over the selected period, again the selected period."
     },
     {
       "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": null,
       "cmpText": null,
-      "expected": "Standalone the previous comparable period mention over the the selected period, again the the selected period."
+      "expected": "Standalone the previous comparable period mention over the selected period, again the selected period."
     },
     {
       "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "the week before launch",
       "cmpText": "the week before launch",
-      "expected": "Standalone the week before launch mention over the the selected period, again the the selected period."
+      "expected": "Standalone the week before launch mention over the selected period, again the selected period."
     },
     {
       "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
@@ -2019,45 +2019,45 @@
     },
     {
       "body": "Compared TO {{CMP}} case, over {{TF}}",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "prev",
       "cmpText": "the previous comparable period",
-      "expected": "Compared TO the previous comparable period case, over the the selected period"
+      "expected": "Compared TO the previous comparable period case, over the selected period"
     },
     {
       "body": "Compared TO {{CMP}} case, over {{TF}}",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "yoy",
       "cmpText": "the same period last year",
-      "expected": "Compared TO the same period last year case, over the the selected period"
+      "expected": "Compared TO the same period last year case, over the selected period"
     },
     {
       "body": "Compared TO {{CMP}} case, over {{TF}}",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "none",
       "cmpText": null,
-      "expected": "Compared TO the previous comparable period case, over the the selected period"
+      "expected": "Compared TO the previous comparable period case, over the selected period"
     },
     {
       "body": "Compared TO {{CMP}} case, over {{TF}}",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "",
       "cmpText": null,
-      "expected": "Compared TO the previous comparable period case, over the the selected period"
+      "expected": "Compared TO the previous comparable period case, over the selected period"
     },
     {
       "body": "Compared TO {{CMP}} case, over {{TF}}",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": null,
       "cmpText": null,
-      "expected": "Compared TO the previous comparable period case, over the the selected period"
+      "expected": "Compared TO the previous comparable period case, over the selected period"
     },
     {
       "body": "Compared TO {{CMP}} case, over {{TF}}",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "the week before launch",
       "cmpText": "the week before launch",
-      "expected": "Compared TO the week before launch case, over the the selected period"
+      "expected": "Compared TO the week before launch case, over the selected period"
     },
     {
       "body": "Compared TO {{CMP}} case, over {{TF}}",
@@ -2439,42 +2439,42 @@
     },
     {
       "body": "No tokens here.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "prev",
       "cmpText": "the previous comparable period",
       "expected": "No tokens here."
     },
     {
       "body": "No tokens here.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "yoy",
       "cmpText": "the same period last year",
       "expected": "No tokens here."
     },
     {
       "body": "No tokens here.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "none",
       "cmpText": null,
       "expected": "No tokens here."
     },
     {
       "body": "No tokens here.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "",
       "cmpText": null,
       "expected": "No tokens here."
     },
     {
       "body": "No tokens here.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": null,
       "cmpText": null,
       "expected": "No tokens here."
     },
     {
       "body": "No tokens here.",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "the week before launch",
       "cmpText": "the week before launch",
       "expected": "No tokens here."
@@ -2859,42 +2859,42 @@
     },
     {
       "body": "",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "prev",
       "cmpText": "the previous comparable period",
       "expected": ""
     },
     {
       "body": "",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "yoy",
       "cmpText": "the same period last year",
       "expected": ""
     },
     {
       "body": "",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "none",
       "cmpText": null,
       "expected": ""
     },
     {
       "body": "",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "",
       "cmpText": null,
       "expected": ""
     },
     {
       "body": "",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": null,
       "cmpText": null,
       "expected": ""
     },
     {
       "body": "",
-      "timeframe": "the selected period",
+      "timeframe": "selected period",
       "comparison": "the week before launch",
       "cmpText": "the week before launch",
       "expected": ""
