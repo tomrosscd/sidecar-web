@@ -8,7 +8,7 @@ Status: M1 to M7 built and in review (stacked PRs). See [docs/PLAN.md](docs/PLAN
 
 - Prompt library with search, category and featured/recommended filters, and a timeframe and comparison builder. A view is shareable through the query string.
 - Prompt pages, collections, saved prompts (stored in this browser only), a Cmd/Ctrl+K palette, and an extension page.
-- Prompt data comes from `https://tomrosscd.github.io/sidecar/prompts.json` at build time. Invalid data fails the build. Collections come from `data/collections.json` until `prompts.json` carries its own.
+- Prompt data comes from `https://tomrosscd.github.io/sidecar/prompts.json` at build time. Invalid data fails the build. Collections come from the `collections` array in `prompts.json`; the build fails if there are none.
 - A hidden skills library, built only when `NEXT_PUBLIC_SHOW_SKILLS=true`.
 - `SUBMIT_URL` and the extension link are in `src/config/site.ts`.
 
