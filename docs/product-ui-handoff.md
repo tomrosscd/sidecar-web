@@ -1,10 +1,33 @@
 # Product UI handoff: findings from building Sidecar Web
 
-Paste this into a session opened in `tomrosscd/cd-product-ui`. Everything was found against 1.5.0 while building Sidecar Web (this repo). Details and workarounds are in [product-ui-gaps.md](product-ui-gaps.md). Sidecar Web did not fork or restyle any Product UI component for these.
+Paste this into a session opened in `tomrosscd/cd-product-ui`. It has two tasks: record Sidecar Web as a consumer (Task A), then triage the gaps found while building it (Task B). Everything was found against 1.5.0. Details and workarounds are in [product-ui-gaps.md](product-ui-gaps.md). Sidecar Web did not fork or restyle any Product UI component for these.
 
-## Brief for that session
+## Task A: record a new consumer
 
-Read AGENTS.md and docs/ai-guidance.md first. For each item below, check the claim against the source, then decide whether it is a defect, an addition or a no. Open one branch and PR per item, or per small group (the first three are small and related). Do not change anything in `tomrosscd/sidecar-web`. Sidecar Web upgrades to the new Product UI release in its own PR afterwards, and removes its workaround then.
+Paste this as the first message of the session.
+
+```
+Record a new consumer of @convert/product-ui: tomrosscd/sidecar-web ("Sidecar Web"), contact Tom Ross.
+
+Read CONSUMERS.md and follow its existing format and evidence rules. Verify read-only from sidecar-web: package.json, the scripts/fetch-product-ui.mjs version and SHA-256, the lockfile, and the latest Pages deploy run via `gh run list -R tomrosscd/sidecar-web`. Record only what you verified and mark the rest unverified.
+
+Also check sidecar-web's docs/product-ui-gaps.md. For each gap, say whether an existing Product UI component already covers it or whether it should become a roadmap item. Report that in the PR description; don't build anything.
+
+Change only CONSUMERS.md (and HANDOFF.md if its rules require it). Branch, open a PR, and don't merge.
+```
+
+Facts as seen from Sidecar Web on 5 October 2026, to check rather than copy. They are a head start, not evidence:
+
+- Package: `@convert/product-ui` 1.5.0, installed as `file:vendor/convert-product-ui-1.5.0.tgz` (package.json and pnpm-lock.yaml).
+- Fetched by `scripts/fetch-product-ui.mjs` (copied from Brand Tools): VERSION `1.5.0`, SHA-256 `1f7109bcae35b9fe96d80d8f7709e95a0b58cbfb169c70d07d472258991ecb63`. The `PRODUCT_UI_TOKEN` Actions secret is used as `GH_TOKEN` in CI and Pages.
+- App: a static Next.js 16 export on GitHub Pages at https://tomrosscd.github.io/sidecar-web/ (the repo is public, so the archive is never committed). Uses `ThemeProvider` (light, workspace appearance), `WorkspaceShell` with the app switcher, `CommandPalette`, `PageLayout`, `FilterToolbar`, `CollectionPanel`, `Card`, `ContentList`, `Grid`, `Stack`, `DatePicker`, `Select`, `Input`, `Textarea`, `Button`, `Icon`, `Badge`, `Progress`, `Alert`, `EmptyState`, `ToastRegion`, `Breadcrumbs`, `KeyValueList` and `SegmentedControl` (list taken from the source imports; re-check).
+- Uses no fork or local restyle of a Product UI component. It has local components for things Product UI lacks (see the gaps file).
+- Contact: Tom Ross.
+- Latest Pages deploy seen: a successful run for commit `dd18478`. Re-check with `gh run list -R tomrosscd/sidecar-web`.
+
+## Task B: triage the gaps
+
+Read AGENTS.md and docs/ai-guidance.md first. For each item below, check the claim against the source, then decide whether it is a defect, an addition or a no. Open one branch and PR per item, or per small group (items 3 to 6 are small). Task A comes first and is report-only. Do not change anything in `tomrosscd/sidecar-web`. Sidecar Web upgrades to the new Product UI release in its own PR afterwards, and removes its workaround then.
 
 ## Items
 
