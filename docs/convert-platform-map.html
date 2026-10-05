@@ -1,436 +1,1403 @@
 <!doctype html>
 <html lang="en-AU">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Convert Platform Map</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
-<style>
-/* Layout: a single reading column for prose, widening to full-bleed bands for the layered architecture diagram and tables. */
-:root {
-  --bg: #f6f7f9;
-  --surface: #ffffff;
-  --sunken: #eef0f4;
-  --fg: #14171f;
-  --muted: #5a6273;
-  --line: #d9dde5;
-  --accent: #2f4bd8;
-  --accent-soft: #e5e9fc;
-  --live: #1f7a4d;   --live-bg: #e2f3ea;
-  --build: #9a5b00;  --build-bg: #fbefd9;
-  --plan: #5a3fc0;   --plan-bg: #ece7fb;
-  --retire: #8a8f9c; --retire-bg: #eceef2;
-  --ext: #0f6b78;    --ext-bg: #dff1f3;
-  --font-display: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0f1218; --surface: #171b23; --sunken: #1d222c; --fg: #e9ecf2; --muted: #9aa3b4; --line: #2b3240;
-    --accent: #8fa2ff; --accent-soft: #232b4d;
-    --live: #6fd3a0; --live-bg: #16301f; --build: #f0b860; --build-bg: #33270f;
-    --plan: #b9a5ff; --plan-bg: #2a2147; --retire: #8a92a3; --retire-bg: #232833;
-    --ext: #6fd0dc; --ext-bg: #12303a;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0f1218; --surface: #171b23; --sunken: #1d222c; --fg: #e9ecf2; --muted: #9aa3b4; --line: #2b3240;
-  --accent: #8fa2ff; --accent-soft: #232b4d;
-  --live: #6fd3a0; --live-bg: #16301f; --build: #f0b860; --build-bg: #33270f;
-  --plan: #b9a5ff; --plan-bg: #2a2147; --retire: #8a92a3; --retire-bg: #232833;
-  --ext: #6fd0dc; --ext-bg: #12303a;
-  color-scheme: dark;
-}
-* { box-sizing: border-box; }
-body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.55; padding: 0 20px; }
-.wrap { max-width: 1120px; margin: 0 auto; padding-block: 40px 80px; display: grid; gap: 56px; }
-.prose { max-width: 70ch; }
-h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.2; }
-h1 { font-size: clamp(30px, 5vw, 44px); font-weight: 700; letter-spacing: -0.02em; }
-h2 { font-size: 24px; font-weight: 700; letter-spacing: -0.01em; }
-h3 { font-size: 16px; font-weight: 600; }
-p { margin: 0; }
-.eyebrow { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-.lede { font-size: 18px; color: var(--muted); max-width: 66ch; }
-section { display: grid; gap: 18px; min-width: 0; }
-.head { display: grid; gap: 6px; }
-a { color: var(--accent); }
-code, .mono { font-family: var(--font-mono); font-size: 0.86em; }
-code { background: var(--sunken); padding: 1px 5px; border-radius: 4px; }
-
-/* Header */
-header.top { display: grid; gap: 14px; }
-.meta { display: flex; flex-wrap: wrap; gap: 8px 18px; color: var(--muted); font-size: 13px; }
-.principles { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-.principle { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
-.principle strong { font-family: var(--font-display); font-size: 15px; }
-.principle span { color: var(--muted); font-size: 14px; }
-
-/* Status pills */
-.pill { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; white-space: nowrap; }
-.pill::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
-.s-live { color: var(--live); background: var(--live-bg); }
-.s-build { color: var(--build); background: var(--build-bg); }
-.s-plan { color: var(--plan); background: var(--plan-bg); }
-.s-retire { color: var(--retire); background: var(--retire-bg); }
-.s-ext { color: var(--ext); background: var(--ext-bg); }
-.legend { display: flex; flex-wrap: wrap; gap: 8px; }
-
-/* Layered diagram */
-.tabs { display: flex; gap: 4px; background: var(--sunken); padding: 4px; border-radius: 10px; width: fit-content; max-width: 100%; flex-wrap: wrap; }
-.tabs button { font: inherit; font-size: 14px; font-weight: 600; border: 0; background: transparent; color: var(--muted); padding: 7px 14px; border-radius: 7px; cursor: pointer; }
-.tabs button[aria-selected="true"] { background: var(--surface); color: var(--fg); box-shadow: 0 1px 2px rgb(0 0 0 / 0.08); }
-.tabs button:focus-visible, .sys:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-.stack { display: grid; gap: 10px; }
-.layer { display: grid; grid-template-columns: 170px 1fr; gap: 14px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; min-width: 0; }
-.layer-label { display: grid; gap: 4px; align-content: start; }
-.layer-label .eyebrow { color: var(--accent); }
-.layer-label p { font-size: 13px; color: var(--muted); }
-.systems { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 8px; min-width: 0; }
-.sys { text-align: left; font: inherit; color: inherit; background: var(--bg); border: 1px solid var(--line); border-radius: 9px; padding: 10px 12px; display: grid; gap: 6px; align-content: start; cursor: pointer; }
-.sys:hover { border-color: var(--accent); }
-.sys[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
-.sys.dim { opacity: 0.35; }
-.sys .name { font-weight: 600; font-size: 14px; line-height: 1.3; }
-.sys .desc { font-size: 12.5px; color: var(--muted); line-height: 1.4; }
-.sys .row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-.flow { display: flex; justify-content: center; color: var(--muted); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; gap: 10px; align-items: center; }
-.flow::before, .flow::after { content: ""; height: 1px; width: 40px; background: var(--line); }
-.detail { background: var(--surface); border: 1px solid var(--accent); border-radius: 12px; padding: 16px 18px; display: grid; gap: 10px; }
-.detail dl { display: grid; grid-template-columns: 140px 1fr; gap: 6px 14px; margin: 0; font-size: 14px; }
-.detail dt { color: var(--muted); }
-.detail dd { margin: 0; min-width: 0; }
-.hint { font-size: 13px; color: var(--muted); }
-
-/* Tables */
-.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); }
-table { border-collapse: collapse; width: 100%; font-size: 14px; min-width: 720px; }
-th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
-th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; background: var(--sunken); }
-tr:last-child td { border-bottom: 0; }
-td.k { font-weight: 600; white-space: nowrap; }
-
-/* Crossovers */
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 12px; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 8px; align-content: start; }
-.card .where { display: flex; flex-wrap: wrap; gap: 6px; }
-.chip { font-size: 12px; background: var(--sunken); border-radius: 6px; padding: 2px 8px; }
-.card p { font-size: 14px; color: var(--muted); }
-.card .fix { color: var(--fg); }
-
-/* Phases */
-.phases { display: grid; gap: 0; position: relative; }
-.phase { display: grid; grid-template-columns: 56px 1fr; gap: 16px; padding-bottom: 22px; position: relative; }
-.phase:not(:last-child)::before { content: ""; position: absolute; left: 27px; top: 44px; bottom: 0; width: 2px; background: var(--line); }
-.num { width: 56px; height: 44px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); font-family: var(--font-mono); font-weight: 500; display: grid; place-items: center; font-size: 14px; }
-.phase-body { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; display: grid; gap: 10px; min-width: 0; }
-.phase-top { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: baseline; justify-content: space-between; }
-.phase-top .when { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
-.phase-body ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 14px; }
-.phase-foot { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; font-size: 13px; border-top: 1px solid var(--line); padding-top: 10px; }
-.phase-foot b { display: block; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-bottom: 2px; }
-
-/* Decisions */
-.decisions { display: grid; gap: 8px; counter-reset: d; }
-.decision { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 16px; align-items: start; }
-.decision p { font-size: 14px; color: var(--muted); grid-column: 1 / -1; }
-.decision .who { font-family: var(--font-mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
-
-@media (max-width: 720px) {
-  .layer { grid-template-columns: 1fr; }
-  .detail dl { grid-template-columns: 1fr; }
-  .detail dt { margin-top: 6px; }
-  .phase { grid-template-columns: 1fr; }
-  .phase:not(:last-child)::before { display: none; }
-  .num { width: auto; height: 32px; justify-self: start; padding: 0 12px; }
-}
-@media (prefers-reduced-motion: no-preference) {
-  .sys { transition: border-color 0.15s, background 0.15s, opacity 0.15s; }
-}
-</style>
-
-<div class="wrap">
-
-<header class="top">
-  <div class="eyebrow">Convert internal platform · future state</div>
-  <h1>Convert Platform Map</h1>
-  <p class="lede">The Convert internal tools, the data each one owns and the outside services they connect to, plus a phased route from separate apps to one connected platform.</p>
-  <div class="meta"><span>Drafted 5 October 2026</span><span>Owner: Tom Ross</span><span>Status: proposal for discussion with Seb</span></div>
-</header>
-
-<section>
-  <div class="head"><div class="eyebrow">Principles</div><h2>How the pieces fit</h2></div>
-  <div class="principles">
-    <div class="principle"><strong>One look</strong><span>Every app runs on Product UI and shares one app switcher.</span></div>
-    <div class="principle"><strong>Separate apps, shared spine</strong><span>Apps stay their own deployments. They share identity, client data and IDs, not code.</span></div>
-    <div class="principle"><strong>One owner per entity</strong><span>Each kind of data (clients, partners, prompts, case studies) has exactly one system of record. Everything else reads it.</span></div>
-    <div class="principle"><strong>Agree IDs before infrastructure</strong><span>Use <code>client_key</code> and partner slugs everywhere now, so joining systems later needs no migration.</span></div>
-  </div>
-</section>
-
-<section>
-  <div class="head">
-    <div class="eyebrow">Architecture</div>
-    <h2>Systems by layer</h2>
-    <p class="hint">Select a system to see what it owns, what it connects to and what changes. Switch between today and the future state.</p>
-  </div>
-  <div class="tabs" role="tablist" aria-label="View">
-    <button role="tab" id="tab-future" aria-selected="true">Future state</button>
-    <button role="tab" id="tab-today" aria-selected="false">Today</button>
-  </div>
-  <div class="legend">
-    <span class="pill s-live">Live</span><span class="pill s-build">In progress</span><span class="pill s-plan">Proposed</span><span class="pill s-retire">Retiring</span><span class="pill s-ext">External</span>
-  </div>
-  <div class="stack" id="stack"></div>
-  <div class="detail" id="detail" hidden></div>
-</section>
-
-<section>
-  <div class="head"><div class="eyebrow">Data ownership</div><h2>Who owns what, in the future state</h2></div>
-  <div class="table-wrap">
-    <table>
-      <thead><tr><th>Entity</th><th>System of record</th><th>Shared ID</th><th>Read by</th><th>Today</th></tr></thead>
-      <tbody>
-        <tr><td class="k">Staff identity and roles</td><td>Capacity (Supabase Auth, <code>profiles.role</code>)</td><td>Google Workspace email</td><td>All apps</td><td>Each app separate; static apps have no login</td></tr>
-        <tr><td class="k">Client users</td><td>Capacity client hub (one-time code login)</td><td>Email + client membership</td><td>Client portal only</td><td>Not started (P5)</td></tr>
-        <tr><td class="k">Clients and project codes</td><td>Capacity CRM (<code>clients</code>, <code>projects</code>, <code>retainers</code>)</td><td><code>client_key</code></td><td>Brand Tools, Great Cart, Payload, Claude skills</td><td>Also in client hub repo (<code>slug</code>) and Payload case studies (no key)</td></tr>
-        <tr><td class="k">Partners (tech and agency)</td><td>Payload <code>partners</code></td><td>Partner slug</td><td>Brand Tools, Great Cart, Capacity</td><td>Three lists: Payload, Brand Tools <code>partners.json</code>, Capacity <code>client_third_parties</code></td></tr>
-        <tr><td class="k">Which client uses which partner</td><td>Capacity <code>client_third_parties</code></td><td><code>client_key</code> + partner slug</td><td>Great Cart, Brand Tools</td><td>Capacity branch only; free text, not linked to a partner list</td></tr>
-        <tr><td class="k">Case studies, features, industries</td><td>Payload</td><td>Case study slug + <code>client_key</code> (to add)</td><td>Great Cart, website</td><td>Payload only</td></tr>
-        <tr><td class="k">Brand assets, colours, logos</td><td>Brand Tools repo</td><td>Asset id</td><td>Website, Product UI</td><td>Brand Tools only</td></tr>
-        <tr><td class="k">Sidekick prompts</td><td><code>prompts.json</code> (sidecar repo), later a database with versions</td><td>Prompt slug</td><td>Sidecar Web, Sidecar Extension, Claude skills</td><td>Shared file; old copy in SidekickV2</td></tr>
-        <tr><td class="k">Inspiration sites</td><td>GoodCart feed + Great Cart database</td><td>Site id</td><td>Great Cart, UX audits</td><td>Proposed</td></tr>
-        <tr><td class="k">Hours, allocation, finance, deals</td><td>Capacity (from Tempo, Jira, Sheets)</td><td>Project + <code>client_key</code></td><td>Client hub, Claude via MCP</td><td>Capacity; Finance Manager merging in</td></tr>
-        <tr><td class="k">UI components and tokens</td><td>Product UI</td><td>Package version</td><td>All apps</td><td>Versions drift: 1.3.3 to 1.5.0</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<section>
-  <div class="head"><div class="eyebrow">Crossovers</div><h2>Overlaps and links worth designing for</h2></div>
-  <div class="cards">
-    <div class="card">
-      <h3>Clients live in three places</h3>
-      <div class="where"><span class="chip">Capacity <code>client_key</code></span><span class="chip">Client hub repo <code>slug</code></span><span class="chip">Payload case studies</span></div>
-      <p class="fix">Make Capacity's <code>client_key</code> the only client ID. Add an optional <code>clientKey</code> to Payload case studies. Retire the client hub repo's model.</p>
-    </div>
-    <div class="card">
-      <h3>Partners live in three places</h3>
-      <div class="where"><span class="chip">Payload partners</span><span class="chip">Brand Tools partners.json</span><span class="chip">Capacity third parties</span></div>
-      <p class="fix">Payload becomes the partner list (it already joins to case studies). Brand Tools reads it for logos. Capacity links client usage to partner slugs.</p>
-    </div>
-    <div class="card">
-      <h3>Sidekick exports go nowhere</h3>
-      <div class="where"><span class="chip">Sidecar Extension export</span><span class="chip">strategy-session-prep skill</span><span class="chip">Client hub strategy</span></div>
-      <p class="fix">The extension already exports Sidekick conversations to Markdown, which the strategy skill consumes. Later, attach exports to the client record in Capacity so they feed the client hub and workshops.</p>
-    </div>
-    <div class="card">
-      <h3>Claude skills run on manual exports</h3>
-      <div class="where"><span class="chip">ux-audit</span><span class="chip">convert-client-hub</span><span class="chip">workshop-to-roadmap</span><span class="chip">Capacity MCP</span></div>
-      <p class="fix">Skills take GA4, Jira, JPD and Tempo exports by hand. Capacity already has an MCP server with per-user tokens. Extending it gives skills live client context.</p>
-    </div>
-    <div class="card">
-      <h3>The static client hub skill overlaps the real one</h3>
-      <div class="where"><span class="chip">convert-client-hub skill</span><span class="chip">Capacity client hub</span></div>
-      <p class="fix">The skill builds static HTML hubs on Product UI. Once Capacity's hub is live, keep the skill for prospects and one-offs only.</p>
-    </div>
-    <div class="card">
-      <h3>Convert builds are already in Payload</h3>
-      <div class="where"><span class="chip">Payload case studies</span><span class="chip">Great Cart</span><span class="chip">convert-content skill</span></div>
-      <p class="fix">Case studies carry industry, features and partners, so Great Cart's "Convert" source needs no new data entry. The content skill already writes to Payload.</p>
-    </div>
-    <div class="card">
-      <h3>Inspiration feeds audits and pitches</h3>
-      <div class="where"><span class="chip">Great Cart</span><span class="chip">ux-audit</span><span class="chip">sales-to-discovery-prep</span></div>
-      <p class="fix">Audit recommendations and discovery prep can cite Great Cart examples by UX pattern. A board per client or pitch links them.</p>
-    </div>
-    <div class="card">
-      <h3>Hosting is spread across four platforms</h3>
-      <div class="where"><span class="chip">Vercel</span><span class="chip">Cloudflare</span><span class="chip">GitHub Pages</span><span class="chip">Chrome Web Store</span></div>
-      <p class="fix">Payload already runs on Cloudflare (Workers, D1, R2) with a free tier that allows commercial use. That's the natural home when static apps need login.</p>
-    </div>
-  </div>
-</section>
-
-<section>
-  <div class="head"><div class="eyebrow">Route</div><h2>Phases to get there</h2><p class="hint">Each phase works on its own. Nothing in Capacity changes without Seb.</p></div>
-  <div class="phases">
-
-    <div class="phase"><div class="num">P0</div><div class="phase-body">
-      <div class="phase-top"><h3>One look</h3><span class="when">Now · Q4 2026</span></div>
-      <ul>
-        <li>Sidecar Web live on Product UI 1.5; SidekickV2 archived.</li>
-        <li>App switcher in Sidecar Web and Brand Tools.</li>
-        <li><code>prompts.json</code> schema 2 shared by Sidecar Web and the extension, with validation.</li>
-        <li>Feed Product UI gaps found in Sidecar Web back into the library.</li>
-      </ul>
-      <div class="phase-foot"><div><b>Owner</b>Tom</div><div><b>Cost</b>Free (GitHub Pages)</div><div><b>Depends on</b>Nothing</div></div>
-    </div></div>
-
-    <div class="phase"><div class="num">P1</div><div class="phase-body">
-      <div class="phase-top"><h3>Shared IDs, still no shared infrastructure</h3><span class="when">Q4 2026 to Q1 2027</span></div>
-      <ul>
-        <li>Agree <code>client_key</code> as the client ID and Payload slugs as partner IDs. Write both into every new data file.</li>
-        <li>Great Cart read-only: GoodCart feed plus Payload case studies, with partner and source filters and Brand Tools links.</li>
-        <li>Map Brand Tools partner ids to Payload partner slugs.</li>
-        <li>Sidecar Extension restyled with Product UI tokens.</li>
-      </ul>
-      <div class="phase-foot"><div><b>Owner</b>Tom</div><div><b>Cost</b>Free</div><div><b>Depends on</b>GoodCart owner agreeing a feed; Seb agreeing the client key format</div></div>
-    </div></div>
-
-    <div class="phase"><div class="num">P2</div><div class="phase-body">
-      <div class="phase-top"><h3>Login per app</h3><span class="when">Q1 2027</span></div>
-      <ul>
-        <li>Each app gets Google sign-in limited to the Convert Workspace. Staff are already signed into Google, so it feels like one login.</li>
-        <li>Brand Tools: gated font downloads, editor role for partners and presets. Moves off GitHub Pages.</li>
-        <li>Great Cart: saves, boards per client or pitch, team submissions.</li>
-        <li>Sidecar Web: internal-only prompts behind login.</li>
-        <li>Pick one host for logged-in apps (Cloudflare suggested) and one small database (Supabase free tier, same technology as Capacity).</li>
-      </ul>
-      <div class="phase-foot"><div><b>Owner</b>Tom</div><div><b>Cost</b>Free tiers; check limits</div><div><b>Depends on</b>Hosting and database decision</div></div>
-    </div></div>
-
-    <div class="phase"><div class="num">P3</div><div class="phase-body">
-      <div class="phase-top"><h3>Capacity consolidates</h3><span class="when">Seb's timeline</span></div>
-      <ul>
-        <li>Finance Manager and the client hub fully merged into Capacity.</li>
-        <li>Capacity on Product UI 1.5 or later; joins the app switcher.</li>
-        <li>Client portal with one-time code login (P5 in the hub tracker).</li>
-        <li>RLS gaps closed (<code>retainers</code> select policy, open <code>client_*</code> policies).</li>
-      </ul>
-      <div class="phase-foot"><div><b>Owner</b>Seb</div><div><b>Cost</b>Existing Vercel Pro and Supabase</div><div><b>Depends on</b>PR #31 and the hub tracker</div></div>
-    </div></div>
-
-    <div class="phase"><div class="num">P4</div><div class="phase-body">
-      <div class="phase-top"><h3>Shared spine</h3><span class="when">2027, if Seb agrees</span></div>
-      <ul>
-        <li>Capacity becomes the identity provider: one Supabase Auth with Google SSO, roles from <code>profiles</code>, a shared session across subdomains of one Convert domain.</li>
-        <li>Capacity publishes a read API (or MCP tools) for clients, projects and partner usage.</li>
-        <li>Brand Tools gets a client section; Great Cart filters by real clients and project codes.</li>
-        <li>Payload case studies carry <code>clientKey</code>; Capacity links third parties to Payload partner slugs.</li>
-        <li>App-owned data (prompts, saves, presets) moves into its own schema in the shared database, or stays per app behind the API.</li>
-      </ul>
-      <div class="phase-foot"><div><b>Owner</b>Tom + Seb</div><div><b>Cost</b>Likely within Capacity's plan</div><div><b>Depends on</b>P3, a domain, Seb's agreement on ownership</div></div>
-    </div></div>
-
-    <div class="phase"><div class="num">P5</div><div class="phase-body">
-      <div class="phase-top"><h3>Connected intelligence</h3><span class="when">Later</span></div>
-      <ul>
-        <li>Claude skills read live data through Capacity's MCP server (GA4, Jira, JPD, Tempo, clients) instead of manual exports.</li>
-        <li>Sidecar exports and Great Cart boards attach to the client record and appear in the client hub.</li>
-        <li>Prompts move to a database with versions, approvals and usage analytics (the SidekickV2 feature set, rebuilt).</li>
-        <li>Optional: fold apps into Capacity as modules, or keep them as separate front ends on the shared spine.</li>
-      </ul>
-      <div class="phase-foot"><div><b>Owner</b>Tom + Seb</div><div><b>Cost</b>LLM and BigQuery usage to watch</div><div><b>Depends on</b>P4</div></div>
-    </div></div>
-
-  </div>
-</section>
-
-<section>
-  <div class="head"><div class="eyebrow">Decisions</div><h2>What needs agreeing, and with whom</h2></div>
-  <div class="decisions">
-    <div class="decision"><h3>Is <code>client_key</code> the client ID everywhere?</h3><span class="who">Tom + Seb · P1</span><p>Cheap to agree now, expensive to fix later. No Capacity code changes needed.</p></div>
-    <div class="decision"><h3>Which system owns partners?</h3><span class="who">Tom · P1</span><p>Recommendation: Payload, because case studies already link to it.</p></div>
-    <div class="decision"><h3>GoodCart feed terms</h3><span class="who">Tom + GoodCart owner · P1</span><p>Format, refresh, image hosting, attribution, who builds team features.</p></div>
-    <div class="decision"><h3>Host and database for logged-in apps</h3><span class="who">Tom · P2</span><p>Cloudflare to match Payload, or Vercel to match Capacity. Supabase free tier for the database.</p></div>
-    <div class="decision"><h3>A Convert domain for the suite</h3><span class="who">Tom + Seb · P4</span><p>Subdomains of one domain are what make a shared login session possible.</p></div>
-    <div class="decision"><h3>Does Capacity become the identity provider and client API?</h3><span class="who">Seb · P4</span><p>The biggest dependency in the plan. Until agreed, every app keeps its own login.</p></div>
-    <div class="decision"><h3>Who owns the shared platform layer?</h3><span class="who">Tom + Seb + leadership · P4</span><p>Someone has to own the API, auth config and data contracts once more than one app depends on them.</p></div>
-  </div>
-</section>
-
-</div>
-
-<script>
-const S = { live: ['s-live','Live'], build: ['s-build','In progress'], plan: ['s-plan','Proposed'], retire: ['s-retire','Retiring'], ext: ['s-ext','External'] };
-
-const systems = {
-  capacity: { name: 'CD Capacity', desc: 'Resourcing, allocation, retainers, invoicing, deals, flows', owns: 'People, clients (client_key), projects, retainers, allocations, hours, deals, invoices', stack: 'Next 15, Supabase (Postgres, Auth, Realtime), Vercel Pro (Tokyo)', auth: 'Google OAuth via Supabase, Convert domain only; roles admin, planner, pm, viewer', links: 'Tempo, Jira, Google Sheets, Resend, GA4 (hub), JPD (hub), MCP server for Claude', change: 'Absorbs Finance Manager and the client hub. Later becomes the identity provider and client API, if Seb agrees.', owner: 'Seb', status: { today: 'live', future: 'live' } },
-  hub: { name: 'Client Hub (in Capacity)', desc: 'Internal client workspace and client portal', owns: 'Hub visibility, report issues, relationship cadence, Growth Vault, value and releases', stack: 'Capacity branch (PR #31), migrations 93 to 102', auth: 'Staff via Capacity; clients via one-time code (not started)', links: 'GA4, JPD, Jira, Tempo through Capacity', change: 'Merges into Capacity main. Client portal opens to client users.', owner: 'Seb', status: { today: 'build', future: 'live' } },
-  finance: { name: 'Finance Manager', desc: 'Alex\'s Tempo finance tool', owns: 'Finance and CRM features now being adopted by Capacity', stack: 'Vite, React', auth: 'n/a', links: 'Tempo', change: 'Consolidated into Capacity (sales pipeline, invoicing).', owner: 'Alex → Seb', status: { today: 'retire', future: null } },
-  hubrepo: { name: 'convert-client-hub repo', desc: 'Standalone hub, foundations only', owns: 'Per-client tenancy model (slug, user_client_roles)', stack: 'Next 16, Supabase, shadcn', auth: 'Supabase Google SSO', links: 'None live', change: 'Superseded by the Capacity hub. Keep as reference; reuse its per-client permission ideas.', owner: 'Tom', status: { today: 'retire', future: null } },
-  brand: { name: 'Brand Tools', desc: 'Brand guide, assets, stacks, gradients, partners', owns: 'Brand assets, colours, logos, stack and gradient presets', stack: 'Next 16 static export, GitHub Pages, Product UI 1.5.0', auth: 'None today; Google sign-in planned', links: 'Payload partners (future), Capacity clients (future), Great Cart', change: 'Login and editor roles, moves off GitHub Pages, gains a client section from Capacity.', owner: 'Tom', status: { today: 'live', future: 'live' } },
-  sidecarweb: { name: 'Sidecar Web', desc: 'Sidekick prompt library website', owns: 'Nothing; reads prompts.json', stack: 'Next 16 static export, GitHub Pages, Product UI 1.5.0', auth: 'None; noindex', links: 'prompts.json, Sidecar Extension', change: 'Internal prompts behind login; later versions, approvals and analytics.', owner: 'Tom', status: { today: 'live', future: 'live' } },
-  ext: { name: 'Sidecar Extension', desc: 'Chrome side panel in Shopify admin', owns: 'Nothing; reads prompts.json, exports Sidekick chats', stack: 'Manifest V3, plain JavaScript, Chrome Web Store (unlisted)', auth: 'None', links: 'Shopify admin and Sidekick, prompts.json', change: 'Product UI tokens; later sends exports to the client record.', owner: 'Tom', status: { today: 'live', future: 'live' } },
-  sidekickv2: { name: 'SidekickV2', desc: 'Old prompt library', owns: 'Stale 54-prompt seed', stack: 'Next 15, Supabase (offline)', auth: 'Supabase Google', links: 'None', change: 'Archived once Sidecar Web reaches parity.', owner: 'Tom', status: { today: 'retire', future: null } },
-  greatcart: { name: 'Great Cart', desc: 'Convert inspiration library', owns: 'Convert layer: client, partner, notes; saves and boards', stack: 'Static Next on Product UI, then a small database', auth: 'None at first; Google sign-in in P2', links: 'GoodCart feed, Payload case studies, Brand Tools partners, Capacity clients', change: 'New app. Read-only first, then saves and boards.', owner: 'Tom', status: { today: null, future: 'plan' } },
-  payload: { name: 'Convert website (Payload)', desc: 'Public site and CMS', owns: 'Case studies, partners, features, industries, services, insights', stack: 'Payload 3.87, Next, Cloudflare Workers, D1, R2, Bitbucket', auth: 'Payload users (editors)', links: 'convert-content skill, Great Cart, Brand Tools (future)', change: 'Becomes the partner list; case studies gain clientKey.', owner: 'Tom / web team', status: { today: 'live', future: 'live' } },
-  prompts: { name: 'prompts.json', desc: 'Shared Sidekick prompt library file', owns: '74 prompts, categories, follow-ups; collections in schema 2', stack: 'JSON on GitHub Pages (sidecar repo)', auth: 'Public', links: 'Sidecar Web, Sidecar Extension', change: 'Schema 2 now; a database with versions later.', owner: 'Tom', status: { today: 'live', future: 'live' } },
-  pui: { name: 'Product UI', desc: 'Convert design system', owns: 'Components, tokens, app switcher, brand marks', stack: 'React package, GitHub releases, Storybook', auth: 'Private repo; read token for installs', links: 'Every app', change: 'Everyone on 1.5 or later; 2.0 waits for Capacity.', owner: 'Tom', status: { today: 'live', future: 'live' } },
-  identity: { name: 'Shared identity', desc: 'One Google SSO for staff', owns: 'Sessions and roles', stack: 'Capacity Supabase Auth across subdomains', auth: 'Google Workspace', links: 'All apps', change: 'Replaces per-app sign-in in P4.', owner: 'Seb + Tom', status: { today: null, future: 'plan' } },
-  api: { name: 'Client and partner API', desc: 'Read access to Capacity data', owns: 'Contract for clients, projects, partner usage', stack: 'Capacity REST routes or MCP tools', auth: 'Service tokens per app', links: 'Brand Tools, Great Cart, Payload, Claude skills', change: 'New in P4.', owner: 'Seb + Tom', status: { today: null, future: 'plan' } },
-  mcp: { name: 'Capacity MCP server', desc: 'Claude access to Capacity', owns: '11 tools today, per-user tokens', stack: 'mcp-handler over Streamable HTTP', auth: 'Per-user bearer tokens', links: 'Claude, Claude skills', change: 'Extended so skills read live client context.', owner: 'Seb', status: { today: 'live', future: 'live' } },
-  skills: { name: 'Claude skills', desc: 'ux-audit, strategy-session-prep, workshop-to-roadmap, convert-client-hub, convert-content', owns: 'Workflows, not data', stack: 'Claude (org skills)', auth: 'Claude accounts', links: 'Manual exports today; Capacity MCP, Payload, Great Cart later', change: 'Move from manual exports to live data.', owner: 'Tom', status: { today: 'live', future: 'live' } },
-  gw: { name: 'Google Workspace', desc: 'SSO, Sheets, Drive', status: { today: 'ext', future: 'ext' } },
-  tempo: { name: 'Tempo', desc: 'Time tracking', status: { today: 'ext', future: 'ext' } },
-  jira: { name: 'Jira and JPD', desc: 'Delivery and product discovery', status: { today: 'ext', future: 'ext' } },
-  ga4: { name: 'GA4', desc: 'Client analytics', status: { today: 'ext', future: 'ext' } },
-  shopify: { name: 'Shopify and Sidekick', desc: 'Client stores and admin', status: { today: 'ext', future: 'ext' } },
-  goodcart: { name: 'GoodCart', desc: 'Curated inspiration feed', status: { today: 'ext', future: 'ext' } },
-  resend: { name: 'Resend', desc: 'Transactional email', status: { today: 'ext', future: 'ext' } },
-  design: { name: 'Figma, FigJam, Granola', desc: 'Design, workshops, meeting notes', status: { today: 'ext', future: 'ext' } },
-  hosting: { name: 'Hosting', desc: 'Vercel, Cloudflare, GitHub Pages', status: { today: 'ext', future: 'ext' } }
-};
-
-const layers = [
-  { id: 'people', label: 'People', note: 'Who signs in', items: { today: [], future: [] }, people: { today: 'Convert staff sign in separately per app. Static apps have no login.', future: 'Convert staff: one Google Workspace sign-in across every app. Client users: client portal only, with a one-time code.' } },
-  { id: 'apps', label: 'Apps', note: 'Product UI front ends in one switcher', items: { today: ['capacity','hub','finance','brand','sidecarweb','ext','sidekickv2','hubrepo'], future: ['capacity','hub','brand','sidecarweb','ext','greatcart'] } },
-  { id: 'platform', label: 'Shared platform', note: 'Owned once, read by many', items: { today: ['payload','prompts','pui','mcp'], future: ['identity','api','payload','prompts','pui','mcp'] } },
-  { id: 'ai', label: 'AI workflows', note: 'Claude on top of the platform', items: { today: ['skills'], future: ['skills'] } },
-  { id: 'ext', label: 'External services', note: 'Sources and infrastructure', items: { today: ['gw','tempo','jira','ga4','shopify','resend','design','hosting'], future: ['gw','tempo','jira','ga4','shopify','goodcart','resend','design','hosting'] } }
-];
-
-let view = 'future';
-let selected = null;
-const stack = document.getElementById('stack');
-const detail = document.getElementById('detail');
-
-function pill(st) { const [c, l] = S[st]; return `<span class="pill ${c}">${l}</span>`; }
-
-function render() {
-  stack.innerHTML = '';
-  layers.forEach((layer, i) => {
-    if (i > 0) { const f = document.createElement('div'); f.className = 'flow'; f.textContent = i === 1 ? 'use' : i === 2 ? 'read and write' : i === 3 ? 'call' : 'connect to'; stack.appendChild(f); }
-    const el = document.createElement('div');
-    el.className = 'layer';
-    let inner = `<div class="layer-label"><div class="eyebrow">${layer.label}</div><p>${layer.note}</p></div>`;
-    if (layer.people) {
-      inner += `<div class="systems" style="grid-template-columns:1fr"><p style="font-size:14px">${layer.people[view]}</p></div>`;
-    } else {
-      inner += '<div class="systems">' + layer.items[view].map(id => {
-        const s = systems[id]; const st = s.status[view];
-        const ext = st === 'ext';
-        return `<button class="sys" data-id="${id}" aria-pressed="${selected === id}" ${ext ? 'data-ext="1"' : ''}><span class="name">${s.name}</span><span class="desc">${s.desc}</span><span class="row">${pill(st)}${s.owner ? `<span class="hint mono">${s.owner}</span>` : ''}</span></button>`;
-      }).join('') + '</div>';
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Convert Platform Map</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+  />
+  <style>
+    /* Layout: a single reading column for prose, widening to full-bleed bands for the layered architecture diagram and tables. */
+    :root {
+      --bg: #f6f7f9;
+      --surface: #ffffff;
+      --sunken: #eef0f4;
+      --fg: #14171f;
+      --muted: #5a6273;
+      --line: #d9dde5;
+      --accent: #2f4bd8;
+      --accent-soft: #e5e9fc;
+      --live: #1f7a4d;
+      --live-bg: #e2f3ea;
+      --build: #9a5b00;
+      --build-bg: #fbefd9;
+      --plan: #5a3fc0;
+      --plan-bg: #ece7fb;
+      --retire: #8a8f9c;
+      --retire-bg: #eceef2;
+      --ext: #0f6b78;
+      --ext-bg: #dff1f3;
+      --font-display: 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      --font-body: 'Hanken Grotesk', 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
     }
-    el.innerHTML = inner;
-    stack.appendChild(el);
-  });
-  stack.querySelectorAll('.sys').forEach(b => b.addEventListener('click', () => {
-    selected = selected === b.dataset.id ? null : b.dataset.id; render();
-  }));
-  renderDetail();
-}
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme='light']) {
+        --bg: #0f1218;
+        --surface: #171b23;
+        --sunken: #1d222c;
+        --fg: #e9ecf2;
+        --muted: #9aa3b4;
+        --line: #2b3240;
+        --accent: #8fa2ff;
+        --accent-soft: #232b4d;
+        --live: #6fd3a0;
+        --live-bg: #16301f;
+        --build: #f0b860;
+        --build-bg: #33270f;
+        --plan: #b9a5ff;
+        --plan-bg: #2a2147;
+        --retire: #8a92a3;
+        --retire-bg: #232833;
+        --ext: #6fd0dc;
+        --ext-bg: #12303a;
+        color-scheme: dark;
+      }
+    }
+    :root[data-theme='dark'] {
+      --bg: #0f1218;
+      --surface: #171b23;
+      --sunken: #1d222c;
+      --fg: #e9ecf2;
+      --muted: #9aa3b4;
+      --line: #2b3240;
+      --accent: #8fa2ff;
+      --accent-soft: #232b4d;
+      --live: #6fd3a0;
+      --live-bg: #16301f;
+      --build: #f0b860;
+      --build-bg: #33270f;
+      --plan: #b9a5ff;
+      --plan-bg: #2a2147;
+      --retire: #8a92a3;
+      --retire-bg: #232833;
+      --ext: #6fd0dc;
+      --ext-bg: #12303a;
+      color-scheme: dark;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.55;
+      padding: 0 20px;
+    }
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding-block: 40px 80px;
+      display: grid;
+      gap: 56px;
+    }
+    .prose {
+      max-width: 70ch;
+    }
+    h1,
+    h2,
+    h3 {
+      font-family: var(--font-display);
+      text-wrap: balance;
+      margin: 0;
+      line-height: 1.2;
+    }
+    h1 {
+      font-size: clamp(30px, 5vw, 44px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    h2 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    p {
+      margin: 0;
+    }
+    .eyebrow {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .lede {
+      font-size: 18px;
+      color: var(--muted);
+      max-width: 66ch;
+    }
+    section {
+      display: grid;
+      gap: 18px;
+      min-width: 0;
+    }
+    .head {
+      display: grid;
+      gap: 6px;
+    }
+    a {
+      color: var(--accent);
+    }
+    code,
+    .mono {
+      font-family: var(--font-mono);
+      font-size: 0.86em;
+    }
+    code {
+      background: var(--sunken);
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
 
-function renderDetail() {
-  const s = selected && systems[selected];
-  if (!s || !s.owns) { detail.hidden = true; return; }
-  detail.hidden = false;
-  detail.innerHTML = `<div class="row" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><h3>${s.name}</h3>${s.status[view] ? pill(s.status[view]) : ''}</div>
-  <dl><dt>Owns</dt><dd>${s.owns}</dd><dt>Stack</dt><dd>${s.stack}</dd><dt>Sign-in</dt><dd>${s.auth}</dd><dt>Connects to</dt><dd>${s.links}</dd><dt>What changes</dt><dd>${s.change}</dd><dt>Owner</dt><dd>${s.owner}</dd></dl>`;
-}
+    /* Header */
+    header.top {
+      display: grid;
+      gap: 14px;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 18px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .principle {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 16px;
+      display: grid;
+      gap: 4px;
+      align-content: start;
+    }
+    .principle strong {
+      font-family: var(--font-display);
+      font-size: 15px;
+    }
+    .principle span {
+      color: var(--muted);
+      font-size: 14px;
+    }
 
-document.querySelectorAll('[role="tab"]').forEach(t => t.addEventListener('click', () => {
-  view = t.id === 'tab-today' ? 'today' : 'future';
-  document.querySelectorAll('[role="tab"]').forEach(x => x.setAttribute('aria-selected', String(x === t)));
-  if (selected && !systems[selected].status[view]) selected = null;
-  render();
-}));
+    /* Status pills */
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .s-live {
+      color: var(--live);
+      background: var(--live-bg);
+    }
+    .s-build {
+      color: var(--build);
+      background: var(--build-bg);
+    }
+    .s-plan {
+      color: var(--plan);
+      background: var(--plan-bg);
+    }
+    .s-retire {
+      color: var(--retire);
+      background: var(--retire-bg);
+    }
+    .s-ext {
+      color: var(--ext);
+      background: var(--ext-bg);
+    }
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
 
-render();
-</script>
+    /* Layered diagram */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      background: var(--sunken);
+      padding: 4px;
+      border-radius: 10px;
+      width: fit-content;
+      max-width: 100%;
+      flex-wrap: wrap;
+    }
+    .tabs button {
+      font: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      padding: 7px 14px;
+      border-radius: 7px;
+      cursor: pointer;
+    }
+    .tabs button[aria-selected='true'] {
+      background: var(--surface);
+      color: var(--fg);
+      box-shadow: 0 1px 2px rgb(0 0 0 / 0.08);
+    }
+    .tabs button:focus-visible,
+    .sys:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+    .stack {
+      display: grid;
+      gap: 10px;
+    }
+    .layer {
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px;
+      min-width: 0;
+    }
+    .layer-label {
+      display: grid;
+      gap: 4px;
+      align-content: start;
+    }
+    .layer-label .eyebrow {
+      color: var(--accent);
+    }
+    .layer-label p {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .systems {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 8px;
+      min-width: 0;
+    }
+    .sys {
+      text-align: left;
+      font: inherit;
+      color: inherit;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      padding: 10px 12px;
+      display: grid;
+      gap: 6px;
+      align-content: start;
+      cursor: pointer;
+    }
+    .sys:hover {
+      border-color: var(--accent);
+    }
+    .sys[aria-pressed='true'] {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    .sys.dim {
+      opacity: 0.35;
+    }
+    .sys .name {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+    .sys .desc {
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .sys .row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+    }
+    .flow {
+      display: flex;
+      justify-content: center;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      gap: 10px;
+      align-items: center;
+    }
+    .flow::before,
+    .flow::after {
+      content: '';
+      height: 1px;
+      width: 40px;
+      background: var(--line);
+    }
+    .detail {
+      background: var(--surface);
+      border: 1px solid var(--accent);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: grid;
+      gap: 10px;
+    }
+    .detail dl {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 6px 14px;
+      margin: 0;
+      font-size: 14px;
+    }
+    .detail dt {
+      color: var(--muted);
+    }
+    .detail dd {
+      margin: 0;
+      min-width: 0;
+    }
+    .hint {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--surface);
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      font-size: 14px;
+      min-width: 720px;
+    }
+    th,
+    td {
+      text-align: left;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      background: var(--sunken);
+    }
+    tr:last-child td {
+      border-bottom: 0;
+    }
+    td.k {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    /* Crossovers */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 12px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+    .card .where {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .chip {
+      font-size: 12px;
+      background: var(--sunken);
+      border-radius: 6px;
+      padding: 2px 8px;
+    }
+    .card p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    .card .fix {
+      color: var(--fg);
+    }
+
+    /* Phases */
+    .phases {
+      display: grid;
+      gap: 0;
+      position: relative;
+    }
+    .phase {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 16px;
+      padding-bottom: 22px;
+      position: relative;
+    }
+    .phase:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 27px;
+      top: 44px;
+      bottom: 0;
+      width: 2px;
+      background: var(--line);
+    }
+    .num {
+      width: 56px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-weight: 500;
+      display: grid;
+      place-items: center;
+      font-size: 14px;
+    }
+    .phase-body {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 18px;
+      display: grid;
+      gap: 10px;
+      min-width: 0;
+    }
+    .phase-top {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 14px;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+    .phase-top .when {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .phase-body ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 4px;
+      font-size: 14px;
+    }
+    .phase-foot {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 10px;
+      font-size: 13px;
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+    .phase-foot b {
+      display: block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    /* Decisions */
+    .decisions {
+      display: grid;
+      gap: 8px;
+      counter-reset: d;
+    }
+    .decision {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 6px 16px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 12px 16px;
+      align-items: start;
+    }
+    .decision p {
+      font-size: 14px;
+      color: var(--muted);
+      grid-column: 1 / -1;
+    }
+    .decision .who {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 720px) {
+      .layer {
+        grid-template-columns: 1fr;
+      }
+      .detail dl {
+        grid-template-columns: 1fr;
+      }
+      .detail dt {
+        margin-top: 6px;
+      }
+      .phase {
+        grid-template-columns: 1fr;
+      }
+      .phase:not(:last-child)::before {
+        display: none;
+      }
+      .num {
+        width: auto;
+        height: 32px;
+        justify-self: start;
+        padding: 0 12px;
+      }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .sys {
+        transition:
+          border-color 0.15s,
+          background 0.15s,
+          opacity 0.15s;
+      }
+    }
+  </style>
+
+  <div class="wrap">
+    <header class="top">
+      <div class="eyebrow">Convert internal platform · future state</div>
+      <h1>Convert Platform Map</h1>
+      <p class="lede">
+        The Convert internal tools, the data each one owns and the outside services they connect to, plus a phased route
+        from separate apps to one connected platform.
+      </p>
+      <div class="meta">
+        <span>Drafted 5 October 2026</span><span>Owner: Tom Ross</span
+        ><span>Status: proposal for discussion with Seb</span>
+      </div>
+    </header>
+
+    <section>
+      <div class="head">
+        <div class="eyebrow">Principles</div>
+        <h2>How the pieces fit</h2>
+      </div>
+      <div class="principles">
+        <div class="principle">
+          <strong>One look</strong><span>Every app runs on Product UI and shares one app switcher.</span>
+        </div>
+        <div class="principle">
+          <strong>Separate apps, shared spine</strong
+          ><span>Apps stay their own deployments. They share identity, client data and IDs, not code.</span>
+        </div>
+        <div class="principle">
+          <strong>One owner per entity</strong
+          ><span
+            >Each kind of data (clients, partners, prompts, case studies) has exactly one system of record. Everything
+            else reads it.</span
+          >
+        </div>
+        <div class="principle">
+          <strong>Agree IDs before infrastructure</strong
+          ><span
+            >Use <code>client_key</code> and partner slugs everywhere now, so joining systems later needs no
+            migration.</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="head">
+        <div class="eyebrow">Architecture</div>
+        <h2>Systems by layer</h2>
+        <p class="hint">
+          Select a system to see what it owns, what it connects to and what changes. Switch between today and the future
+          state.
+        </p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="View">
+        <button role="tab" id="tab-future" aria-selected="true">Future state</button>
+        <button role="tab" id="tab-today" aria-selected="false">Today</button>
+      </div>
+      <div class="legend">
+        <span class="pill s-live">Live</span><span class="pill s-build">In progress</span
+        ><span class="pill s-plan">Proposed</span><span class="pill s-retire">Retiring</span
+        ><span class="pill s-ext">External</span>
+      </div>
+      <div class="stack" id="stack"></div>
+      <div class="detail" id="detail" hidden></div>
+    </section>
+
+    <section>
+      <div class="head">
+        <div class="eyebrow">Data ownership</div>
+        <h2>Who owns what, in the future state</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Entity</th>
+              <th>System of record</th>
+              <th>Shared ID</th>
+              <th>Read by</th>
+              <th>Today</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="k">Staff identity and roles</td>
+              <td>Capacity (Supabase Auth, <code>profiles.role</code>)</td>
+              <td>Google Workspace email</td>
+              <td>All apps</td>
+              <td>Each app separate; static apps have no login</td>
+            </tr>
+            <tr>
+              <td class="k">Client users</td>
+              <td>Capacity client hub (one-time code login)</td>
+              <td>Email + client membership</td>
+              <td>Client portal only</td>
+              <td>Not started (P5)</td>
+            </tr>
+            <tr>
+              <td class="k">Clients and project codes</td>
+              <td>Capacity CRM (<code>clients</code>, <code>projects</code>, <code>retainers</code>)</td>
+              <td><code>client_key</code></td>
+              <td>Brand Tools, Great Cart, Payload, Claude skills</td>
+              <td>Also in client hub repo (<code>slug</code>) and Payload case studies (no key)</td>
+            </tr>
+            <tr>
+              <td class="k">Partners (tech and agency)</td>
+              <td>Payload <code>partners</code></td>
+              <td>Partner slug</td>
+              <td>Brand Tools, Great Cart, Capacity</td>
+              <td>
+                Three lists: Payload, Brand Tools <code>partners.json</code>, Capacity <code>client_third_parties</code>
+              </td>
+            </tr>
+            <tr>
+              <td class="k">Which client uses which partner</td>
+              <td>Capacity <code>client_third_parties</code></td>
+              <td><code>client_key</code> + partner slug</td>
+              <td>Great Cart, Brand Tools</td>
+              <td>Capacity branch only; free text, not linked to a partner list</td>
+            </tr>
+            <tr>
+              <td class="k">Case studies, features, industries</td>
+              <td>Payload</td>
+              <td>Case study slug + <code>client_key</code> (to add)</td>
+              <td>Great Cart, website</td>
+              <td>Payload only</td>
+            </tr>
+            <tr>
+              <td class="k">Brand assets, colours, logos</td>
+              <td>Brand Tools repo</td>
+              <td>Asset id</td>
+              <td>Website, Product UI</td>
+              <td>Brand Tools only</td>
+            </tr>
+            <tr>
+              <td class="k">Sidekick prompts</td>
+              <td><code>prompts.json</code> (sidecar repo), later a database with versions</td>
+              <td>Prompt slug</td>
+              <td>Sidecar Web, Sidecar Extension, Claude skills</td>
+              <td>Shared file; old copy in SidekickV2</td>
+            </tr>
+            <tr>
+              <td class="k">Inspiration sites</td>
+              <td>GoodCart feed + Great Cart database</td>
+              <td>Site id</td>
+              <td>Great Cart, UX audits</td>
+              <td>Proposed</td>
+            </tr>
+            <tr>
+              <td class="k">Hours, allocation, finance, deals</td>
+              <td>Capacity (from Tempo, Jira, Sheets)</td>
+              <td>Project + <code>client_key</code></td>
+              <td>Client hub, Claude via MCP</td>
+              <td>Capacity; Finance Manager merging in</td>
+            </tr>
+            <tr>
+              <td class="k">UI components and tokens</td>
+              <td>Product UI</td>
+              <td>Package version</td>
+              <td>All apps</td>
+              <td>Versions drift: 1.3.3 to 1.5.0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section>
+      <div class="head">
+        <div class="eyebrow">Crossovers</div>
+        <h2>Overlaps and links worth designing for</h2>
+      </div>
+      <div class="cards">
+        <div class="card">
+          <h3>Clients live in three places</h3>
+          <div class="where">
+            <span class="chip">Capacity <code>client_key</code></span
+            ><span class="chip">Client hub repo <code>slug</code></span
+            ><span class="chip">Payload case studies</span>
+          </div>
+          <p class="fix">
+            Make Capacity's <code>client_key</code> the only client ID. Add an optional <code>clientKey</code> to
+            Payload case studies. Retire the client hub repo's model.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Partners live in three places</h3>
+          <div class="where">
+            <span class="chip">Payload partners</span><span class="chip">Brand Tools partners.json</span
+            ><span class="chip">Capacity third parties</span>
+          </div>
+          <p class="fix">
+            Payload becomes the partner list (it already joins to case studies). Brand Tools reads it for logos.
+            Capacity links client usage to partner slugs.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Sidekick exports go nowhere</h3>
+          <div class="where">
+            <span class="chip">Sidecar Extension export</span><span class="chip">strategy-session-prep skill</span
+            ><span class="chip">Client hub strategy</span>
+          </div>
+          <p class="fix">
+            The extension already exports Sidekick conversations to Markdown, which the strategy skill consumes. Later,
+            attach exports to the client record in Capacity so they feed the client hub and workshops.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Claude skills run on manual exports</h3>
+          <div class="where">
+            <span class="chip">ux-audit</span><span class="chip">convert-client-hub</span
+            ><span class="chip">workshop-to-roadmap</span><span class="chip">Capacity MCP</span>
+          </div>
+          <p class="fix">
+            Skills take GA4, Jira, JPD and Tempo exports by hand. Capacity already has an MCP server with per-user
+            tokens. Extending it gives skills live client context.
+          </p>
+        </div>
+        <div class="card">
+          <h3>The static client hub skill overlaps the real one</h3>
+          <div class="where">
+            <span class="chip">convert-client-hub skill</span><span class="chip">Capacity client hub</span>
+          </div>
+          <p class="fix">
+            The skill builds static HTML hubs on Product UI. Once Capacity's hub is live, keep the skill for prospects
+            and one-offs only.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Convert builds are already in Payload</h3>
+          <div class="where">
+            <span class="chip">Payload case studies</span><span class="chip">Great Cart</span
+            ><span class="chip">convert-content skill</span>
+          </div>
+          <p class="fix">
+            Case studies carry industry, features and partners, so Great Cart's "Convert" source needs no new data
+            entry. The content skill already writes to Payload.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Inspiration feeds audits and pitches</h3>
+          <div class="where">
+            <span class="chip">Great Cart</span><span class="chip">ux-audit</span
+            ><span class="chip">sales-to-discovery-prep</span>
+          </div>
+          <p class="fix">
+            Audit recommendations and discovery prep can cite Great Cart examples by UX pattern. A board per client or
+            pitch links them.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Hosting is spread across four platforms</h3>
+          <div class="where">
+            <span class="chip">Vercel</span><span class="chip">Cloudflare</span><span class="chip">GitHub Pages</span
+            ><span class="chip">Chrome Web Store</span>
+          </div>
+          <p class="fix">
+            Payload already runs on Cloudflare (Workers, D1, R2) with a free tier that allows commercial use. That's the
+            natural home when static apps need login.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="head">
+        <div class="eyebrow">Route</div>
+        <h2>Phases to get there</h2>
+        <p class="hint">Each phase works on its own. Nothing in Capacity changes without Seb.</p>
+      </div>
+      <div class="phases">
+        <div class="phase">
+          <div class="num">P0</div>
+          <div class="phase-body">
+            <div class="phase-top">
+              <h3>One look</h3>
+              <span class="when">Now · Q4 2026</span>
+            </div>
+            <ul>
+              <li>Sidecar Web live on Product UI 1.5; SidekickV2 archived.</li>
+              <li>App switcher in Sidecar Web and Brand Tools.</li>
+              <li><code>prompts.json</code> schema 2 shared by Sidecar Web and the extension, with validation.</li>
+              <li>Feed Product UI gaps found in Sidecar Web back into the library.</li>
+            </ul>
+            <div class="phase-foot">
+              <div><b>Owner</b>Tom</div>
+              <div><b>Cost</b>Free (GitHub Pages)</div>
+              <div><b>Depends on</b>Nothing</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="num">P1</div>
+          <div class="phase-body">
+            <div class="phase-top">
+              <h3>Shared IDs, still no shared infrastructure</h3>
+              <span class="when">Q4 2026 to Q1 2027</span>
+            </div>
+            <ul>
+              <li>
+                Agree <code>client_key</code> as the client ID and Payload slugs as partner IDs. Write both into every
+                new data file.
+              </li>
+              <li>
+                Great Cart read-only: GoodCart feed plus Payload case studies, with partner and source filters and Brand
+                Tools links.
+              </li>
+              <li>Map Brand Tools partner ids to Payload partner slugs.</li>
+              <li>Sidecar Extension restyled with Product UI tokens.</li>
+            </ul>
+            <div class="phase-foot">
+              <div><b>Owner</b>Tom</div>
+              <div><b>Cost</b>Free</div>
+              <div><b>Depends on</b>GoodCart owner agreeing a feed; Seb agreeing the client key format</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="num">P2</div>
+          <div class="phase-body">
+            <div class="phase-top">
+              <h3>Login per app</h3>
+              <span class="when">Q1 2027</span>
+            </div>
+            <ul>
+              <li>
+                Each app gets Google sign-in limited to the Convert Workspace. Staff are already signed into Google, so
+                it feels like one login.
+              </li>
+              <li>Brand Tools: gated font downloads, editor role for partners and presets. Moves off GitHub Pages.</li>
+              <li>Great Cart: saves, boards per client or pitch, team submissions.</li>
+              <li>Sidecar Web: internal-only prompts behind login.</li>
+              <li>
+                Pick one host for logged-in apps (Cloudflare suggested) and one small database (Supabase free tier, same
+                technology as Capacity).
+              </li>
+            </ul>
+            <div class="phase-foot">
+              <div><b>Owner</b>Tom</div>
+              <div><b>Cost</b>Free tiers; check limits</div>
+              <div><b>Depends on</b>Hosting and database decision</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="num">P3</div>
+          <div class="phase-body">
+            <div class="phase-top">
+              <h3>Capacity consolidates</h3>
+              <span class="when">Seb's timeline</span>
+            </div>
+            <ul>
+              <li>Finance Manager and the client hub fully merged into Capacity.</li>
+              <li>Capacity on Product UI 1.5 or later; joins the app switcher.</li>
+              <li>Client portal with one-time code login (P5 in the hub tracker).</li>
+              <li>RLS gaps closed (<code>retainers</code> select policy, open <code>client_*</code> policies).</li>
+            </ul>
+            <div class="phase-foot">
+              <div><b>Owner</b>Seb</div>
+              <div><b>Cost</b>Existing Vercel Pro and Supabase</div>
+              <div><b>Depends on</b>PR #31 and the hub tracker</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="num">P4</div>
+          <div class="phase-body">
+            <div class="phase-top">
+              <h3>Shared spine</h3>
+              <span class="when">2027, if Seb agrees</span>
+            </div>
+            <ul>
+              <li>
+                Capacity becomes the identity provider: one Supabase Auth with Google SSO, roles from
+                <code>profiles</code>, a shared session across subdomains of one Convert domain.
+              </li>
+              <li>Capacity publishes a read API (or MCP tools) for clients, projects and partner usage.</li>
+              <li>Brand Tools gets a client section; Great Cart filters by real clients and project codes.</li>
+              <li>
+                Payload case studies carry <code>clientKey</code>; Capacity links third parties to Payload partner
+                slugs.
+              </li>
+              <li>
+                App-owned data (prompts, saves, presets) moves into its own schema in the shared database, or stays per
+                app behind the API.
+              </li>
+            </ul>
+            <div class="phase-foot">
+              <div><b>Owner</b>Tom + Seb</div>
+              <div><b>Cost</b>Likely within Capacity's plan</div>
+              <div><b>Depends on</b>P3, a domain, Seb's agreement on ownership</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <div class="num">P5</div>
+          <div class="phase-body">
+            <div class="phase-top">
+              <h3>Connected intelligence</h3>
+              <span class="when">Later</span>
+            </div>
+            <ul>
+              <li>
+                Claude skills read live data through Capacity's MCP server (GA4, Jira, JPD, Tempo, clients) instead of
+                manual exports.
+              </li>
+              <li>Sidecar exports and Great Cart boards attach to the client record and appear in the client hub.</li>
+              <li>
+                Prompts move to a database with versions, approvals and usage analytics (the SidekickV2 feature set,
+                rebuilt).
+              </li>
+              <li>
+                Optional: fold apps into Capacity as modules, or keep them as separate front ends on the shared spine.
+              </li>
+            </ul>
+            <div class="phase-foot">
+              <div><b>Owner</b>Tom + Seb</div>
+              <div><b>Cost</b>LLM and BigQuery usage to watch</div>
+              <div><b>Depends on</b>P4</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="head">
+        <div class="eyebrow">Decisions</div>
+        <h2>What needs agreeing, and with whom</h2>
+      </div>
+      <div class="decisions">
+        <div class="decision">
+          <h3>Is <code>client_key</code> the client ID everywhere?</h3>
+          <span class="who">Tom + Seb · P1</span>
+          <p>Cheap to agree now, expensive to fix later. No Capacity code changes needed.</p>
+        </div>
+        <div class="decision">
+          <h3>Which system owns partners?</h3>
+          <span class="who">Tom · P1</span>
+          <p>Recommendation: Payload, because case studies already link to it.</p>
+        </div>
+        <div class="decision">
+          <h3>GoodCart feed terms</h3>
+          <span class="who">Tom + GoodCart owner · P1</span>
+          <p>Format, refresh, image hosting, attribution, who builds team features.</p>
+        </div>
+        <div class="decision">
+          <h3>Host and database for logged-in apps</h3>
+          <span class="who">Tom · P2</span>
+          <p>Cloudflare to match Payload, or Vercel to match Capacity. Supabase free tier for the database.</p>
+        </div>
+        <div class="decision">
+          <h3>A Convert domain for the suite</h3>
+          <span class="who">Tom + Seb · P4</span>
+          <p>Subdomains of one domain are what make a shared login session possible.</p>
+        </div>
+        <div class="decision">
+          <h3>Does Capacity become the identity provider and client API?</h3>
+          <span class="who">Seb · P4</span>
+          <p>The biggest dependency in the plan. Until agreed, every app keeps its own login.</p>
+        </div>
+        <div class="decision">
+          <h3>Who owns the shared platform layer?</h3>
+          <span class="who">Tom + Seb + leadership · P4</span>
+          <p>Someone has to own the API, auth config and data contracts once more than one app depends on them.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    const S = {
+      live: ['s-live', 'Live'],
+      build: ['s-build', 'In progress'],
+      plan: ['s-plan', 'Proposed'],
+      retire: ['s-retire', 'Retiring'],
+      ext: ['s-ext', 'External'],
+    }
+
+    const systems = {
+      capacity: {
+        name: 'CD Capacity',
+        desc: 'Resourcing, allocation, retainers, invoicing, deals, flows',
+        owns: 'People, clients (client_key), projects, retainers, allocations, hours, deals, invoices',
+        stack: 'Next 15, Supabase (Postgres, Auth, Realtime), Vercel Pro (Tokyo)',
+        auth: 'Google OAuth via Supabase, Convert domain only; roles admin, planner, pm, viewer',
+        links: 'Tempo, Jira, Google Sheets, Resend, GA4 (hub), JPD (hub), MCP server for Claude',
+        change:
+          'Absorbs Finance Manager and the client hub. Later becomes the identity provider and client API, if Seb agrees.',
+        owner: 'Seb',
+        status: { today: 'live', future: 'live' },
+      },
+      hub: {
+        name: 'Client Hub (in Capacity)',
+        desc: 'Internal client workspace and client portal',
+        owns: 'Hub visibility, report issues, relationship cadence, Growth Vault, value and releases',
+        stack: 'Capacity branch (PR #31), migrations 93 to 102',
+        auth: 'Staff via Capacity; clients via one-time code (not started)',
+        links: 'GA4, JPD, Jira, Tempo through Capacity',
+        change: 'Merges into Capacity main. Client portal opens to client users.',
+        owner: 'Seb',
+        status: { today: 'build', future: 'live' },
+      },
+      finance: {
+        name: 'Finance Manager',
+        desc: "Alex's Tempo finance tool",
+        owns: 'Finance and CRM features now being adopted by Capacity',
+        stack: 'Vite, React',
+        auth: 'n/a',
+        links: 'Tempo',
+        change: 'Consolidated into Capacity (sales pipeline, invoicing).',
+        owner: 'Alex → Seb',
+        status: { today: 'retire', future: null },
+      },
+      hubrepo: {
+        name: 'convert-client-hub repo',
+        desc: 'Standalone hub, foundations only',
+        owns: 'Per-client tenancy model (slug, user_client_roles)',
+        stack: 'Next 16, Supabase, shadcn',
+        auth: 'Supabase Google SSO',
+        links: 'None live',
+        change: 'Superseded by the Capacity hub. Keep as reference; reuse its per-client permission ideas.',
+        owner: 'Tom',
+        status: { today: 'retire', future: null },
+      },
+      brand: {
+        name: 'Brand Tools',
+        desc: 'Brand guide, assets, stacks, gradients, partners',
+        owns: 'Brand assets, colours, logos, stack and gradient presets',
+        stack: 'Next 16 static export, GitHub Pages, Product UI 1.5.0',
+        auth: 'None today; Google sign-in planned',
+        links: 'Payload partners (future), Capacity clients (future), Great Cart',
+        change: 'Login and editor roles, moves off GitHub Pages, gains a client section from Capacity.',
+        owner: 'Tom',
+        status: { today: 'live', future: 'live' },
+      },
+      sidecarweb: {
+        name: 'Sidecar Web',
+        desc: 'Sidekick prompt library website',
+        owns: 'Nothing; reads prompts.json',
+        stack: 'Next 16 static export, GitHub Pages, Product UI 1.5.0',
+        auth: 'None; noindex',
+        links: 'prompts.json, Sidecar Extension',
+        change: 'Internal prompts behind login; later versions, approvals and analytics.',
+        owner: 'Tom',
+        status: { today: 'live', future: 'live' },
+      },
+      ext: {
+        name: 'Sidecar Extension',
+        desc: 'Chrome side panel in Shopify admin',
+        owns: 'Nothing; reads prompts.json, exports Sidekick chats',
+        stack: 'Manifest V3, plain JavaScript, Chrome Web Store (unlisted)',
+        auth: 'None',
+        links: 'Shopify admin and Sidekick, prompts.json',
+        change: 'Product UI tokens; later sends exports to the client record.',
+        owner: 'Tom',
+        status: { today: 'live', future: 'live' },
+      },
+      sidekickv2: {
+        name: 'SidekickV2',
+        desc: 'Old prompt library',
+        owns: 'Stale 54-prompt seed',
+        stack: 'Next 15, Supabase (offline)',
+        auth: 'Supabase Google',
+        links: 'None',
+        change: 'Archived once Sidecar Web reaches parity.',
+        owner: 'Tom',
+        status: { today: 'retire', future: null },
+      },
+      greatcart: {
+        name: 'Great Cart',
+        desc: 'Convert inspiration library',
+        owns: 'Convert layer: client, partner, notes; saves and boards',
+        stack: 'Static Next on Product UI, then a small database',
+        auth: 'None at first; Google sign-in in P2',
+        links: 'GoodCart feed, Payload case studies, Brand Tools partners, Capacity clients',
+        change: 'New app. Read-only first, then saves and boards.',
+        owner: 'Tom',
+        status: { today: null, future: 'plan' },
+      },
+      payload: {
+        name: 'Convert website (Payload)',
+        desc: 'Public site and CMS',
+        owns: 'Case studies, partners, features, industries, services, insights',
+        stack: 'Payload 3.87, Next, Cloudflare Workers, D1, R2, Bitbucket',
+        auth: 'Payload users (editors)',
+        links: 'convert-content skill, Great Cart, Brand Tools (future)',
+        change: 'Becomes the partner list; case studies gain clientKey.',
+        owner: 'Tom / web team',
+        status: { today: 'live', future: 'live' },
+      },
+      prompts: {
+        name: 'prompts.json',
+        desc: 'Shared Sidekick prompt library file',
+        owns: '74 prompts, categories, follow-ups; collections in schema 2',
+        stack: 'JSON on GitHub Pages (sidecar repo)',
+        auth: 'Public',
+        links: 'Sidecar Web, Sidecar Extension',
+        change: 'Schema 2 now; a database with versions later.',
+        owner: 'Tom',
+        status: { today: 'live', future: 'live' },
+      },
+      pui: {
+        name: 'Product UI',
+        desc: 'Convert design system',
+        owns: 'Components, tokens, app switcher, brand marks',
+        stack: 'React package, GitHub releases, Storybook',
+        auth: 'Private repo; read token for installs',
+        links: 'Every app',
+        change: 'Everyone on 1.5 or later; 2.0 waits for Capacity.',
+        owner: 'Tom',
+        status: { today: 'live', future: 'live' },
+      },
+      identity: {
+        name: 'Shared identity',
+        desc: 'One Google SSO for staff',
+        owns: 'Sessions and roles',
+        stack: 'Capacity Supabase Auth across subdomains',
+        auth: 'Google Workspace',
+        links: 'All apps',
+        change: 'Replaces per-app sign-in in P4.',
+        owner: 'Seb + Tom',
+        status: { today: null, future: 'plan' },
+      },
+      api: {
+        name: 'Client and partner API',
+        desc: 'Read access to Capacity data',
+        owns: 'Contract for clients, projects, partner usage',
+        stack: 'Capacity REST routes or MCP tools',
+        auth: 'Service tokens per app',
+        links: 'Brand Tools, Great Cart, Payload, Claude skills',
+        change: 'New in P4.',
+        owner: 'Seb + Tom',
+        status: { today: null, future: 'plan' },
+      },
+      mcp: {
+        name: 'Capacity MCP server',
+        desc: 'Claude access to Capacity',
+        owns: '11 tools today, per-user tokens',
+        stack: 'mcp-handler over Streamable HTTP',
+        auth: 'Per-user bearer tokens',
+        links: 'Claude, Claude skills',
+        change: 'Extended so skills read live client context.',
+        owner: 'Seb',
+        status: { today: 'live', future: 'live' },
+      },
+      skills: {
+        name: 'Claude skills',
+        desc: 'ux-audit, strategy-session-prep, workshop-to-roadmap, convert-client-hub, convert-content',
+        owns: 'Workflows, not data',
+        stack: 'Claude (org skills)',
+        auth: 'Claude accounts',
+        links: 'Manual exports today; Capacity MCP, Payload, Great Cart later',
+        change: 'Move from manual exports to live data.',
+        owner: 'Tom',
+        status: { today: 'live', future: 'live' },
+      },
+      gw: { name: 'Google Workspace', desc: 'SSO, Sheets, Drive', status: { today: 'ext', future: 'ext' } },
+      tempo: { name: 'Tempo', desc: 'Time tracking', status: { today: 'ext', future: 'ext' } },
+      jira: { name: 'Jira and JPD', desc: 'Delivery and product discovery', status: { today: 'ext', future: 'ext' } },
+      ga4: { name: 'GA4', desc: 'Client analytics', status: { today: 'ext', future: 'ext' } },
+      shopify: {
+        name: 'Shopify and Sidekick',
+        desc: 'Client stores and admin',
+        status: { today: 'ext', future: 'ext' },
+      },
+      goodcart: { name: 'GoodCart', desc: 'Curated inspiration feed', status: { today: 'ext', future: 'ext' } },
+      resend: { name: 'Resend', desc: 'Transactional email', status: { today: 'ext', future: 'ext' } },
+      design: {
+        name: 'Figma, FigJam, Granola',
+        desc: 'Design, workshops, meeting notes',
+        status: { today: 'ext', future: 'ext' },
+      },
+      hosting: { name: 'Hosting', desc: 'Vercel, Cloudflare, GitHub Pages', status: { today: 'ext', future: 'ext' } },
+    }
+
+    const layers = [
+      {
+        id: 'people',
+        label: 'People',
+        note: 'Who signs in',
+        items: { today: [], future: [] },
+        people: {
+          today: 'Convert staff sign in separately per app. Static apps have no login.',
+          future:
+            'Convert staff: one Google Workspace sign-in across every app. Client users: client portal only, with a one-time code.',
+        },
+      },
+      {
+        id: 'apps',
+        label: 'Apps',
+        note: 'Product UI front ends in one switcher',
+        items: {
+          today: ['capacity', 'hub', 'finance', 'brand', 'sidecarweb', 'ext', 'sidekickv2', 'hubrepo'],
+          future: ['capacity', 'hub', 'brand', 'sidecarweb', 'ext', 'greatcart'],
+        },
+      },
+      {
+        id: 'platform',
+        label: 'Shared platform',
+        note: 'Owned once, read by many',
+        items: {
+          today: ['payload', 'prompts', 'pui', 'mcp'],
+          future: ['identity', 'api', 'payload', 'prompts', 'pui', 'mcp'],
+        },
+      },
+      {
+        id: 'ai',
+        label: 'AI workflows',
+        note: 'Claude on top of the platform',
+        items: { today: ['skills'], future: ['skills'] },
+      },
+      {
+        id: 'ext',
+        label: 'External services',
+        note: 'Sources and infrastructure',
+        items: {
+          today: ['gw', 'tempo', 'jira', 'ga4', 'shopify', 'resend', 'design', 'hosting'],
+          future: ['gw', 'tempo', 'jira', 'ga4', 'shopify', 'goodcart', 'resend', 'design', 'hosting'],
+        },
+      },
+    ]
+
+    let view = 'future'
+    let selected = null
+    const stack = document.getElementById('stack')
+    const detail = document.getElementById('detail')
+
+    function pill(st) {
+      const [c, l] = S[st]
+      return `<span class="pill ${c}">${l}</span>`
+    }
+
+    function render() {
+      stack.innerHTML = ''
+      layers.forEach((layer, i) => {
+        if (i > 0) {
+          const f = document.createElement('div')
+          f.className = 'flow'
+          f.textContent = i === 1 ? 'use' : i === 2 ? 'read and write' : i === 3 ? 'call' : 'connect to'
+          stack.appendChild(f)
+        }
+        const el = document.createElement('div')
+        el.className = 'layer'
+        let inner = `<div class="layer-label"><div class="eyebrow">${layer.label}</div><p>${layer.note}</p></div>`
+        if (layer.people) {
+          inner += `<div class="systems" style="grid-template-columns:1fr"><p style="font-size:14px">${layer.people[view]}</p></div>`
+        } else {
+          inner +=
+            '<div class="systems">' +
+            layer.items[view]
+              .map((id) => {
+                const s = systems[id]
+                const st = s.status[view]
+                const ext = st === 'ext'
+                return `<button class="sys" data-id="${id}" aria-pressed="${selected === id}" ${ext ? 'data-ext="1"' : ''}><span class="name">${s.name}</span><span class="desc">${s.desc}</span><span class="row">${pill(st)}${s.owner ? `<span class="hint mono">${s.owner}</span>` : ''}</span></button>`
+              })
+              .join('') +
+            '</div>'
+        }
+        el.innerHTML = inner
+        stack.appendChild(el)
+      })
+      stack.querySelectorAll('.sys').forEach((b) =>
+        b.addEventListener('click', () => {
+          selected = selected === b.dataset.id ? null : b.dataset.id
+          render()
+        }),
+      )
+      renderDetail()
+    }
+
+    function renderDetail() {
+      const s = selected && systems[selected]
+      if (!s || !s.owns) {
+        detail.hidden = true
+        return
+      }
+      detail.hidden = false
+      detail.innerHTML = `<div class="row" style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><h3>${s.name}</h3>${s.status[view] ? pill(s.status[view]) : ''}</div>
+  <dl><dt>Owns</dt><dd>${s.owns}</dd><dt>Stack</dt><dd>${s.stack}</dd><dt>Sign-in</dt><dd>${s.auth}</dd><dt>Connects to</dt><dd>${s.links}</dd><dt>What changes</dt><dd>${s.change}</dd><dt>Owner</dt><dd>${s.owner}</dd></dl>`
+    }
+
+    document.querySelectorAll('[role="tab"]').forEach((t) =>
+      t.addEventListener('click', () => {
+        view = t.id === 'tab-today' ? 'today' : 'future'
+        document.querySelectorAll('[role="tab"]').forEach((x) => x.setAttribute('aria-selected', String(x === t)))
+        if (selected && !systems[selected].status[view]) selected = null
+        render()
+      }),
+    )
+
+    render()
+  </script>
+</html>

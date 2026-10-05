@@ -8,14 +8,14 @@ Each prompt is self-contained. Open a Code session in that repo's folder, pick S
 
 ## Order
 
-| # | Repo | Change | When |
-| --- | --- | --- | --- |
-| 1 | `cd-brand-tools` | Add the app switcher | Once Sidecar Web's first milestone (M1) is live on Pages |
-| 2 | `sidecar` | Add Sidecar Web's extra fields and collections to `prompts.json` (version 2), with an automatic check | Any time, in parallel |
-| 3 | `sidecar-web` | Switch collections to the shared `prompts.json` | After #2 is merged |
-| 4 | `SidekickV2` | Point to Sidecar Web, then archive | Once Sidecar Web has everything SidekickV2 does |
-| 5 | `cd-product-ui` | List Sidecar Web as a consumer | After Sidecar Web deploys |
-| 6 | `sidecar` | Restyle the extension with Product UI | Later phase, after #2 |
+| #   | Repo             | Change                                                                                                | When                                                     |
+| --- | ---------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
+| 1   | `cd-brand-tools` | Add the app switcher                                                                                  | Once Sidecar Web's first milestone (M1) is live on Pages |
+| 2   | `sidecar`        | Add Sidecar Web's extra fields and collections to `prompts.json` (version 2), with an automatic check | Any time, in parallel                                    |
+| 3   | `sidecar-web`    | Switch collections to the shared `prompts.json`                                                       | After #2 is merged                                       |
+| 4   | `SidekickV2`     | Point to Sidecar Web, then archive                                                                    | Once Sidecar Web has everything SidekickV2 does          |
+| 5   | `cd-product-ui`  | List Sidecar Web as a consumer                                                                        | After Sidecar Web deploys                                |
+| 6   | `sidecar`        | Restyle the extension with Product UI                                                                 | Later phase, after #2                                    |
 
 Prompt 2 is the one to be careful with. Installed copies of the extension fetch the live `prompts.json`, so one malformed prompt makes every installed extension fall back to its cached copy. The new automatic check is what stops that.
 

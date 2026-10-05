@@ -15,11 +15,11 @@ It's a targeted Convert tool, not a GoodCart reskin. Its job is to answer team q
 
 ## Sources
 
-| Source | Badge | Where it comes from | Phase |
-| --- | --- | --- | --- |
-| GoodCart | "GoodCart", plus a "View on GoodCart" link | Coworker's feed (format to be agreed) | 1 |
-| Convert builds | "Convert" | Convert website Payload CMS (`convert-digital-2025`), published case studies | 1 |
-| Team submissions | "Submitted by <name>" | Great Cart's own database | 2 |
+| Source           | Badge                                      | Where it comes from                                                          | Phase |
+| ---------------- | ------------------------------------------ | ---------------------------------------------------------------------------- | ----- |
+| GoodCart         | "GoodCart", plus a "View on GoodCart" link | Coworker's feed (format to be agreed)                                        | 1     |
+| Convert builds   | "Convert"                                  | Convert website Payload CMS (`convert-digital-2025`), published case studies | 1     |
+| Team submissions | "Submitted by <name>"                      | Great Cart's own database                                                    | 2     |
 
 Source is a filter: All, GoodCart, Convert, Team.
 
