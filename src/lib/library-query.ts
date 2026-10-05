@@ -74,3 +74,13 @@ export function filterPrompts(
     return terms.every((t) => hay.includes(t))
   })
 }
+
+/** The timeframe and comparison part of a view, for pages that have no search or filters. */
+export function parseTimeframeQuery(search: string, presets: readonly string[]): TimeframeState {
+  const { timeframe, comparison, customTimeframe, customComparison } = parseLibraryQuery(search, presets, [])
+  return { timeframe, comparison, customTimeframe, customComparison }
+}
+
+export function serialiseTimeframeQuery(s: TimeframeState): string {
+  return serialiseLibraryQuery({ ...DEFAULT_LIBRARY_STATE, ...s })
+}

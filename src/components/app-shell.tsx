@@ -8,6 +8,7 @@ import { basePath, withBase } from '@/lib/base-path'
 
 const items: readonly SidebarEntry[] = [
   { id: 'library', label: 'Prompt library', href: withBase('/'), icon: <Icon name="overview" /> },
+  { id: 'collections', label: 'Collections', href: withBase('/collections/'), icon: <Icon name="grid" /> },
 ]
 
 const routes: Record<string, string> = {}

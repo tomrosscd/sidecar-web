@@ -1,0 +1,41 @@
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cui-space-8);
+}
+
+.body {
+  margin: 0;
+  font-family: inherit;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.token,
+.placeholder {
+  padding: 0 var(--cui-space-4);
+  border-radius: var(--cui-radius-compact);
+  color: inherit;
+  font-weight: 600;
+}
+
+.token {
+  background: var(--cui-surface-selected);
+}
+
+.placeholder {
+  background: var(--cui-surface-warning);
+}
+
+.note {
+  margin: var(--cui-space-12) 0 0;
+  color: var(--cui-text-secondary);
+  font-size: 0.875rem;
+}
+
+.list {
+  margin: 0;
+  padding-left: var(--cui-space-20);
+}

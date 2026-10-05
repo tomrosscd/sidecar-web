@@ -1,24 +1,20 @@
 'use client'
 
 import {
-  Badge,
   ContentList,
-  ContentListItem,
   EmptyState,
   FilterToolbar,
-  Grid,
-  Input,
   PageLayout,
-  Select,
   Button,
   type CollectionFilterSelection,
 } from '@convert/product-ui'
 import { useCallback, useMemo } from 'react'
 import { filterPrompts, parseLibraryQuery, serialiseLibraryQuery, type LibraryState } from '@/lib/library-query'
 import { useQueryString } from '@/lib/use-query-string'
-import { COMPARISON_OPTIONS, TIMEFRAME_PRESETS, effectiveComparison, effectiveTimeframe } from '@/lib/timeframe'
+import { TIMEFRAME_PRESETS, effectiveComparison, effectiveTimeframe } from '@/lib/timeframe'
 import type { Prompt } from '@/lib/types'
-import { CopyPromptButton } from './copy-prompt'
+import { PromptRow } from './prompt-row'
+import { TimeframeControls } from './timeframe-controls'
 
 const PRESET_VALUES = TIMEFRAME_PRESETS.map((t) => t.value)
 
@@ -83,38 +79,7 @@ export function PromptLibrary({ prompts, updated }: { prompts: Prompt[]; updated
             onValueChange: onPickerChange,
           }}
           onClearAll={() => patch({ q: '', category: '', featured: false, recommended: false })}
-          filters={
-            <Grid columns={2} gap={16}>
-              <Select
-                label="Timeframe"
-                value={state.timeframe}
-                onChange={(e) => patch({ timeframe: e.target.value })}
-                options={[...TIMEFRAME_PRESETS, { value: 'custom', label: 'Custom range…' }]}
-              />
-              <Select
-                label="Comparison"
-                value={state.comparison}
-                onChange={(e) => patch({ comparison: e.target.value })}
-                options={[...COMPARISON_OPTIONS, { value: 'custom', label: 'Custom period…' }]}
-              />
-              {state.timeframe === 'custom' && (
-                <Input
-                  label="Custom timeframe"
-                  hint="Reads as “the …”, for example 1 to 14 March."
-                  value={state.customTimeframe}
-                  onChange={(e) => patch({ customTimeframe: e.target.value })}
-                />
-              )}
-              {state.comparison === 'custom' && (
-                <Input
-                  label="Custom comparison"
-                  hint="For example, the week before launch."
-                  value={state.customComparison}
-                  onChange={(e) => patch({ customComparison: e.target.value })}
-                />
-              )}
-            </Grid>
-          }
+          filters={<TimeframeControls state={state} onChange={patch} />}
         />
       }
       footer={
@@ -141,19 +106,7 @@ export function PromptLibrary({ prompts, updated }: { prompts: Prompt[]; updated
       ) : (
         <ContentList density="compact">
           {visible.map((p) => (
-            <ContentListItem
-              key={p.slug}
-              title={p.title}
-              description={p.description}
-              meta={
-                <>
-                  <Badge>{p.category}</Badge>
-                  {p.featured && <Badge tone="accent">Featured</Badge>}
-                  {p.recommended && <Badge tone="positive">Recommended</Badge>}
-                </>
-              }
-              actions={<CopyPromptButton prompt={p} timeframe={timeframe} comparison={comparison} />}
-            />
+            <PromptRow key={p.slug} prompt={p} timeframe={timeframe} comparison={comparison} />
           ))}
         </ContentList>
       )}
