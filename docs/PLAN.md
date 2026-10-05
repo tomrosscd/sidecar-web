@@ -128,3 +128,17 @@ Summarise in the PR:
 - any Product UI gaps found
 
 Then stop and wait for me.
+
+## Status
+
+| Milestone                             | Status                                                                                |
+| ------------------------------------- | ------------------------------------------------------------------------------------- |
+| M1 Scaffold and deploy an empty shell | PR #1, in review                                                                      |
+| M2 Prompt data layer                  | PR #2 (stacked), in review                                                            |
+| M3 Library page                       | PR #3 (stacked), in review                                                            |
+| M4 Detail and collections             | PR #4 (stacked), in review                                                            |
+| M5 Saved, submit, extension, search   | PR #5 (stacked), in review                                                            |
+| M6 Skills library, hidden             | PR #6 (stacked), in review                                                            |
+| M7 QA and release                     | PR #7 (stacked), in review. Live deploy checks are pending until the stack is merged. |
+
+M7 evidence so far: no horizontal scroll on any route at 1440, 1024, 390 and 320px; dialog and palette keyboard behaviour; 1480 live prompt, timeframe and comparison combinations match the extension byte for byte.

@@ -2,7 +2,17 @@
 
 A static prompt library for Convert staff. It replaces SidekickV2, shares its prompt data with the Sidecar Extension, and is built on `@convert/product-ui`.
 
-Status: milestone M1 (empty shell). See [docs/PLAN.md](docs/PLAN.md) for the milestones.
+Status: M1 to M7 built and in review (stacked PRs). See [docs/PLAN.md](docs/PLAN.md) for the milestones and their status.
+
+## What it does
+
+- Prompt library with search, category and featured/recommended filters, and a timeframe and comparison builder. A view is shareable through the query string.
+- Prompt pages, collections, saved prompts (stored in this browser only), a Cmd/Ctrl+K palette, and an extension page.
+- Prompt data comes from `https://tomrosscd.github.io/sidecar/prompts.json` at build time. Invalid data fails the build. Collections come from `data/collections.json` until `prompts.json` carries its own.
+- A hidden skills library, built only when `NEXT_PUBLIC_SHOW_SKILLS=true`.
+- `SUBMIT_URL` and the extension link are in `src/config/site.ts`.
+
+Because the data is fetched at build, a new prompt appears on the site after the next build. Run the Pages workflow (it has `workflow_dispatch`) after changing `prompts.json`.
 
 ## Run locally
 
@@ -24,6 +34,8 @@ pnpm check
 ```
 
 `pnpm check` runs type-check, lint, tests and a static build.
+
+Parity with the extension: `tests/fixtures/extension-parity.json` is generated from the extension's own `prompts.js` by `node scripts/generate-parity-fixtures.mjs`. To spot-check every live prompt against the extension, run `node --experimental-strip-types scripts/parity-live.mjs`.
 
 ## Hosting
 
