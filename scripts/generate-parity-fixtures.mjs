@@ -28,7 +28,7 @@ const timeframes = [
   'last quarter',
   'last 6 months',
   'last 12 months',
-  'the selected period',
+  'selected period',
   '1 to 14 March 2026',
 ]
 const comparisons = ['prev', 'yoy', 'none', '', null, 'the week before launch']

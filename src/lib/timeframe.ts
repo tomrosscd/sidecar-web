@@ -32,7 +32,7 @@ export const DEFAULT_TIMEFRAME_STATE: TimeframeState = {
 
 /** The timeframe text passed to buildPrompt (extension: getEffectiveTf). */
 export function effectiveTimeframe(s: TimeframeState): string {
-  return s.timeframe === 'custom' ? s.customTimeframe.trim() || 'the selected period' : s.timeframe
+  return s.timeframe === 'custom' ? s.customTimeframe.trim() || 'selected period' : s.timeframe
 }
 
 /** The comparison value passed to buildPrompt (extension: getEffectiveCmp). */
