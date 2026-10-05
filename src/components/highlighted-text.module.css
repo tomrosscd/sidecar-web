@@ -1,0 +1,15 @@
+.tf,
+.cmp {
+  padding: 0 var(--cui-space-4);
+  border-radius: var(--cui-radius-compact);
+  color: inherit;
+  font-weight: 600;
+}
+
+.tf {
+  background: var(--cui-surface-warning);
+}
+
+.cmp {
+  background: var(--cui-surface-selected);
+}

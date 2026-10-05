@@ -1,0 +1,30 @@
+.snippet {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--cui-text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cui-space-4);
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cui-space-8);
+  margin-bottom: var(--cui-space-12);
+}

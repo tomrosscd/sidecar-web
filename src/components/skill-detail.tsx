@@ -4,7 +4,7 @@ import { Badge, Breadcrumbs, Button, Card, KeyValueList, PageLayout, Stack } fro
 import { withBase } from '@/lib/base-path'
 import { copyText } from '@/lib/copy-text'
 import type { Skill } from '@/lib/skills'
-import styles from './prompt-detail.module.css'
+import styles from './skill-detail.module.css'
 import { useToast } from './toast-provider'
 
 export function SkillDetail({ skill }: { skill: Skill }) {

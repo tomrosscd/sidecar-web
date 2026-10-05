@@ -30,7 +30,7 @@ const apps: readonly AppEntry[] = suiteApps.map((app) => ({
   href: app.href,
   description: app.description,
   mark: appMark(app.markSrc),
-  markTreatment: 'full-frame',
+  markTreatment: app.markTreatment,
 }))
 
 export function AppShell({ children, searchEntries }: { children: ReactNode; searchEntries: readonly SearchEntry[] }) {

@@ -5,6 +5,7 @@ import '@convert/product-ui/styles.css'
 import './globals.css'
 import { AppShell } from '@/components/app-shell'
 import { ToastProvider } from '@/components/toast-provider'
+import { ViewProvider } from '@/components/view-provider'
 import { SITE_DESCRIPTION, SITE_NAME } from '@/config/site'
 import { withBase } from '@/lib/base-path'
 import { loadCollections } from '@/lib/collections'
@@ -27,7 +28,9 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
       <body>
         <ThemeProvider theme="light" appearance="workspace">
           <ToastProvider>
-            <AppShell searchEntries={buildSearchEntries(prompts, collections)}>{children}</AppShell>
+            <ViewProvider prompts={prompts}>
+              <AppShell searchEntries={buildSearchEntries(prompts, collections)}>{children}</AppShell>
+            </ViewProvider>
           </ToastProvider>
         </ThemeProvider>
       </body>

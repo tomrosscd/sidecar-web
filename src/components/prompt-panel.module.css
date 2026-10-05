@@ -1,0 +1,33 @@
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cui-space-8);
+}
+
+.description {
+  margin: 0;
+  color: var(--cui-text-secondary);
+}
+
+.section {
+  display: grid;
+  gap: var(--cui-space-12);
+}
+
+.sectionHeading {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--cui-text-secondary);
+}
+
+.list {
+  margin: 0;
+  padding-left: var(--cui-space-20);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cui-space-8);
+}

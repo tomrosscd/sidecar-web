@@ -1,0 +1,10 @@
+.fields {
+  display: grid;
+  gap: var(--cui-space-12);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cui-space-8);
+}

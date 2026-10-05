@@ -24,12 +24,13 @@ describe('library query string', () => {
       q: 'checkout flow',
       category: 'CRO',
       featured: true,
+      prompt: 'a-prompt',
       timeframe: 'custom',
       customTimeframe: '1 to 14 March',
       comparison: 'custom',
       customComparison: 'the week before launch',
     }
-    expect(parseLibraryQuery(serialiseLibraryQuery(s), presets, cats)).toEqual(s)
+    expect(parseLibraryQuery(serialiseLibraryQuery(s), presets, cats, new Set(['a-prompt']))).toEqual(s)
   })
   it('falls back to defaults for unknown values', () => {
     const s = parseLibraryQuery('?tf=bogus&cmp=nope&cat=Nope&featured=yes', presets, cats)

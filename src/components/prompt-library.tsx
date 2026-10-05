@@ -1,57 +1,52 @@
 'use client'
 
 import {
-  ContentList,
+  Button,
   EmptyState,
   FilterToolbar,
+  Grid,
   PageLayout,
-  Button,
+  SegmentedControl,
   type CollectionFilterSelection,
 } from '@convert/product-ui'
-import { useCallback, useMemo } from 'react'
-import { filterPrompts, parseLibraryQuery, serialiseLibraryQuery, type LibraryState } from '@/lib/library-query'
-import { useQueryString } from '@/lib/use-query-string'
-import { TIMEFRAME_PRESETS, effectiveComparison, effectiveTimeframe } from '@/lib/timeframe'
-import type { Prompt } from '@/lib/types'
 import { SUBMIT_URL } from '@/config/site'
-import { PromptRow } from './prompt-row'
+import { filterPrompts } from '@/lib/library-query'
+import styles from './prompt-library.module.css'
+import { PromptCard } from './prompt-card'
+import { PromptPanelHost } from './prompt-panel'
 import { TimeframeControls } from './timeframe-controls'
+import { useView } from './view-provider'
 
-const PRESET_VALUES = TIMEFRAME_PRESETS.map((t) => t.value)
+export function PromptLibrary({ updated }: { updated?: string }) {
+  const { prompts, categories, state, patch } = useView()
+  const visible = filterPrompts(prompts, state)
+  const clear = () => patch({ q: '', category: '', featured: false, recommended: false })
 
-export function PromptLibrary({ prompts, updated }: { prompts: Prompt[]; updated?: string }) {
-  const categories = useMemo(() => [...new Set(prompts.map((p) => p.category))].sort(), [prompts])
-  const [search, setSearch] = useQueryString()
-  const state = useMemo(() => parseLibraryQuery(search, PRESET_VALUES, categories), [search, categories])
-  const patch = useCallback(
-    (p: Partial<LibraryState>) => setSearch(serialiseLibraryQuery({ ...state, ...p })),
-    [state, setSearch],
-  )
-
-  const visible = useMemo(() => filterPrompts(prompts, state), [prompts, state])
-  const timeframe = effectiveTimeframe(state)
-  const comparison = effectiveComparison(state)
-
-  const pickerValue: CollectionFilterSelection[] = []
-  if (state.category) pickerValue.push({ field: 'category', values: [state.category] })
   const flags = [...(state.featured ? ['featured'] : []), ...(state.recommended ? ['recommended'] : [])]
-  if (flags.length > 0) pickerValue.push({ field: 'flags', values: flags })
-
-  const onPickerChange = (next: CollectionFilterSelection[]) => {
-    const cat = next.find((s) => s.field === 'category')?.values[0] ?? ''
-    const fl = next.find((s) => s.field === 'flags')?.values ?? []
-    patch({ category: cat, featured: fl.includes('featured'), recommended: fl.includes('recommended') })
-  }
+  const pickerValue: CollectionFilterSelection[] = flags.length > 0 ? [{ field: 'flags', values: flags }] : []
 
   return (
     <PageLayout
       headingOwner="page"
       heading="Prompt library"
-      description="Ready-made prompts for Shopify Sidekick. Choose a timeframe, then copy a prompt and paste it into Sidekick."
+      description="Ready-made prompts for Shopify Sidekick. Set the date range once, then copy a prompt and paste it into Sidekick."
       actions={
         <a className="cui-button cui-button-secondary cui-button-sm" href={SUBMIT_URL}>
           Submit a prompt
         </a>
+      }
+      summary={
+        <section aria-labelledby="prompt-settings-heading" className={styles.settings}>
+          <div>
+            <h2 id="prompt-settings-heading" className={styles.settingsHeading}>
+              Prompt settings
+            </h2>
+            <p className={styles.settingsNote}>
+              These change the wording of every prompt, and carry into the details panel.
+            </p>
+          </div>
+          <TimeframeControls />
+        </section>
       }
       toolbar={
         <FilterToolbar
@@ -61,16 +56,23 @@ export function PromptLibrary({ prompts, updated }: { prompts: Prompt[]; updated
           searchPlaceholder="Search prompts…"
           searchValue={state.q}
           onSearchChange={(q) => patch({ q })}
+          leading={
+            <SegmentedControl
+              variant="pills"
+              label="Category"
+              value={state.category || 'all'}
+              onValueChange={(v) => patch({ category: v === 'all' ? '' : v })}
+              options={[
+                { value: 'all', label: `All · ${prompts.length}` },
+                ...categories.map((c) => ({
+                  value: c,
+                  label: `${c} · ${prompts.filter((p) => p.category === c).length}`,
+                })),
+              ]}
+            />
+          }
           filterPicker={{
             fields: [
-              {
-                key: 'category',
-                label: 'Category',
-                options: categories.map((c) => ({
-                  value: c,
-                  label: `${c} (${prompts.filter((p) => p.category === c).length})`,
-                })),
-              },
               {
                 key: 'flags',
                 label: 'Show only',
@@ -82,10 +84,12 @@ export function PromptLibrary({ prompts, updated }: { prompts: Prompt[]; updated
               },
             ],
             value: pickerValue,
-            onValueChange: onPickerChange,
+            onValueChange: (next) => {
+              const fl = next.find((s) => s.field === 'flags')?.values ?? []
+              patch({ featured: fl.includes('featured'), recommended: fl.includes('recommended') })
+            },
           }}
-          onClearAll={() => patch({ q: '', category: '', featured: false, recommended: false })}
-          filters={<TimeframeControls state={state} onChange={patch} />}
+          onClearAll={clear}
         />
       }
       footer={
@@ -95,27 +99,26 @@ export function PromptLibrary({ prompts, updated }: { prompts: Prompt[]; updated
         </p>
       }
     >
-      {visible.length === 0 ? (
-        <EmptyState
-          live
-          heading="No prompts match"
-          description="Try a different search or clear the filters."
-          action={
-            <Button
-              variant="secondary"
-              onClick={() => patch({ q: '', category: '', featured: false, recommended: false })}
-            >
-              Clear filters
-            </Button>
-          }
-        />
-      ) : (
-        <ContentList density="compact">
-          {visible.map((p) => (
-            <PromptRow key={p.slug} prompt={p} timeframe={timeframe} comparison={comparison} />
-          ))}
-        </ContentList>
-      )}
+      <PromptPanelHost>
+        {visible.length === 0 ? (
+          <EmptyState
+            live
+            heading="No prompts match"
+            description="Try a different search or clear the filters."
+            action={
+              <Button variant="secondary" onClick={clear}>
+                Clear filters
+              </Button>
+            }
+          />
+        ) : (
+          <Grid columns={2} minItemWidth={380} gap={16}>
+            {visible.map((p) => (
+              <PromptCard key={p.slug} prompt={p} />
+            ))}
+          </Grid>
+        )}
+      </PromptPanelHost>
     </PageLayout>
   )
 }

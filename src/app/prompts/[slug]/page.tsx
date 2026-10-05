@@ -22,6 +22,5 @@ export default async function PromptPage({ params }: { params: Promise<Params> }
   const { prompts } = await loadPrompts()
   const prompt = prompts.find((p) => p.slug === slug)
   if (!prompt) notFound()
-  const next = prompt.followUp ? prompts.find((p) => p.slug === prompt.followUp) : undefined
-  return <PromptDetail prompt={prompt} followUp={next && { slug: next.slug, title: next.title }} />
+  return <PromptDetail prompt={prompt} />
 }

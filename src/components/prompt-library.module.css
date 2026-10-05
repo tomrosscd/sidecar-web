@@ -1,0 +1,16 @@
+.settings {
+  display: grid;
+  gap: var(--cui-space-12);
+}
+
+.settingsHeading {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.settingsNote {
+  margin: var(--cui-space-4) 0 0;
+  color: var(--cui-text-secondary);
+  font-size: 0.875rem;
+}

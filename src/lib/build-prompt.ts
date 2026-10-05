@@ -57,3 +57,45 @@ export function fillPlaceholders(
 export function hasUnfilledPlaceholders(text: string): boolean {
   return /\[[^\]]+\]/.test(text) || /\{\{[^}]+\}\}/.test(text)
 }
+
+export type PromptSegment = { text: string; kind: 'text' | 'tf' | 'cmp' }
+
+// Private-use markers that cannot occur in prompt text.
+const TF_OPEN = ''
+const TF_CLOSE = ''
+const CMP_OPEN = ''
+const CMP_CLOSE = ''
+
+/**
+ * The same text as buildPrompt, split so the substituted timeframe and comparison can be highlighted
+ * (the extension shows them yellow and green). Joining the segments always equals buildPrompt's output.
+ * When there is no comparison, the removed or fallback wording is left unhighlighted.
+ */
+export function buildPromptSegments(
+  prompt: { body?: string },
+  timeframe: string,
+  comparison: string | null | undefined,
+): PromptSegment[] {
+  const hasCmp = getCmpText(timeframe, comparison) !== null
+  let body = (prompt.body || '').replace(/\{\{TF\}\}/g, `${TF_OPEN}{{TF}}${TF_CLOSE}`)
+  if (hasCmp) body = body.replace(/\{\{CMP\}\}/g, `${CMP_OPEN}{{CMP}}${CMP_CLOSE}`)
+  const marked = buildPrompt({ body }, timeframe, comparison)
+  const segments: PromptSegment[] = []
+  let kind: PromptSegment['kind'] = 'text'
+  let text = ''
+  const flush = () => {
+    if (text) segments.push({ text, kind })
+    text = ''
+  }
+  for (const ch of marked) {
+    if (ch === TF_OPEN || ch === CMP_OPEN) {
+      flush()
+      kind = ch === TF_OPEN ? 'tf' : 'cmp'
+    } else if (ch === TF_CLOSE || ch === CMP_CLOSE) {
+      flush()
+      kind = 'text'
+    } else text += ch
+  }
+  flush()
+  return segments
+}
