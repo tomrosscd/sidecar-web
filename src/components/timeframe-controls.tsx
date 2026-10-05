@@ -8,7 +8,8 @@ import { useView } from './view-provider'
 
 /**
  * The controls that change the prompt text itself: date range, comparison and their custom wording.
- * Shared by the library, the side panel and collections, all reading the same state.
+ * Each custom field opens directly under the control it belongs to. Shared by the library, the side
+ * panel and collections, all reading the same state.
  */
 export function TimeframeControls() {
   const { state, patch } = useView()
@@ -21,6 +22,14 @@ export function TimeframeControls() {
           onChange={(e) => patch({ timeframe: e.target.value })}
           options={[...TIMEFRAME_PRESETS, { value: 'custom', label: 'Custom range…' }]}
         />
+        {state.timeframe === 'custom' && (
+          <CustomPeriodField
+            label="Custom date range"
+            hint="Reads as “the …”. Edit it freely, for example Q1 2025."
+            text={state.customTimeframe}
+            onTextChange={(customTimeframe) => patch({ customTimeframe })}
+          />
+        )}
       </div>
       <div className={styles.field}>
         <Select
@@ -29,27 +38,15 @@ export function TimeframeControls() {
           onChange={(e) => patch({ comparison: e.target.value })}
           options={[...COMPARISON_OPTIONS, { value: 'custom', label: 'Custom period…' }]}
         />
-      </div>
-      {state.timeframe === 'custom' && (
-        <div className={styles.field}>
-          <CustomPeriodField
-            label="Custom date range"
-            hint="Reads as “the …”. Edit it freely, for example Q1 2025."
-            text={state.customTimeframe}
-            onTextChange={(customTimeframe) => patch({ customTimeframe })}
-          />
-        </div>
-      )}
-      {state.comparison === 'custom' && (
-        <div className={styles.field}>
+        {state.comparison === 'custom' && (
           <CustomPeriodField
             label="Custom comparison"
             hint="For example, the week before launch."
             text={state.customComparison}
             onTextChange={(customComparison) => patch({ customComparison })}
           />
-        </div>
-      )}
+        )}
+      </div>
     </div>
   )
 }

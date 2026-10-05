@@ -13,6 +13,9 @@
 
 .footer {
   display: flex;
+  margin-top: var(--cui-space-4);
+  padding-top: var(--cui-space-12);
+  border-top: 1px solid var(--cui-border-subtle);
   flex-wrap: wrap;
   align-items: center;
   gap: var(--cui-space-4);

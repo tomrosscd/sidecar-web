@@ -5,8 +5,11 @@
   gap: var(--cui-space-16);
 }
 
+/* Each control and its custom field stack in one column. */
 .field {
+  display: grid;
   flex: 1 1 14rem;
+  gap: var(--cui-space-12);
   min-width: 0;
   max-width: 22rem;
 }

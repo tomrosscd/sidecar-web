@@ -1,6 +1,6 @@
 'use client'
 
-import { Badge, Button, Card } from '@convert/product-ui'
+import { Badge, Button, Card, Icon } from '@convert/product-ui'
 import { useState } from 'react'
 import { buildPrompt, fillPlaceholders } from '@/lib/build-prompt'
 import { copyText } from '@/lib/copy-text'
@@ -61,6 +61,7 @@ export function PromptCard({
       headingSize="collection"
       density="compact"
       description={prompt.description}
+      action={<SaveButton slug={prompt.slug} title={prompt.title} />}
       footer={
         <div className={styles.footer}>
           <Button
@@ -92,8 +93,13 @@ export function PromptCard({
               {step.done ? 'Done' : 'Mark done'}
             </Button>
           )}
-          <SaveButton slug={prompt.slug} title={prompt.title} />
-          <Button size="sm" variant="secondary" onClick={quickCopy} aria-label={`Copy prompt: ${prompt.title}`}>
+          <Button
+            size="sm"
+            variant="primary"
+            leadingIcon={<Icon name="copy" />}
+            onClick={quickCopy}
+            aria-label={`Copy prompt: ${prompt.title}`}
+          >
             Copy
           </Button>
         </div>
