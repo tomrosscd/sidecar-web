@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Input, Stack, Textarea } from '@convert/product-ui'
+import { Button, Icon, Input, Stack, Textarea } from '@convert/product-ui'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { buildPrompt, fillPlaceholders, hasUnfilledPlaceholders } from '@/lib/build-prompt'
 import { copyText } from '@/lib/copy-text'
@@ -75,7 +75,7 @@ export function PromptEditor({ prompt, autoFocus }: { prompt: Prompt; autoFocus?
         error={checked && missing.length === 0 && unfilled ? 'There is still a [placeholder] in the text.' : undefined}
       />
       <div className={styles.actions}>
-        <Button variant="primary" onClick={copy}>
+        <Button variant="primary" leadingIcon={<Icon name="copy" />} onClick={copy}>
           Copy prompt
         </Button>
         {edited && (

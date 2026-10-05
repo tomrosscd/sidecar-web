@@ -1,0 +1,108 @@
+/* Dotted canvas. Every colour is a Product UI token, so it follows the theme. */
+.canvas {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border: var(--cui-border-width, 1px) solid var(--cui-border-subtle);
+  border-radius: var(--cui-radius-card);
+  background-color: var(--cui-surface-band);
+  background-image: radial-gradient(var(--cui-border-subtle) 1px, transparent 1.25px);
+  background-size: 22px 22px;
+  background-position: center;
+}
+
+.edges {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.edge,
+.edgeLit {
+  fill: none;
+  stroke-width: 1.5;
+  transition: stroke 150ms ease;
+}
+
+.edge {
+  stroke: var(--cui-border-control);
+}
+
+.edgeLit {
+  stroke: var(--cui-text-accent);
+}
+
+.edgeLabel {
+  position: absolute;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+  padding: var(--cui-space-4) var(--cui-space-8);
+  border: 1px solid var(--cui-border-subtle);
+  border-radius: var(--cui-radius-pill);
+  background: var(--cui-surface-card);
+  color: var(--cui-text-secondary);
+  font-size: 0.75rem;
+  line-height: 1;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.reset {
+  position: absolute;
+  top: var(--cui-space-8);
+  right: var(--cui-space-8);
+  z-index: 3;
+}
+
+.nodes {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.node {
+  position: absolute;
+  z-index: 2;
+  display: grid;
+  gap: var(--cui-space-8);
+  transform: translateX(-50%);
+}
+
+.tagRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: var(--cui-space-24);
+}
+
+.handle {
+  display: inline-grid;
+  place-items: center;
+  width: var(--cui-space-24);
+  height: var(--cui-space-24);
+  padding: 0;
+  border: 0;
+  border-radius: var(--cui-radius-compact);
+  background: transparent;
+  color: var(--cui-text-secondary);
+  cursor: grab;
+  touch-action: none;
+}
+
+.handle:hover {
+  background: var(--cui-surface-hover);
+}
+
+.handle:active {
+  cursor: grabbing;
+}
+
+.inner {
+  min-width: 0;
+}
+
+.node[data-selected] .inner {
+  border-radius: var(--cui-radius-card);
+  outline: 2px solid var(--cui-text-accent);
+  outline-offset: 2px;
+}

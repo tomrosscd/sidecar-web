@@ -8,17 +8,19 @@ import { WorkflowFlow } from './workflow-flow'
 
 export function CollectionDetail({ collection }: { collection: ResolvedCollection }) {
   return (
-    <PageLayout
-      headingOwner="page"
-      heading={collection.title}
-      description={collection.description}
-      context={
-        <Breadcrumbs items={[{ label: 'Collections', href: withBase('/collections/') }, { label: collection.title }]} />
-      }
-    >
-      <PromptPanelHost>
+    <PromptPanelHost>
+      <PageLayout
+        headingOwner="page"
+        heading={collection.title}
+        description={collection.description}
+        context={
+          <Breadcrumbs
+            items={[{ label: 'Collections', href: withBase('/collections/') }, { label: collection.title }]}
+          />
+        }
+      >
         <WorkflowFlow collection={collection} />
-      </PromptPanelHost>
-    </PageLayout>
+      </PageLayout>
+    </PromptPanelHost>
   )
 }

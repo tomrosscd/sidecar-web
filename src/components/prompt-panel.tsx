@@ -97,7 +97,7 @@ export function PromptPanelContent({ prompt, page = false }: { prompt: Prompt; p
         </section>
       )}
       <div className={styles.actions}>
-        <SaveButton slug={prompt.slug} title={prompt.title} size="default" />
+        <SaveButton slug={prompt.slug} title={prompt.title} showLabel />
         <Button variant="secondary" onClick={copyLink}>
           Copy link
         </Button>

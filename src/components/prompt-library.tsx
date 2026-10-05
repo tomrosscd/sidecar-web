@@ -26,80 +26,80 @@ export function PromptLibrary({ updated }: { updated?: string }) {
   const pickerValue: CollectionFilterSelection[] = flags.length > 0 ? [{ field: 'flags', values: flags }] : []
 
   return (
-    <PageLayout
-      headingOwner="page"
-      heading="Prompt library"
-      description="Ready-made prompts for Shopify Sidekick. Set the date range once, then copy a prompt and paste it into Sidekick."
-      actions={
-        <a className="cui-button cui-button-secondary cui-button-sm" href={SUBMIT_URL}>
-          Submit a prompt
-        </a>
-      }
-      summary={
-        <section aria-labelledby="prompt-settings-heading" className={styles.settings}>
-          <div>
-            <h2 id="prompt-settings-heading" className={styles.settingsHeading}>
-              Prompt settings
-            </h2>
-            <p className={styles.settingsNote}>
-              These change the wording of every prompt, and carry into the details panel.
-            </p>
-          </div>
-          <TimeframeControls />
-        </section>
-      }
-      toolbar={
-        <FilterToolbar
-          density="compact"
-          searchMode="expanded"
-          searchLabel="Search prompts"
-          searchPlaceholder="Search prompts…"
-          searchValue={state.q}
-          onSearchChange={(q) => patch({ q })}
-          leading={
-            <SegmentedControl
-              variant="pills"
-              label="Category"
-              value={state.category || 'all'}
-              onValueChange={(v) => patch({ category: v === 'all' ? '' : v })}
-              options={[
-                { value: 'all', label: `All · ${prompts.length}` },
-                ...categories.map((c) => ({
-                  value: c,
-                  label: `${c} · ${prompts.filter((p) => p.category === c).length}`,
-                })),
-              ]}
-            />
-          }
-          filterPicker={{
-            fields: [
-              {
-                key: 'flags',
-                label: 'Show only',
-                multiple: true,
-                options: [
-                  { value: 'featured', label: 'Featured' },
-                  { value: 'recommended', label: 'Recommended' },
-                ],
+    <PromptPanelHost>
+      <PageLayout
+        headingOwner="page"
+        heading="Prompt library"
+        description="Ready-made prompts for Shopify Sidekick. Set the date range once, then copy a prompt and paste it into Sidekick."
+        actions={
+          <a className="cui-button cui-button-secondary cui-button-sm" href={SUBMIT_URL}>
+            Submit a prompt
+          </a>
+        }
+        summary={
+          <section aria-labelledby="prompt-settings-heading" className={styles.settings}>
+            <div>
+              <h2 id="prompt-settings-heading" className={styles.settingsHeading}>
+                Prompt settings
+              </h2>
+              <p className={styles.settingsNote}>
+                These change the wording of every prompt, and carry into the details panel.
+              </p>
+            </div>
+            <TimeframeControls />
+          </section>
+        }
+        toolbar={
+          <FilterToolbar
+            density="compact"
+            searchMode="expanded"
+            searchLabel="Search prompts"
+            searchPlaceholder="Search prompts…"
+            searchValue={state.q}
+            onSearchChange={(q) => patch({ q })}
+            leading={
+              <SegmentedControl
+                variant="pills"
+                label="Category"
+                value={state.category || 'all'}
+                onValueChange={(v) => patch({ category: v === 'all' ? '' : v })}
+                options={[
+                  { value: 'all', label: `All · ${prompts.length}` },
+                  ...categories.map((c) => ({
+                    value: c,
+                    label: `${c} · ${prompts.filter((p) => p.category === c).length}`,
+                  })),
+                ]}
+              />
+            }
+            filterPicker={{
+              fields: [
+                {
+                  key: 'flags',
+                  label: 'Show only',
+                  multiple: true,
+                  options: [
+                    { value: 'featured', label: 'Featured' },
+                    { value: 'recommended', label: 'Recommended' },
+                  ],
+                },
+              ],
+              value: pickerValue,
+              onValueChange: (next) => {
+                const fl = next.find((s) => s.field === 'flags')?.values ?? []
+                patch({ featured: fl.includes('featured'), recommended: fl.includes('recommended') })
               },
-            ],
-            value: pickerValue,
-            onValueChange: (next) => {
-              const fl = next.find((s) => s.field === 'flags')?.values ?? []
-              patch({ featured: fl.includes('featured'), recommended: fl.includes('recommended') })
-            },
-          }}
-          onClearAll={clear}
-        />
-      }
-      footer={
-        <p role="status">
-          {visible.length} of {prompts.length} {prompts.length === 1 ? 'prompt' : 'prompts'}
-          {updated ? ` · Library updated ${updated}` : ''}
-        </p>
-      }
-    >
-      <PromptPanelHost>
+            }}
+            onClearAll={clear}
+          />
+        }
+        footer={
+          <p role="status">
+            {visible.length} of {prompts.length} {prompts.length === 1 ? 'prompt' : 'prompts'}
+            {updated ? ` · Library updated ${updated}` : ''}
+          </p>
+        }
+      >
         {visible.length === 0 ? (
           <EmptyState
             live
@@ -118,7 +118,7 @@ export function PromptLibrary({ updated }: { updated?: string }) {
             ))}
           </Grid>
         )}
-      </PromptPanelHost>
-    </PageLayout>
+      </PageLayout>
+    </PromptPanelHost>
   )
 }
