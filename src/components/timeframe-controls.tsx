@@ -1,7 +1,8 @@
 'use client'
 
-import { Input, Select } from '@convert/product-ui'
+import { Select } from '@convert/product-ui'
 import { COMPARISON_OPTIONS, TIMEFRAME_PRESETS } from '@/lib/timeframe'
+import { CustomPeriodField } from './custom-period-field'
 import styles from './timeframe-controls.module.css'
 import { useView } from './view-provider'
 
@@ -31,23 +32,21 @@ export function TimeframeControls() {
       </div>
       {state.timeframe === 'custom' && (
         <div className={styles.field}>
-          <Input
+          <CustomPeriodField
             label="Custom date range"
-            hint="Reads as “the …”. For example Q1 2025 or 1 Jan – 31 Mar 2025."
-            value={state.customTimeframe}
-            onChange={(e) => patch({ customTimeframe: e.target.value })}
-            autoComplete="off"
+            hint="Reads as “the …”. Edit it freely, for example Q1 2025."
+            text={state.customTimeframe}
+            onTextChange={(customTimeframe) => patch({ customTimeframe })}
           />
         </div>
       )}
       {state.comparison === 'custom' && (
         <div className={styles.field}>
-          <Input
+          <CustomPeriodField
             label="Custom comparison"
             hint="For example, the week before launch."
-            value={state.customComparison}
-            onChange={(e) => patch({ customComparison: e.target.value })}
-            autoComplete="off"
+            text={state.customComparison}
+            onTextChange={(customComparison) => patch({ customComparison })}
           />
         </div>
       )}

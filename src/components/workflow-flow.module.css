@@ -1,61 +1,10 @@
-/* A dotted canvas, like a workflow editor. Dots use a border token so they follow the theme. */
-.canvas {
-  padding: var(--cui-space-24) var(--cui-space-16);
-  border: 1px solid var(--cui-border-subtle);
-  border-radius: var(--cui-radius-card);
-  background-color: var(--cui-surface-band);
-  background-image: radial-gradient(var(--cui-border-subtle) 1px, transparent 1px);
-  background-size: 16px 16px;
-}
-
 .flow {
   display: grid;
   gap: var(--cui-space-16);
-  max-width: 44rem;
-  margin: 0 auto;
-}
-
-.steps {
-  display: grid;
-  gap: 0;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.step {
-  display: grid;
-  gap: var(--cui-space-8);
-  scroll-margin-top: var(--cui-space-24);
-}
-
-.connector {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  height: var(--cui-space-40);
-}
-
-.connector::before {
-  content: '';
-  position: absolute;
-  inset: 0 auto 0 50%;
-  border-left: 2px dotted var(--cui-border-control);
-}
-
-.label {
-  position: relative;
-  align-self: center;
-  padding: var(--cui-space-4) var(--cui-space-8);
-  border: 1px solid var(--cui-border-subtle);
-  border-radius: var(--cui-radius-pill);
-  background: var(--cui-surface-card);
-  color: var(--cui-text-secondary);
-  font-size: 0.75rem;
 }
 
 .branch {
-  margin: 0;
+  margin: var(--cui-space-8) 0 0;
   color: var(--cui-text-secondary);
   font-size: 0.875rem;
 }
