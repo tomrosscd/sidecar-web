@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import '@convert/product-ui/styles.css'
 import './globals.css'
 import { AppShell } from '@/components/app-shell'
+import { ToastProvider } from '@/components/toast-provider'
 import { SITE_DESCRIPTION, SITE_NAME } from '@/config/site'
 import { withBase } from '@/lib/base-path'
 
@@ -21,7 +22,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en-AU" suppressHydrationWarning>
       <body>
         <ThemeProvider theme="light" appearance="workspace">
-          <AppShell>{children}</AppShell>
+          <ToastProvider>
+            <AppShell>{children}</AppShell>
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>

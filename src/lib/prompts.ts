@@ -15,7 +15,7 @@ export function loadPrompts(): Promise<PromptsPayload> {
 }
 
 async function fetchPrompts(): Promise<PromptsPayload> {
-  const res = await fetch(PROMPTS_URL, { cache: 'no-store' })
+  const res = await fetch(PROMPTS_URL)
   if (!res.ok) throw new Error(`Could not fetch ${PROMPTS_URL}: HTTP ${res.status}`)
   const data: unknown = await res.json()
   const errors = validatePayload(data)
