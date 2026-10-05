@@ -12,9 +12,9 @@ export function browserStore(): Store | undefined {
 }
 
 /** Saved prompt slugs. Anything unreadable or malformed reads as an empty list. */
-export function readSaved(store: Store | undefined): string[] {
+export function readSaved(store: Store | undefined, key: string = SAVED_KEY): string[] {
   try {
-    const raw = store?.getItem(SAVED_KEY)
+    const raw = store?.getItem(key)
     if (!raw) return []
     const data: unknown = JSON.parse(raw)
     return Array.isArray(data) ? [...new Set(data.filter((s): s is string => typeof s === 'string'))] : []
@@ -24,10 +24,10 @@ export function readSaved(store: Store | undefined): string[] {
 }
 
 /** Returns false when the write failed. */
-export function writeSaved(store: Store | undefined, slugs: readonly string[]): boolean {
+export function writeSaved(store: Store | undefined, slugs: readonly string[], key: string = SAVED_KEY): boolean {
   try {
     if (!store) return false
-    store.setItem(SAVED_KEY, JSON.stringify(slugs))
+    store.setItem(key, JSON.stringify(slugs))
     return true
   } catch {
     return false

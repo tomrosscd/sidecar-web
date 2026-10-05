@@ -8,6 +8,8 @@ export type SuiteApp = {
   href: string
   description: string
   markSrc: string
+  /** Cropped artwork needs 'inset' so it keeps padding inside the frame. */
+  markTreatment: 'full-frame' | 'inset'
 }
 
 export const CURRENT_APP_ID = 'sidecar-web'
@@ -20,6 +22,7 @@ export const suiteApps: readonly SuiteApp[] = [
     href: 'https://tomrosscd.github.io/sidecar-web/',
     description: 'Prompt library for Convert staff',
     markSrc: '/brand/sidecar-icon.svg',
+    markTreatment: 'full-frame',
   },
   {
     id: 'brand-tools',
@@ -27,6 +30,7 @@ export const suiteApps: readonly SuiteApp[] = [
     href: 'https://tomrosscd.github.io/cd-brand-tools/',
     description: 'Brand guide, assets and creators',
     markSrc: '/brand/convert-icon-dark-green.svg',
+    markTreatment: 'inset',
   },
 ]
 

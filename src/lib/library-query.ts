@@ -7,6 +7,8 @@ export type LibraryState = TimeframeState & {
   category: string
   featured: boolean
   recommended: boolean
+  /** Slug of the prompt open in the side panel, or ''. */
+  prompt: string
 }
 
 export const DEFAULT_LIBRARY_STATE: LibraryState = {
@@ -15,6 +17,7 @@ export const DEFAULT_LIBRARY_STATE: LibraryState = {
   category: '',
   featured: false,
   recommended: false,
+  prompt: '',
 }
 
 const TF_VALUES = new Set(['custom'])
@@ -25,6 +28,7 @@ export function parseLibraryQuery(
   search: string,
   presets: readonly string[],
   categories: readonly string[],
+  promptSlugs?: ReadonlySet<string>,
 ): LibraryState {
   const p = new URLSearchParams(search)
   const d = DEFAULT_LIBRARY_STATE
@@ -33,6 +37,7 @@ export function parseLibraryQuery(
   const cat = p.get('cat') ?? ''
   return {
     q: p.get('q') ?? '',
+    prompt: promptSlugs?.has(p.get('p') ?? '') ? (p.get('p') as string) : '',
     category: categories.includes(cat) ? cat : '',
     featured: p.get('featured') === '1',
     recommended: p.get('recommended') === '1',
@@ -48,6 +53,7 @@ export function serialiseLibraryQuery(s: LibraryState): string {
   const d = DEFAULT_LIBRARY_STATE
   const p = new URLSearchParams()
   if (s.q.trim()) p.set('q', s.q)
+  if (s.prompt) p.set('p', s.prompt)
   if (s.category) p.set('cat', s.category)
   if (s.featured) p.set('featured', '1')
   if (s.recommended) p.set('recommended', '1')
@@ -73,14 +79,4 @@ export function filterPrompts(
     const hay = `${p.title} ${p.description ?? ''} ${p.category} ${p.slug}`.toLowerCase()
     return terms.every((t) => hay.includes(t))
   })
-}
-
-/** The timeframe and comparison part of a view, for pages that have no search or filters. */
-export function parseTimeframeQuery(search: string, presets: readonly string[]): TimeframeState {
-  const { timeframe, comparison, customTimeframe, customComparison } = parseLibraryQuery(search, presets, [])
-  return { timeframe, comparison, customTimeframe, customComparison }
-}
-
-export function serialiseTimeframeQuery(s: TimeframeState): string {
-  return serialiseLibraryQuery({ ...DEFAULT_LIBRARY_STATE, ...s })
 }

@@ -1,46 +1,56 @@
 'use client'
 
-import { Grid, Input, Select } from '@convert/product-ui'
-import { COMPARISON_OPTIONS, TIMEFRAME_PRESETS, type TimeframeState } from '@/lib/timeframe'
+import { Input, Select } from '@convert/product-ui'
+import { COMPARISON_OPTIONS, TIMEFRAME_PRESETS } from '@/lib/timeframe'
+import styles from './timeframe-controls.module.css'
+import { useView } from './view-provider'
 
-/** The timeframe and comparison builder shared by the library, prompt and collection pages. */
-export function TimeframeControls({
-  state,
-  onChange,
-}: {
-  state: TimeframeState
-  onChange: (patch: Partial<TimeframeState>) => void
-}) {
+/**
+ * The controls that change the prompt text itself: date range, comparison and their custom wording.
+ * Shared by the library, the side panel and collections, all reading the same state.
+ */
+export function TimeframeControls() {
+  const { state, patch } = useView()
   return (
-    <Grid columns={2} gap={16}>
-      <Select
-        label="Timeframe"
-        value={state.timeframe}
-        onChange={(e) => onChange({ timeframe: e.target.value })}
-        options={[...TIMEFRAME_PRESETS, { value: 'custom', label: 'Custom range…' }]}
-      />
-      <Select
-        label="Comparison"
-        value={state.comparison}
-        onChange={(e) => onChange({ comparison: e.target.value })}
-        options={[...COMPARISON_OPTIONS, { value: 'custom', label: 'Custom period…' }]}
-      />
-      {state.timeframe === 'custom' && (
-        <Input
-          label="Custom timeframe"
-          hint="Reads as “the …”, for example 1 to 14 March."
-          value={state.customTimeframe}
-          onChange={(e) => onChange({ customTimeframe: e.target.value })}
+    <div className={styles.row}>
+      <div className={styles.field}>
+        <Select
+          label="Date range"
+          value={state.timeframe}
+          onChange={(e) => patch({ timeframe: e.target.value })}
+          options={[...TIMEFRAME_PRESETS, { value: 'custom', label: 'Custom range…' }]}
         />
+      </div>
+      <div className={styles.field}>
+        <Select
+          label="Comparison"
+          value={state.comparison}
+          onChange={(e) => patch({ comparison: e.target.value })}
+          options={[...COMPARISON_OPTIONS, { value: 'custom', label: 'Custom period…' }]}
+        />
+      </div>
+      {state.timeframe === 'custom' && (
+        <div className={styles.field}>
+          <Input
+            label="Custom date range"
+            hint="Reads as “the …”. For example Q1 2025 or 1 Jan – 31 Mar 2025."
+            value={state.customTimeframe}
+            onChange={(e) => patch({ customTimeframe: e.target.value })}
+            autoComplete="off"
+          />
+        </div>
       )}
       {state.comparison === 'custom' && (
-        <Input
-          label="Custom comparison"
-          hint="For example, the week before launch."
-          value={state.customComparison}
-          onChange={(e) => onChange({ customComparison: e.target.value })}
-        />
+        <div className={styles.field}>
+          <Input
+            label="Custom comparison"
+            hint="For example, the week before launch."
+            value={state.customComparison}
+            onChange={(e) => patch({ customComparison: e.target.value })}
+            autoComplete="off"
+          />
+        </div>
       )}
-    </Grid>
+    </div>
   )
 }

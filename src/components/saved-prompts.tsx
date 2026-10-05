@@ -1,17 +1,17 @@
 'use client'
 
-import { Alert, ContentList, EmptyState, PageLayout, Stack } from '@convert/product-ui'
+import { Alert, EmptyState, Grid, PageLayout, Stack } from '@convert/product-ui'
 import Link from 'next/link'
 import { useMemo } from 'react'
-import type { Prompt } from '@/lib/types'
 import { useSaved } from '@/lib/use-saved'
-import { useTimeframeView } from '@/lib/use-timeframe-view'
-import { PromptRow } from './prompt-row'
+import { PromptCard } from './prompt-card'
+import { PromptPanelHost } from './prompt-panel'
 import { TimeframeControls } from './timeframe-controls'
+import { useView } from './view-provider'
 
-export function SavedPrompts({ prompts }: { prompts: Prompt[] }) {
+export function SavedPrompts() {
   const { saved, available } = useSaved()
-  const { state, patch, timeframe, comparison } = useTimeframeView()
+  const { prompts } = useView()
   // Slugs that no longer exist in the library are ignored rather than shown.
   const list = useMemo(() => {
     const bySlug = new Map(prompts.map((p) => [p.slug, p]))
@@ -43,12 +43,14 @@ export function SavedPrompts({ prompts }: { prompts: Prompt[] }) {
           />
         ) : (
           <>
-            <TimeframeControls state={state} onChange={patch} />
-            <ContentList density="compact">
-              {list.map((p) => (
-                <PromptRow key={p.slug} prompt={p} timeframe={timeframe} comparison={comparison} />
-              ))}
-            </ContentList>
+            <TimeframeControls />
+            <PromptPanelHost>
+              <Grid columns={2} minItemWidth={380} gap={16}>
+                {list.map((p) => (
+                  <PromptCard key={p.slug} prompt={p} />
+                ))}
+              </Grid>
+            </PromptPanelHost>
           </>
         )}
       </Stack>

@@ -1,0 +1,12 @@
+.steps {
+  margin: 0;
+  padding-left: var(--cui-space-20);
+  color: var(--cui-text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.more {
+  list-style: none;
+  margin-left: calc(var(--cui-space-20) * -1);
+}

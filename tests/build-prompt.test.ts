@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { buildPrompt, fillPlaceholders, getCmpText, hasUnfilledPlaceholders } from '@/lib/build-prompt'
+import {
+  buildPrompt,
+  buildPromptSegments,
+  fillPlaceholders,
+  getCmpText,
+  hasUnfilledPlaceholders,
+} from '@/lib/build-prompt'
 import fixtures from './fixtures/extension-parity.json'
 
 describe('parity with the Sidecar Extension', () => {
@@ -27,5 +33,23 @@ describe('placeholders', () => {
     expect(hasUnfilledPlaceholders('Run [A]')).toBe(true)
     expect(hasUnfilledPlaceholders('over {{TF}}')).toBe(true)
     expect(hasUnfilledPlaceholders('all done')).toBe(false)
+  })
+})
+
+describe('buildPromptSegments', () => {
+  it('always joins back to exactly what buildPrompt returns', () => {
+    for (const c of fixtures.cases) {
+      const joined = buildPromptSegments({ body: c.body }, c.timeframe, c.comparison)
+        .map((s) => s.text)
+        .join('')
+      expect(joined).toBe(c.expected)
+    }
+  })
+  it('marks the timeframe and comparison', () => {
+    const segs = buildPromptSegments({ body: 'Over {{TF}} vs {{CMP}}.' }, 'last 7 days', 'prev')
+    expect(segs.filter((s) => s.kind !== 'text')).toEqual([
+      { kind: 'tf', text: 'the last 7 days' },
+      { kind: 'cmp', text: 'the previous 7 days' },
+    ])
   })
 })
