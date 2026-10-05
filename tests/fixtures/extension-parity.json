@@ -1,0 +1,2945 @@
+{
+  "generatedFrom": "sidecar/prompts.js",
+  "cases": [
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 7 days",
+      "comparison": "prev",
+      "cmpText": "the previous 7 days",
+      "expected": "Analyse the last 7 days, compared to the previous 7 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 7 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Analyse the last 7 days, compared to the same period last year.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 7 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Analyse the last 7 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 7 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Analyse the last 7 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 7 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Analyse the last 7 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 7 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Analyse the last 7 days, compared to the week before launch.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 14 days",
+      "comparison": "prev",
+      "cmpText": "the previous 14 days",
+      "expected": "Analyse the last 14 days, compared to the previous 14 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 14 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Analyse the last 14 days, compared to the same period last year.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 14 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Analyse the last 14 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 14 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Analyse the last 14 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 14 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Analyse the last 14 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 14 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Analyse the last 14 days, compared to the week before launch.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 30 days",
+      "comparison": "prev",
+      "cmpText": "the previous 30 days",
+      "expected": "Analyse the last 30 days, compared to the previous 30 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 30 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Analyse the last 30 days, compared to the same period last year.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 30 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Analyse the last 30 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 30 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Analyse the last 30 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 30 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Analyse the last 30 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 30 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Analyse the last 30 days, compared to the week before launch.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 60 days",
+      "comparison": "prev",
+      "cmpText": "the previous 60 days",
+      "expected": "Analyse the last 60 days, compared to the previous 60 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 60 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Analyse the last 60 days, compared to the same period last year.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 60 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Analyse the last 60 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 60 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Analyse the last 60 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 60 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Analyse the last 60 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 60 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Analyse the last 60 days, compared to the week before launch.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 90 days",
+      "comparison": "prev",
+      "cmpText": "the previous 90 days",
+      "expected": "Analyse the last 90 days, compared to the previous 90 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 90 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Analyse the last 90 days, compared to the same period last year.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 90 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Analyse the last 90 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 90 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Analyse the last 90 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 90 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Analyse the last 90 days.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 90 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Analyse the last 90 days, compared to the week before launch.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last quarter",
+      "comparison": "prev",
+      "cmpText": "the previous quarter",
+      "expected": "Analyse the last quarter, compared to the previous quarter.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last quarter",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Analyse the last quarter, compared to the same period last year.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last quarter",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Analyse the last quarter.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last quarter",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Analyse the last quarter.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last quarter",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Analyse the last quarter.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last quarter",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Analyse the last quarter, compared to the week before launch.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 6 months",
+      "comparison": "prev",
+      "cmpText": "the previous 6 months",
+      "expected": "Analyse the last 6 months, compared to the previous 6 months.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 6 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Analyse the last 6 months, compared to the same period last year.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 6 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Analyse the last 6 months.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 6 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Analyse the last 6 months.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 6 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Analyse the last 6 months.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 6 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Analyse the last 6 months, compared to the week before launch.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 12 months",
+      "comparison": "prev",
+      "cmpText": "the previous 12 months",
+      "expected": "Analyse the last 12 months, compared to the previous 12 months.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 12 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Analyse the last 12 months, compared to the same period last year.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 12 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Analyse the last 12 months.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 12 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Analyse the last 12 months.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 12 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Analyse the last 12 months.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "last 12 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Analyse the last 12 months, compared to the week before launch.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "the selected period",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": "Analyse the the selected period, compared to the previous comparable period.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "the selected period",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Analyse the the selected period, compared to the same period last year.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "the selected period",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Analyse the the selected period.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "the selected period",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Analyse the the selected period.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "the selected period",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Analyse the the selected period.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "the selected period",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Analyse the the selected period, compared to the week before launch.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": "Analyse the 1 to 14 March 2026, compared to the previous comparable period.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Analyse the 1 to 14 March 2026, compared to the same period last year.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Analyse the 1 to 14 March 2026.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Analyse the 1 to 14 March 2026.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Analyse the 1 to 14 March 2026.\n\nSummarise."
+    },
+    {
+      "body": "Analyse {{TF}}, compared to {{CMP}}.\n\nSummarise.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Analyse the 1 to 14 March 2026, compared to the week before launch.\n\nSummarise."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 7 days",
+      "comparison": "prev",
+      "cmpText": "the previous 7 days",
+      "expected": "Review the last 7 days and compare it to the previous 7 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 7 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Review the last 7 days and compare it to the same period last year. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 7 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Review the last 7 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 7 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Review the last 7 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 7 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Review the last 7 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 7 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Review the last 7 days and compare it to the week before launch. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 14 days",
+      "comparison": "prev",
+      "cmpText": "the previous 14 days",
+      "expected": "Review the last 14 days and compare it to the previous 14 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 14 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Review the last 14 days and compare it to the same period last year. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 14 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Review the last 14 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 14 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Review the last 14 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 14 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Review the last 14 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 14 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Review the last 14 days and compare it to the week before launch. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 30 days",
+      "comparison": "prev",
+      "cmpText": "the previous 30 days",
+      "expected": "Review the last 30 days and compare it to the previous 30 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 30 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Review the last 30 days and compare it to the same period last year. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 30 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Review the last 30 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 30 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Review the last 30 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 30 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Review the last 30 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 30 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Review the last 30 days and compare it to the week before launch. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 60 days",
+      "comparison": "prev",
+      "cmpText": "the previous 60 days",
+      "expected": "Review the last 60 days and compare it to the previous 60 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 60 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Review the last 60 days and compare it to the same period last year. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 60 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Review the last 60 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 60 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Review the last 60 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 60 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Review the last 60 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 60 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Review the last 60 days and compare it to the week before launch. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 90 days",
+      "comparison": "prev",
+      "cmpText": "the previous 90 days",
+      "expected": "Review the last 90 days and compare it to the previous 90 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 90 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Review the last 90 days and compare it to the same period last year. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 90 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Review the last 90 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 90 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Review the last 90 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 90 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Review the last 90 days. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 90 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Review the last 90 days and compare it to the week before launch. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last quarter",
+      "comparison": "prev",
+      "cmpText": "the previous quarter",
+      "expected": "Review the last quarter and compare it to the previous quarter. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last quarter",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Review the last quarter and compare it to the same period last year. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last quarter",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Review the last quarter. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last quarter",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Review the last quarter. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last quarter",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Review the last quarter. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last quarter",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Review the last quarter and compare it to the week before launch. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 6 months",
+      "comparison": "prev",
+      "cmpText": "the previous 6 months",
+      "expected": "Review the last 6 months and compare it to the previous 6 months. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 6 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Review the last 6 months and compare it to the same period last year. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 6 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Review the last 6 months. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 6 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Review the last 6 months. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 6 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Review the last 6 months. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 6 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Review the last 6 months and compare it to the week before launch. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 12 months",
+      "comparison": "prev",
+      "cmpText": "the previous 12 months",
+      "expected": "Review the last 12 months and compare it to the previous 12 months. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 12 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Review the last 12 months and compare it to the same period last year. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 12 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Review the last 12 months. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 12 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Review the last 12 months. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 12 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Review the last 12 months. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "last 12 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Review the last 12 months and compare it to the week before launch. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "the selected period",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": "Review the the selected period and compare it to the previous comparable period. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "the selected period",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Review the the selected period and compare it to the same period last year. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "the selected period",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Review the the selected period. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "the selected period",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Review the the selected period. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "the selected period",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Review the the selected period. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "the selected period",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Review the the selected period and compare it to the week before launch. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": "Review the 1 to 14 March 2026 and compare it to the previous comparable period. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Review the 1 to 14 March 2026 and compare it to the same period last year. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Review the 1 to 14 March 2026. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Review the 1 to 14 March 2026. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Review the 1 to 14 March 2026. Then list wins."
+    },
+    {
+      "body": "Review {{TF}} and compare it to {{CMP}}. Then list wins.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Review the 1 to 14 March 2026 and compare it to the week before launch. Then list wins."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 7 days",
+      "comparison": "prev",
+      "cmpText": "the previous 7 days",
+      "expected": "Look at the last 7 days compared to the previous 7 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 7 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Look at the last 7 days compared to the same period last year for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 7 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Look at the last 7 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 7 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Look at the last 7 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 7 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Look at the last 7 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 7 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Look at the last 7 days compared to the week before launch for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 14 days",
+      "comparison": "prev",
+      "cmpText": "the previous 14 days",
+      "expected": "Look at the last 14 days compared to the previous 14 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 14 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Look at the last 14 days compared to the same period last year for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 14 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Look at the last 14 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 14 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Look at the last 14 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 14 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Look at the last 14 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 14 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Look at the last 14 days compared to the week before launch for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 30 days",
+      "comparison": "prev",
+      "cmpText": "the previous 30 days",
+      "expected": "Look at the last 30 days compared to the previous 30 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 30 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Look at the last 30 days compared to the same period last year for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 30 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Look at the last 30 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 30 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Look at the last 30 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 30 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Look at the last 30 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 30 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Look at the last 30 days compared to the week before launch for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 60 days",
+      "comparison": "prev",
+      "cmpText": "the previous 60 days",
+      "expected": "Look at the last 60 days compared to the previous 60 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 60 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Look at the last 60 days compared to the same period last year for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 60 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Look at the last 60 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 60 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Look at the last 60 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 60 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Look at the last 60 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 60 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Look at the last 60 days compared to the week before launch for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 90 days",
+      "comparison": "prev",
+      "cmpText": "the previous 90 days",
+      "expected": "Look at the last 90 days compared to the previous 90 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 90 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Look at the last 90 days compared to the same period last year for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 90 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Look at the last 90 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 90 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Look at the last 90 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 90 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Look at the last 90 days for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 90 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Look at the last 90 days compared to the week before launch for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last quarter",
+      "comparison": "prev",
+      "cmpText": "the previous quarter",
+      "expected": "Look at the last quarter compared to the previous quarter for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last quarter",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Look at the last quarter compared to the same period last year for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last quarter",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Look at the last quarter for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last quarter",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Look at the last quarter for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last quarter",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Look at the last quarter for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last quarter",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Look at the last quarter compared to the week before launch for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 6 months",
+      "comparison": "prev",
+      "cmpText": "the previous 6 months",
+      "expected": "Look at the last 6 months compared to the previous 6 months for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 6 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Look at the last 6 months compared to the same period last year for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 6 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Look at the last 6 months for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 6 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Look at the last 6 months for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 6 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Look at the last 6 months for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 6 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Look at the last 6 months compared to the week before launch for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 12 months",
+      "comparison": "prev",
+      "cmpText": "the previous 12 months",
+      "expected": "Look at the last 12 months compared to the previous 12 months for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 12 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Look at the last 12 months compared to the same period last year for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 12 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Look at the last 12 months for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 12 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Look at the last 12 months for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 12 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Look at the last 12 months for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "last 12 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Look at the last 12 months compared to the week before launch for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "the selected period",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": "Look at the the selected period compared to the previous comparable period for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "the selected period",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Look at the the selected period compared to the same period last year for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "the selected period",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Look at the the selected period for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "the selected period",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Look at the the selected period for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "the selected period",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Look at the the selected period for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "the selected period",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Look at the the selected period compared to the week before launch for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": "Look at the 1 to 14 March 2026 compared to the previous comparable period for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Look at the 1 to 14 March 2026 compared to the same period last year for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Look at the 1 to 14 March 2026 for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Look at the 1 to 14 March 2026 for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Look at the 1 to 14 March 2026 for [Campaign Name]."
+    },
+    {
+      "body": "Look at {{TF}} compared to {{CMP}} for [Campaign Name].",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Look at the 1 to 14 March 2026 compared to the week before launch for [Campaign Name]."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 7 days",
+      "comparison": "prev",
+      "cmpText": "the previous 7 days",
+      "expected": "Standalone the previous 7 days mention over the last 7 days, again the last 7 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 7 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Standalone the same period last year mention over the last 7 days, again the last 7 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 7 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 7 days, again the last 7 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 7 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 7 days, again the last 7 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 7 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 7 days, again the last 7 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 7 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Standalone the week before launch mention over the last 7 days, again the last 7 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 14 days",
+      "comparison": "prev",
+      "cmpText": "the previous 14 days",
+      "expected": "Standalone the previous 14 days mention over the last 14 days, again the last 14 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 14 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Standalone the same period last year mention over the last 14 days, again the last 14 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 14 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 14 days, again the last 14 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 14 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 14 days, again the last 14 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 14 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 14 days, again the last 14 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 14 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Standalone the week before launch mention over the last 14 days, again the last 14 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 30 days",
+      "comparison": "prev",
+      "cmpText": "the previous 30 days",
+      "expected": "Standalone the previous 30 days mention over the last 30 days, again the last 30 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 30 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Standalone the same period last year mention over the last 30 days, again the last 30 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 30 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 30 days, again the last 30 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 30 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 30 days, again the last 30 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 30 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 30 days, again the last 30 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 30 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Standalone the week before launch mention over the last 30 days, again the last 30 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 60 days",
+      "comparison": "prev",
+      "cmpText": "the previous 60 days",
+      "expected": "Standalone the previous 60 days mention over the last 60 days, again the last 60 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 60 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Standalone the same period last year mention over the last 60 days, again the last 60 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 60 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 60 days, again the last 60 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 60 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 60 days, again the last 60 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 60 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 60 days, again the last 60 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 60 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Standalone the week before launch mention over the last 60 days, again the last 60 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 90 days",
+      "comparison": "prev",
+      "cmpText": "the previous 90 days",
+      "expected": "Standalone the previous 90 days mention over the last 90 days, again the last 90 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 90 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Standalone the same period last year mention over the last 90 days, again the last 90 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 90 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 90 days, again the last 90 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 90 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 90 days, again the last 90 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 90 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 90 days, again the last 90 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 90 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Standalone the week before launch mention over the last 90 days, again the last 90 days."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last quarter",
+      "comparison": "prev",
+      "cmpText": "the previous quarter",
+      "expected": "Standalone the previous quarter mention over the last quarter, again the last quarter."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last quarter",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Standalone the same period last year mention over the last quarter, again the last quarter."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last quarter",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last quarter, again the last quarter."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last quarter",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last quarter, again the last quarter."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last quarter",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last quarter, again the last quarter."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last quarter",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Standalone the week before launch mention over the last quarter, again the last quarter."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 6 months",
+      "comparison": "prev",
+      "cmpText": "the previous 6 months",
+      "expected": "Standalone the previous 6 months mention over the last 6 months, again the last 6 months."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 6 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Standalone the same period last year mention over the last 6 months, again the last 6 months."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 6 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 6 months, again the last 6 months."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 6 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 6 months, again the last 6 months."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 6 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 6 months, again the last 6 months."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 6 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Standalone the week before launch mention over the last 6 months, again the last 6 months."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 12 months",
+      "comparison": "prev",
+      "cmpText": "the previous 12 months",
+      "expected": "Standalone the previous 12 months mention over the last 12 months, again the last 12 months."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 12 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Standalone the same period last year mention over the last 12 months, again the last 12 months."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 12 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 12 months, again the last 12 months."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 12 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 12 months, again the last 12 months."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 12 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the last 12 months, again the last 12 months."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "last 12 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Standalone the week before launch mention over the last 12 months, again the last 12 months."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "the selected period",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": "Standalone the previous comparable period mention over the the selected period, again the the selected period."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "the selected period",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Standalone the same period last year mention over the the selected period, again the the selected period."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "the selected period",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the the selected period, again the the selected period."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "the selected period",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the the selected period, again the the selected period."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "the selected period",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the the selected period, again the the selected period."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "the selected period",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Standalone the week before launch mention over the the selected period, again the the selected period."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": "Standalone the previous comparable period mention over the 1 to 14 March 2026, again the 1 to 14 March 2026."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Standalone the same period last year mention over the 1 to 14 March 2026, again the 1 to 14 March 2026."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the 1 to 14 March 2026, again the 1 to 14 March 2026."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the 1 to 14 March 2026, again the 1 to 14 March 2026."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Standalone the previous comparable period mention over the 1 to 14 March 2026, again the 1 to 14 March 2026."
+    },
+    {
+      "body": "Standalone {{CMP}} mention over {{TF}}, again {{TF}}.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Standalone the week before launch mention over the 1 to 14 March 2026, again the 1 to 14 March 2026."
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 7 days",
+      "comparison": "prev",
+      "cmpText": "the previous 7 days",
+      "expected": "Compared TO the previous 7 days case, over the last 7 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 7 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Compared TO the same period last year case, over the last 7 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 7 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 7 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 7 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 7 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 7 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 7 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 7 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Compared TO the week before launch case, over the last 7 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 14 days",
+      "comparison": "prev",
+      "cmpText": "the previous 14 days",
+      "expected": "Compared TO the previous 14 days case, over the last 14 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 14 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Compared TO the same period last year case, over the last 14 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 14 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 14 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 14 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 14 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 14 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 14 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 14 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Compared TO the week before launch case, over the last 14 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 30 days",
+      "comparison": "prev",
+      "cmpText": "the previous 30 days",
+      "expected": "Compared TO the previous 30 days case, over the last 30 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 30 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Compared TO the same period last year case, over the last 30 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 30 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 30 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 30 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 30 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 30 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 30 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 30 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Compared TO the week before launch case, over the last 30 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 60 days",
+      "comparison": "prev",
+      "cmpText": "the previous 60 days",
+      "expected": "Compared TO the previous 60 days case, over the last 60 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 60 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Compared TO the same period last year case, over the last 60 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 60 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 60 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 60 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 60 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 60 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 60 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 60 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Compared TO the week before launch case, over the last 60 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 90 days",
+      "comparison": "prev",
+      "cmpText": "the previous 90 days",
+      "expected": "Compared TO the previous 90 days case, over the last 90 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 90 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Compared TO the same period last year case, over the last 90 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 90 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 90 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 90 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 90 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 90 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 90 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 90 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Compared TO the week before launch case, over the last 90 days"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last quarter",
+      "comparison": "prev",
+      "cmpText": "the previous quarter",
+      "expected": "Compared TO the previous quarter case, over the last quarter"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last quarter",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Compared TO the same period last year case, over the last quarter"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last quarter",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last quarter"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last quarter",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last quarter"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last quarter",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last quarter"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last quarter",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Compared TO the week before launch case, over the last quarter"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 6 months",
+      "comparison": "prev",
+      "cmpText": "the previous 6 months",
+      "expected": "Compared TO the previous 6 months case, over the last 6 months"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 6 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Compared TO the same period last year case, over the last 6 months"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 6 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 6 months"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 6 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 6 months"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 6 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 6 months"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 6 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Compared TO the week before launch case, over the last 6 months"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 12 months",
+      "comparison": "prev",
+      "cmpText": "the previous 12 months",
+      "expected": "Compared TO the previous 12 months case, over the last 12 months"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 12 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Compared TO the same period last year case, over the last 12 months"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 12 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 12 months"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 12 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 12 months"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 12 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the last 12 months"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "last 12 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Compared TO the week before launch case, over the last 12 months"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "the selected period",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": "Compared TO the previous comparable period case, over the the selected period"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "the selected period",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Compared TO the same period last year case, over the the selected period"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "the selected period",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the the selected period"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "the selected period",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the the selected period"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "the selected period",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the the selected period"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "the selected period",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Compared TO the week before launch case, over the the selected period"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": "Compared TO the previous comparable period case, over the 1 to 14 March 2026"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "Compared TO the same period last year case, over the 1 to 14 March 2026"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the 1 to 14 March 2026"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the 1 to 14 March 2026"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "Compared TO the previous comparable period case, over the 1 to 14 March 2026"
+    },
+    {
+      "body": "Compared TO {{CMP}} case, over {{TF}}",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "Compared TO the week before launch case, over the 1 to 14 March 2026"
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 7 days",
+      "comparison": "prev",
+      "cmpText": "the previous 7 days",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 7 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 7 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 7 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 7 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 7 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 14 days",
+      "comparison": "prev",
+      "cmpText": "the previous 14 days",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 14 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 14 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 14 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 14 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 14 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 30 days",
+      "comparison": "prev",
+      "cmpText": "the previous 30 days",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 30 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 30 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 30 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 30 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 30 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 60 days",
+      "comparison": "prev",
+      "cmpText": "the previous 60 days",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 60 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 60 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 60 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 60 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 60 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 90 days",
+      "comparison": "prev",
+      "cmpText": "the previous 90 days",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 90 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 90 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 90 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 90 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 90 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last quarter",
+      "comparison": "prev",
+      "cmpText": "the previous quarter",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last quarter",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last quarter",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last quarter",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last quarter",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last quarter",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 6 months",
+      "comparison": "prev",
+      "cmpText": "the previous 6 months",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 6 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 6 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 6 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 6 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 6 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 12 months",
+      "comparison": "prev",
+      "cmpText": "the previous 12 months",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 12 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 12 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 12 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 12 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "last 12 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "the selected period",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "the selected period",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "the selected period",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "the selected period",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "the selected period",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "the selected period",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "",
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": null,
+      "cmpText": null,
+      "expected": "No tokens here."
+    },
+    {
+      "body": "No tokens here.",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": "No tokens here."
+    },
+    {
+      "body": "",
+      "timeframe": "last 7 days",
+      "comparison": "prev",
+      "cmpText": "the previous 7 days",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 7 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 7 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 7 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 7 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 7 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 14 days",
+      "comparison": "prev",
+      "cmpText": "the previous 14 days",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 14 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 14 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 14 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 14 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 14 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 30 days",
+      "comparison": "prev",
+      "cmpText": "the previous 30 days",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 30 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 30 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 30 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 30 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 30 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 60 days",
+      "comparison": "prev",
+      "cmpText": "the previous 60 days",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 60 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 60 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 60 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 60 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 60 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 90 days",
+      "comparison": "prev",
+      "cmpText": "the previous 90 days",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 90 days",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 90 days",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 90 days",
+      "comparison": "",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 90 days",
+      "comparison": null,
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 90 days",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last quarter",
+      "comparison": "prev",
+      "cmpText": "the previous quarter",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last quarter",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last quarter",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last quarter",
+      "comparison": "",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last quarter",
+      "comparison": null,
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last quarter",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 6 months",
+      "comparison": "prev",
+      "cmpText": "the previous 6 months",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 6 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 6 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 6 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 6 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 6 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 12 months",
+      "comparison": "prev",
+      "cmpText": "the previous 12 months",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 12 months",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 12 months",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 12 months",
+      "comparison": "",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 12 months",
+      "comparison": null,
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "last 12 months",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "the selected period",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "the selected period",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "the selected period",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "the selected period",
+      "comparison": "",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "the selected period",
+      "comparison": null,
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "the selected period",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "prev",
+      "cmpText": "the previous comparable period",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "yoy",
+      "cmpText": "the same period last year",
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "none",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "",
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": null,
+      "cmpText": null,
+      "expected": ""
+    },
+    {
+      "body": "",
+      "timeframe": "1 to 14 March 2026",
+      "comparison": "the week before launch",
+      "cmpText": "the week before launch",
+      "expected": ""
+    }
+  ]
+}
