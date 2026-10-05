@@ -9,6 +9,7 @@ import type { Prompt } from '@/lib/types'
 import { useTimeframeView } from '@/lib/use-timeframe-view'
 import { getCmpText } from '@/lib/build-prompt'
 import { CopyPromptButton } from './copy-prompt'
+import { SaveButton } from './save-button'
 import styles from './prompt-detail.module.css'
 import { TimeframeControls } from './timeframe-controls'
 import { useToast } from './toast-provider'
@@ -63,6 +64,7 @@ export function PromptDetail({ prompt, followUp }: { prompt: Prompt; followUp?: 
       context={<Breadcrumbs items={[{ label: 'Prompt library', href: withBase('/') }, { label: prompt.title }]} />}
       actions={
         <>
+          <SaveButton slug={prompt.slug} title={prompt.title} size="default" />
           <Button variant="secondary" onClick={copyLink}>
             Copy link
           </Button>

@@ -13,6 +13,7 @@ import { filterPrompts, parseLibraryQuery, serialiseLibraryQuery, type LibrarySt
 import { useQueryString } from '@/lib/use-query-string'
 import { TIMEFRAME_PRESETS, effectiveComparison, effectiveTimeframe } from '@/lib/timeframe'
 import type { Prompt } from '@/lib/types'
+import { SUBMIT_URL } from '@/config/site'
 import { PromptRow } from './prompt-row'
 import { TimeframeControls } from './timeframe-controls'
 
@@ -47,6 +48,11 @@ export function PromptLibrary({ prompts, updated }: { prompts: Prompt[]; updated
       headingOwner="page"
       heading="Prompt library"
       description="Ready-made prompts for Shopify Sidekick. Choose a timeframe, then copy a prompt and paste it into Sidekick."
+      actions={
+        <a className="cui-button cui-button-secondary cui-button-sm" href={SUBMIT_URL}>
+          Submit a prompt
+        </a>
+      }
       toolbar={
         <FilterToolbar
           density="compact"

@@ -1,17 +1,26 @@
 'use client'
 
-import { CommandPalette, Icon, WorkspaceShell, type AppEntry, type SidebarEntry } from '@convert/product-ui'
+import { Button, CommandPalette, Icon, WorkspaceShell, type AppEntry, type SidebarEntry } from '@convert/product-ui'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState, type ReactNode } from 'react'
+import { useEffect, useState, type ReactNode } from 'react'
 import { CURRENT_APP_ID, appMark, suiteApps } from '@/config/apps'
+import { EXTENSION_URL } from '@/config/site'
 import { basePath, withBase } from '@/lib/base-path'
+import type { SearchEntry } from '@/lib/search-entries'
 
 const items: readonly SidebarEntry[] = [
   { id: 'library', label: 'Prompt library', href: withBase('/'), icon: <Icon name="overview" /> },
   { id: 'collections', label: 'Collections', href: withBase('/collections/'), icon: <Icon name="grid" /> },
+  { id: 'saved', label: 'Saved', href: withBase('/saved/'), icon: <Icon name="check" /> },
+  { id: 'extension', label: 'Extension', href: withBase('/extension/'), icon: <Icon name="download" /> },
 ]
 
-const routes: Record<string, string> = {}
+/** Which sidebar item is active for the first path segment. Prompt pages belong to the library. */
+const sections: Record<string, string> = {
+  collections: 'collections',
+  saved: 'saved',
+  extension: 'extension',
+}
 
 const apps: readonly AppEntry[] = suiteApps.map((app) => ({
   id: app.id,
@@ -22,21 +31,43 @@ const apps: readonly AppEntry[] = suiteApps.map((app) => ({
   markTreatment: 'full-frame',
 }))
 
-export function AppShell({ children }: { children: ReactNode }) {
+export function AppShell({ children, searchEntries }: { children: ReactNode; searchEntries: readonly SearchEntry[] }) {
   const [searchOpen, setSearchOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
+
+  // The one owner of Cmd/Ctrl+K.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault()
+        setSearchOpen((open) => !open)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [])
+
   return (
     <>
       <WorkspaceShell
         items={items}
-        activeId={routes[pathname.replace(/\/$/, '')] ?? 'library'}
+        activeId={sections[pathname.split('/').filter(Boolean)[0] ?? ''] ?? 'library'}
         productName="Sidecar Web"
         productMark={appMark('/brand/sidecar-icon.svg')}
         apps={apps}
         currentAppId={CURRENT_APP_ID}
         onSearch={() => setSearchOpen(true)}
         collapsible
+        footer={
+          <Button
+            size="sm"
+            variant="primary"
+            onClick={() => window.open(EXTENSION_URL, '_blank', 'noopener,noreferrer')}
+          >
+            Get the extension
+          </Button>
+        }
         onNavigate={(item, event) => {
           if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return
           event.preventDefault()
@@ -49,17 +80,20 @@ export function AppShell({ children }: { children: ReactNode }) {
         open={searchOpen}
         onOpenChange={setSearchOpen}
         label="Search Sidecar Web"
-        placeholder="Search pages…"
-        emptyLabel="No matching pages"
-        items={[
-          {
-            id: 'library',
-            label: 'Prompt library',
-            group: 'Pages',
-            icon: <Icon name="overview" />,
-            onSelect: () => router.push('/'),
-          },
-        ]}
+        placeholder="Search prompts, collections and pages…"
+        emptyLabel="Nothing matches that search"
+        groupOrder={['Pages', 'Collections', 'Prompts']}
+        items={searchEntries.map((entry) => ({
+          id: entry.id,
+          label: entry.label,
+          group: entry.group,
+          keywords: entry.keywords.join(' '),
+          hint: entry.hint,
+          icon: (
+            <Icon name={entry.group === 'Prompts' ? 'list' : entry.group === 'Collections' ? 'grid' : 'overview'} />
+          ),
+          onSelect: () => router.push(entry.href),
+        }))}
       />
     </>
   )
