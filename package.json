@@ -1,0 +1,40 @@
+{
+  "name": "sidecar-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "type-check": "tsc --noEmit",
+    "test": "vitest run",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "pnpm type-check && pnpm lint && pnpm test && pnpm build",
+    "product-ui": "node scripts/fetch-product-ui.mjs"
+  },
+  "dependencies": {
+    "@convert/product-ui": "file:vendor/convert-product-ui-1.5.0.tgz",
+    "next": "16.3.5",
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
+  },
+  "devDependencies": {
+    "@types/jsdom": "30.0.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.5",
+    "jsdom": "30.1.0",
+    "prettier": "3.9.7",
+    "typescript": "^5",
+    "vitest": "^3.2.7"
+  },
+  "packageManager": "pnpm@10.33.0",
+  "description": "A static prompt library for Convert staff, sharing prompt data with the Sidecar Extension",
+  "engines": {
+    "node": ">=22.22.2"
+  }
+}

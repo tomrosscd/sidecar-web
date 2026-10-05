@@ -1,0 +1,11 @@
+html,
+body {
+  margin: 0;
+  background: var(--cui-surface-page);
+  color: var(--cui-text-primary);
+  font-family: var(--cui-font-sans);
+}
+
+* {
+  box-sizing: border-box;
+}
