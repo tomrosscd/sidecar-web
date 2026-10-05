@@ -1,6 +1,6 @@
 # Sidecar Web: contribution rules
 
-Read [docs/PLAN.md](docs/PLAN.md) (the approved brief and milestones) before starting work. [docs/SUITE-PLAN.md](docs/SUITE-PLAN.md) is the wider multi-app plan, for context only.
+Read [docs/PLAN.md](docs/PLAN.md) (the approved brief and milestones) before starting work.
 
 ## Boundaries
 
