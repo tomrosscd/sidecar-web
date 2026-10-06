@@ -15,7 +15,7 @@
     "product-ui": "node scripts/fetch-product-ui.mjs"
   },
   "dependencies": {
-    "@convert/product-ui": "file:vendor/convert-product-ui-1.5.0.tgz",
+    "@convert/product-ui": "file:vendor/convert-product-ui-1.6.0.tgz",
     "next": "16.3.5",
     "react": "19.2.8",
     "react-dom": "19.2.8"
