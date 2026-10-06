@@ -71,7 +71,7 @@ Read first:
 - Next 16 static export, the Product UI fetch script and `styles.css`, `ThemeProvider` (light, `appearance="workspace"`), `WorkspaceShell` with sidebar and `CommandPalette` wiring. Self-host Roobert if Brand Tools does.
 - App switcher via `WorkspaceShell` `apps`:
   - `sidecar-web`: "Sidecar Web", `https://tomrosscd.github.io/sidecar-web/`. Mark from `sidecar/icons/`.
-  - `brand-tools`: "Brand Tools", `https://tomrosscd.github.io/cd-brand-tools/`. Copy the Convert mark Brand Tools uses.
+  - `brand-tools`: "Brand Tools", `https://cd-brand-tools.pages.dev/`. Copy the Convert mark Brand Tools uses.
   - Keep the list in `src/config/apps.ts`.
 - `metadata.robots = { index: false, follow: false }` in the root layout, so every page gets noindex. No sitemap. Note in README that project-level `robots.txt` is ignored on GitHub Pages project sites.
 - CI workflow (format check plus `pnpm check`) and Pages workflow (build with base path, upload `out/`), modelled on Brand Tools.

@@ -26,9 +26,9 @@ The switcher lists only these two apps. Sidecar Web stays marked current, and li
 
 Requested on 6 October 2026: `https://cd-brand-tools.pages.dev/` returned HTTP 200, `https://tomrosscd.github.io/sidecar-web/` returned HTTP 200, and the old `https://tomrosscd.github.io/cd-brand-tools/` returned HTTP 404.
 
-Other hits for the old Brand Tools address, not changed:
+Other hits for the old Brand Tools address:
 
-- `docs/PLAN.md` line 74 still reads `brand-tools`: "Brand Tools", `https://tomrosscd.github.io/cd-brand-tools/`. It is the approved brief's description of the switcher entry, so it is arguably the same link, but it is a planning record, so it was left for the owner to decide.
+- `docs/PLAN.md` line 74 (the brief's description of the switcher entry) also had the old address. Changed to the Cloudflare address on the owner's instruction.
 - `AGENTS.md` and `docs/PLAN.md` name the `tomrosscd/cd-brand-tools` repository (a repo name, not a link). Correct as is.
 - None in code, workflows, tests, metadata, canonical links or a sitemap (there is no sitemap).
 
