@@ -1,0 +1,18 @@
+[
+  {
+    "id": "sidecar-web",
+    "label": "Sidecar Web",
+    "href": "https://tomrosscd.github.io/sidecar-web/",
+    "description": "Prompt library for Convert staff",
+    "markSrc": "/apps/sidecar-web.svg",
+    "markTreatment": "full-frame"
+  },
+  {
+    "id": "brand-tools",
+    "label": "Brand Tools",
+    "href": "https://cd-brand-tools.pages.dev/",
+    "description": "Brand guide, assets and creative tools",
+    "markSrc": "/apps/convert.svg",
+    "markTreatment": "inset"
+  }
+]

@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { createElement } from 'react'
 import { withBase } from '@/lib/base-path'
+import generatedApps from './apps.generated.json'
 
 export type SuiteApp = {
   id: string
@@ -14,25 +15,8 @@ export type SuiteApp = {
 
 export const CURRENT_APP_ID = 'sidecar-web'
 
-/** The Convert apps shown in the shell's app switcher. Add new apps here. */
-export const suiteApps: readonly SuiteApp[] = [
-  {
-    id: 'sidecar-web',
-    label: 'Sidecar Web',
-    href: 'https://tomrosscd.github.io/sidecar-web/',
-    description: 'Prompt library for Convert staff',
-    markSrc: '/brand/sidecar-icon.svg',
-    markTreatment: 'full-frame',
-  },
-  {
-    id: 'brand-tools',
-    label: 'Brand Tools',
-    href: 'https://cd-brand-tools.pages.dev/',
-    description: 'Brand guide, assets and creators',
-    markSrc: '/brand/convert-icon-dark-green.svg',
-    markTreatment: 'inset',
-  },
-]
+/** The Convert apps shown in the shell's app switcher, from the shared list in `tomrosscd/convert-apps`. Run `pnpm apps` to refresh it. */
+export const suiteApps = generatedApps as readonly SuiteApp[]
 
 /** A small published mark, shown unaltered. */
 export function appMark(src: string): ReactNode {

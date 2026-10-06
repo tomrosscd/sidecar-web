@@ -12,10 +12,11 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "check": "pnpm type-check && pnpm lint && pnpm test && pnpm build",
-    "product-ui": "node scripts/fetch-product-ui.mjs"
+    "product-ui": "node scripts/fetch-product-ui.mjs",
+    "apps": "node scripts/fetch-apps.mjs"
   },
   "dependencies": {
-    "@convert/product-ui": "file:vendor/convert-product-ui-1.6.0.tgz",
+    "@convert/product-ui": "file:vendor/convert-product-ui-1.7.0.tgz",
     "next": "16.3.5",
     "react": "19.2.8",
     "react-dom": "19.2.8"
