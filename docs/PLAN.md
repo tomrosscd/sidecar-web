@@ -50,7 +50,7 @@ Read first:
 ## Stack
 
 - Next.js 16 App Router with `output: 'export'`. React 19.2, TypeScript strict, pnpm 10, Node 22 or later. Match Brand Tools' versions.
-- `@convert/product-ui` **1.5.0**. Install it with a copy of Brand Tools' `scripts/fetch-product-ui.mjs`: same pinned version and SHA-256, run via `pnpm product-ui`, with `vendor/` git-ignored.
+- `@convert/product-ui` **1.6.0**. Install it with a copy of Brand Tools' `scripts/fetch-product-ui.mjs`: same pinned version and SHA-256, run via `pnpm product-ui`, with `vendor/` git-ignored.
 - CSS modules on `--cui-*` tokens. No Tailwind, shadcn, Supabase or Resend.
 - Vitest and jsdom. Prettier and ESLint as in Brand Tools.
 - `NEXT_PUBLIC_BASE_PATH=/sidecar-web` on Pages. Use a `withBase()` helper like Brand Tools'.

@@ -27,7 +27,7 @@ export const suiteApps: readonly SuiteApp[] = [
   {
     id: 'brand-tools',
     label: 'Brand Tools',
-    href: 'https://tomrosscd.github.io/cd-brand-tools/',
+    href: 'https://cd-brand-tools.pages.dev/',
     description: 'Brand guide, assets and creators',
     markSrc: '/brand/convert-icon-dark-green.svg',
     markTreatment: 'inset',
