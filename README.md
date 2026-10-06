@@ -24,7 +24,7 @@ pnpm install
 pnpm dev
 ```
 
-`pnpm product-ui` downloads the pinned Product UI 1.6.0 archive into the git-ignored `vendor/` and verifies its SHA-256. Run it first on a fresh checkout.
+`pnpm product-ui` downloads the pinned Product UI 1.7.0 archive into the git-ignored `vendor/` and verifies its SHA-256. Run it first on a fresh checkout.
 
 ## Checks
 

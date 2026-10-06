@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # Daily, so changes to tomrosscd/convert-apps arrive without a code change.
+    - cron: '17 19 * * *'
 
 permissions:
   contents: read
@@ -26,6 +29,10 @@ jobs:
           cache: pnpm
       - name: Fetch Product UI
         run: node scripts/fetch-product-ui.mjs
+        env:
+          GH_TOKEN: ${{ secrets.PRODUCT_UI_TOKEN }}
+      - name: Fetch app list
+        run: node scripts/fetch-apps.mjs
         env:
           GH_TOKEN: ${{ secrets.PRODUCT_UI_TOKEN }}
       - run: pnpm install --frozen-lockfile
