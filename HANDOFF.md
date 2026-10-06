@@ -4,7 +4,7 @@ Status: PR open, not merged, not deployed. The live site is not upgraded until t
 
 - Branch: `upgrade-product-ui-1.6.0` (from `main` at `ba82e53`)
 - Upgrade commit: `2268889`
-- PR: PR_LINK_PLACEHOLDER
+- PR: [tomrosscd/sidecar-web#16](https://github.com/tomrosscd/sidecar-web/pull/16)
 
 ## What changed
 
