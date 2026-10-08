@@ -1,5 +1,10 @@
 # Handoff: Product UI 1.6.0 upgrade
 
+## Resume here: checks are manual, 8 October 2026
+
+Branch `ci/manual-checks`, PR open, not merged. `.github/workflows/ci.yml` now runs only on manual dispatch, because the account's free Actions minutes ran out. Before merging any PR, run `pnpm format:check` and `pnpm check` locally and record what passed. The deploy workflow still runs on push to `main` and is unchanged. Not verified: the workflow has not been dispatched on GitHub. The YAML was only parsed locally.
+
+
 Status: PR open, not merged, not deployed. The live site is not upgraded until the owner merges and the Pages deployment succeeds.
 
 - Branch: `upgrade-product-ui-1.6.0` (from `main` at `ba82e53`)
