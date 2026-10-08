@@ -131,14 +131,6 @@ Then stop and wait for me.
 
 ## Status
 
-| Milestone                             | Status                                                                                |
-| ------------------------------------- | ------------------------------------------------------------------------------------- |
-| M1 Scaffold and deploy an empty shell | PR #1, in review                                                                      |
-| M2 Prompt data layer                  | PR #2 (stacked), in review                                                            |
-| M3 Library page                       | PR #3 (stacked), in review                                                            |
-| M4 Detail and collections             | PR #4 (stacked), in review                                                            |
-| M5 Saved, submit, extension, search   | PR #5 (stacked), in review                                                            |
-| M6 Skills library, hidden             | PR #6 (stacked), in review                                                            |
-| M7 QA and release                     | PR #7 (stacked), in review. Live deploy checks are pending until the stack is merged. |
+All seven milestones are merged and the site is live on Product UI 1.7.0. Build and upgrade records are in HANDOFF.md and the pull requests.
 
-M7 evidence so far: no horizontal scroll on any route at 1440, 1024, 390 and 320px; dialog and palette keyboard behaviour; 1480 live prompt, timeframe and comparison combinations match the extension byte for byte.
+Next: the site and the prompt file move from GitHub Pages to Cloudflare, behind sign-in, and this repository becomes private. The extension keeps working throughout: it falls back to its cached prompts.
