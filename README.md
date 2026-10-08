@@ -8,7 +8,7 @@ Status: M1 to M7 built and in review (stacked PRs). See [docs/PLAN.md](docs/PLAN
 
 - Prompt library with search, category and featured/recommended filters, and a timeframe and comparison builder. A view is shareable through the query string.
 - Prompt pages, collections, saved prompts (stored in this browser only), a Cmd/Ctrl+K palette, and an extension page.
-- Prompt data comes from `https://tomrosscd.github.io/sidecar/prompts.json` at build time. Invalid data fails the build. Collections come from the `collections` array in `prompts.json`; the build fails if there are none.
+- Prompt data comes from `PROMPTS_URL` at build time (default `https://convert-sidecar-prompts.pages.dev/prompts.json`). Invalid data fails the build. Collections come from the `collections` array in `prompts.json`; the build fails if there are none.
 - A hidden skills library, built only when `NEXT_PUBLIC_SHOW_SKILLS=true`.
 - `SUBMIT_URL` and the extension link are in `src/config/site.ts`.
 
@@ -39,7 +39,12 @@ Parity with the extension: `tests/fixtures/extension-parity.json` is generated f
 
 ## Hosting
 
-`main` deploys to GitHub Pages at https://tomrosscd.github.io/sidecar-web/ through `.github/workflows/pages.yml` (Pages source: GitHub Actions). The site is a static export. To preview the Pages build locally:
+The site is a static export, built on Cloudflare Pages at the domain root (leave `NEXT_PUBLIC_BASE_PATH` unset) and gated by Cloudflare Access. Cloudflare build settings:
+
+- Build command `pnpm product-ui && pnpm apps && pnpm build`, output directory `out`.
+- Variables: `NODE_VERSION` (22), `GH_TOKEN` (a read-only token for the private Product UI and app list repositories; `pnpm product-ui` and `pnpm apps` use the GitHub API when it is set, so the build needs no `gh` CLI) and, optionally, `PROMPTS_URL`.
+
+`.github/workflows/pages.yml` still builds a GitHub Pages copy with a base path until it is removed. To preview that build locally:
 
 ```sh
 NEXT_PUBLIC_BASE_PATH=/sidecar-web pnpm build
@@ -49,7 +54,7 @@ Both workflows fetch Product UI using the `PRODUCT_UI_TOKEN` Actions secret, a r
 
 ## Not indexed
 
-Every page is `noindex, nofollow` through `metadata.robots` in the root layout, and there is no sitemap. A project-level `robots.txt` is ignored on GitHub Pages project sites (only the root of the user site is honoured), so the meta tag is the control.
+Every page is `noindex, nofollow` through `metadata.robots` in the root layout, and there is no sitemap. `public/_headers` sends `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet` and `public/robots.txt` disallows everything, for hosts that honour them.
 
 ## Apps
 

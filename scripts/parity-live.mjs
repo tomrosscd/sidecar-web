@@ -9,7 +9,9 @@ const ext = {}
 const src = join(import.meta.dirname, '..', '..', '_ref', 'sidecar', 'prompts.js')
 vm.runInNewContext(`${readFileSync(src, 'utf8')}\nthis.buildPrompt = buildPrompt`, ext)
 
-const { prompts } = await (await fetch('https://tomrosscd.github.io/sidecar/prompts.json')).json()
+const { prompts } = await (
+  await fetch(process.env.PROMPTS_URL || 'https://convert-sidecar-prompts.pages.dev/prompts.json')
+).json()
 const timeframes = ['last 7 days', 'last 30 days', 'last quarter', 'last 12 months', '1 to 14 March 2026']
 const comparisons = ['prev', 'yoy', 'none', 'the week before launch']
 let n = 0

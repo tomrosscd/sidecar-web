@@ -58,7 +58,7 @@ Read first:
 
 ## Prompt data
 
-- Source of truth: `https://tomrosscd.github.io/sidecar/prompts.json`. Shape: `{ schema, updated, count, prompts: [{ slug, title, category, description, body, placeholders[], featured, recommended, followUp }] }`. Currently 74 prompts in 10 categories.
+- Source of truth: `prompts.json` on Cloudflare Pages (`PROMPTS_URL`; the original brief named a GitHub Pages address). Shape: `{ schema, updated, count, prompts: [{ slug, title, category, description, body, placeholders[], featured, recommended, followUp }] }`. Currently 74 prompts in 10 categories.
 - Fetch it **at build time** (`lib/prompts.ts`). Validate it with the same rules as the extension's `isValidPayload()`, plus valid `followUp` slugs. Fail the build on invalid data. There is no committed copy.
 - Treat any extra fields as optional. Later the file gains `whenToUse`, `caveats`, `useCases[]`, `dataSources[]`, `level`, `visibility` and a top-level `collections: [{ slug, title, description, promptSlugs[] }]`. Type them as optional now and render them when present.
 - Until `collections` exists in `prompts.json`, read collections from `data/collections.json` in this repo, keyed by prompt slug. Pick sensible ones from SidekickV2's seed (Post-Launch Review, BFCM Preparation, and so on) and map them to current slugs. Drop any prompt that no longer exists.
