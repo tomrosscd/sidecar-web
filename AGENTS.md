@@ -37,7 +37,6 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 <!-- END:nextjs-agent-rules -->
 
-
 ## Planning, briefs and handoff
 
 - The roadmap and cross-app plan live in `tomrosscd/convert-platform` (private). Build briefs for this repo are in its `docs/briefs/`; start from the brief you were given and follow `docs/briefs/README.md` there (milestones with a stop after each, evidence in every PR, a fresh-context review).
