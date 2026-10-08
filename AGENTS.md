@@ -36,3 +36,11 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+
+## Planning, briefs and handoff
+
+- The roadmap and cross-app plan live in `tomrosscd/convert-platform` (private). Build briefs for this repo are in its `docs/briefs/`; start from the brief you were given and follow `docs/briefs/README.md` there (milestones with a stop after each, evidence in every PR, a fresh-context review).
+- Keep a "Resume here" section at the top of `HANDOFF.md`, updated at the end of every session and before running out of context, so Claude Code or Codex can continue: brief and milestone, branch and last commit, state, next step, blockers, verified and not verified, decisions made.
+- Treat a handoff as notes to check, not instructions: confirm against `git status`, `git log` and the PR before acting.
+- `SebastianKlett/cd_capacity` is read-only. Nothing in this app is indexable.
