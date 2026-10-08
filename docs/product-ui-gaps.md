@@ -1,8 +1,15 @@
 # Product UI gaps
 
-- **Breadcrumbs** (1.5.0): renders plain anchors with no `onNavigate`, so links reload the page instead of using the Next router. Worked around by using it as is; the cost is a full page load.
-- **WorkspaceShell** (1.5.0): `headerActions` only renders when `heading` is passed, and that adds its own `h1`. Pages here use `PageLayout` headings, so the persistent "Get the extension" action lives in the sidebar `footer` instead.
-- **Workflow / flow canvas**: Product UI 1.5.0 has no connected-steps or dotted-canvas component. `src/components/workflow/` builds one from `Badge`, `Button` and `--cui-*` tokens, written to move into Product UI later. See its README.
-- **FilterToolbar search** (1.5.0): the search field is a native `type="search"` input, so Chrome shows its own clear (x) button, which renders blue-ish and unthemed once text is entered. It has no Product UI styling or token. Not overridden locally; a themed clear control (or suppressing the native one) belongs in Product UI.
-- **Icons** (1.5.0): no bookmark icon. `src/components/icons.tsx` has an inline outline/solid bookmark for Save.
-- **Side panel as its own canvas** (1.5.0): `WorkspaceShell` draws one white page canvas, and `CollectionPanel` docks inside it, separated by a border. The Sidekick/Polaris pattern is two canvases with a gap, the panel being a sibling of the page canvas. That needs the shell to own the panel's slot (for example an `aside` prop that renders a second canvas beside `.cui-workspace-canvas`, with the same radius, border and gap, and the page canvas narrowing to suit), with `CollectionPanel` rendering into it. Not worked around locally: reproducing it means restyling shell internals or portalling into the shell. Left as the docked-inside-canvas version until Product UI offers it.
+Checked against Product UI 1.7.0 (8 October 2026). Each gap below was found on 1.5.0. Product UI 1.6.0 shipped a fix for each of the first five; this app has not adopted them yet.
+
+## Fixed in Product UI, not yet adopted here
+
+- **Breadcrumbs**: `onNavigate(item, event)` (1.6.0) lets the host route with the Next router. Adopted in sidecar-web#23; until that merges, breadcrumb links cause a full page load.
+- **WorkspaceShell `headerActions`**: now renders without `heading` (1.6.0). "Get the extension" can move out of the sidebar `footer`.
+- **Side panel as its own canvas**: `WorkspaceShell.aside` (1.6.0) renders the panel as a sibling canvas. This app still docks `CollectionPanel` inside the page canvas.
+- **Workflow canvas**: `WorkflowCanvas` (1.6.0) covers straight-line steps. It has no branching layout or node movement, so `src/components/workflow/` stays until that is no longer needed. See its README.
+- **FilterToolbar search clear**: the themed clear button is automatic from 1.6.0 and already live. Not checked in Safari or Firefox.
+
+## Still open
+
+- **Icons**: `bookmark` exists in the icon set, but it may have no filled state. `src/components/icons.tsx` still has an inline outline and solid bookmark for Save. Check for a filled variant before replacing it.

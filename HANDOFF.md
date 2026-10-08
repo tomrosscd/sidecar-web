@@ -1,9 +1,17 @@
 # Handoff: Product UI 1.6.0 upgrade
 
-## Resume here: checks are manual, 8 October 2026
+## Resume here (updated 9 October 2026, Claude Code, Sonnet 5.5)
 
-Branch `ci/manual-checks`, PR open, not merged. `.github/workflows/ci.yml` now runs only on manual dispatch, because the account's free Actions minutes ran out. Before merging any PR, run `pnpm format:check` and `pnpm check` locally and record what passed. The deploy workflow still runs on push to `main` and is unchanged. Not verified: the workflow has not been dispatched on GitHub. The YAML was only parsed locally.
-
+- Brief: `convert-platform/docs/briefs/02-sidecar-web-cloudflare.md`, M1 and M2 merged, M3 in progress
+- Branch: `docs/refresh-gaps-and-handoff` (docs only). Open PRs: this one; [sidecar-web#22](https://github.com/tomrosscd/sidecar-web/pull/22) removes `pages.yml`; [sidecar-web#23](https://github.com/tomrosscd/sidecar-web/pull/23) breadcrumbs via the router; [convert-apps#1](https://github.com/tomrosscd/convert-apps/pull/1) points the switcher at the new address; [sidecar#5](https://github.com/tomrosscd/sidecar/pull/5) extension 2.1.0
+- State: brief 01 M1 is live (`https://convert-sidecar-prompts.pages.dev/prompts.json` with CORS, `no-store`, `noindex`). Sidecar Web builds on Cloudflare Pages at `https://convert-sidecar-web.pages.dev/` and is **not yet behind sign-in**. Parity against the new prompts address: 1480 combinations, 0 mismatches
+- Cloudflare build settings (Pages, project `convert-sidecar-web`): command `node scripts/fetch-product-ui.mjs && node scripts/fetch-apps.mjs && pnpm install --frozen-lockfile && pnpm build`, output `out`, variables `SKIP_DEPENDENCY_INSTALL=1`, `NODE_VERSION=22`, `GH_TOKEN` (encrypted, read-only). Cloudflare's own install runs before the build command and fails without the Product UI archive, hence the skip
+- Next step, in this order (Tom): set up Cloudflare Access with Google sign-in (OAuth client in the Sidekick project, hostnames `convert-sidecar-web.pages.dev` and `*.convert-sidecar-web.pages.dev`, allow emails ending `@convertdigital.com.au`) and confirm sign-in and the preview gate; then merge convert-apps#1 and sidecar-web#22. Then publish extension 2.1.0 (check the Chrome Web Store listing and privacy policy wording, see sidecar#5), wait for it to reach people, and only then make `sidecar` and `sidecar-web` private (brief 02, M4)
+- Blockers or questions for Tom: Access setup; whether to adopt `WorkspaceShell headerActions` and `aside` (they change the look; see `docs/product-ui-gaps.md`); delete the merged remote branches (`m1-scaffold` to `m9-workflow-datepicker`, `collections-from-file`, `fix-custom-range-fallback`, `handoff-consumer-record`, the two `upgrade-product-ui` branches)
+- Verified this session: both Cloudflare builds succeed; the prompts address returns the right headers; `pnpm check` on each PR; breadcrumb click does not reload (local browser)
+- Not verified: Access sign-in; the extension in Chrome (sidecar#5 lists the steps); Safari and Firefox search clear; `/skills/`
+- Decisions made: Cloudflare Access (not Cloud Run with IAP) gates Sidecar Web, for the proof of concept; Google as the login method, using the Sidekick project's Internal audience
+- Note: the account's free GitHub Actions minutes ran out, so `ci.yml` is manual only. Run `pnpm format:check` and `pnpm check` locally before merging and record the result in the PR
 
 Status: PR open, not merged, not deployed. The live site is not upgraded until the owner merges and the Pages deployment succeeds.
 
