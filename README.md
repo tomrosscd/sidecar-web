@@ -41,8 +41,8 @@ Parity with the extension: `tests/fixtures/extension-parity.json` is generated f
 
 The site is a static export, built on Cloudflare Pages at the domain root (leave `NEXT_PUBLIC_BASE_PATH` unset) and gated by Cloudflare Access. Cloudflare build settings:
 
-- Build command `pnpm product-ui && pnpm apps && pnpm build`, output directory `out`.
-- Variables: `NODE_VERSION` (22), `GH_TOKEN` (a read-only token for the private Product UI and app list repositories; `pnpm product-ui` and `pnpm apps` use the GitHub API when it is set, so the build needs no `gh` CLI) and, optionally, `PROMPTS_URL`.
+- Build command `node scripts/fetch-product-ui.mjs && node scripts/fetch-apps.mjs && pnpm install --frozen-lockfile && pnpm build`, output directory `out`. Cloudflare's automatic install runs before the build command and fails because the Product UI archive is not in `vendor/` yet, so set `SKIP_DEPENDENCY_INSTALL=1` and install in the build command after the fetch.
+- Variables: `SKIP_DEPENDENCY_INSTALL` (1), `NODE_VERSION` (22), `GH_TOKEN` (a read-only token for the private Product UI and app list repositories; `pnpm product-ui` and `pnpm apps` use the GitHub API when it is set, so the build needs no `gh` CLI) and, optionally, `PROMPTS_URL`.
 
 `.github/workflows/pages.yml` still builds a GitHub Pages copy with a base path until it is removed. To preview that build locally:
 
