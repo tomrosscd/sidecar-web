@@ -7,7 +7,7 @@ const showSkills = process.env.NEXT_PUBLIC_SHOW_SKILLS === 'true'
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || undefined
 
 const nextConfig: NextConfig = {
-  // A fully static site for GitHub Pages: no server, database or auth.
+  // A fully static site: no server, database or auth.
   output: 'export',
   pageExtensions: showSkills ? ['tsx', 'ts', 'skills.tsx'] : ['tsx', 'ts'],
   basePath,

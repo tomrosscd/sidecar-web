@@ -17,7 +17,7 @@ Read [docs/PLAN.md](docs/PLAN.md) (the approved brief and milestones) before sta
 
 ## Prompt data
 
-- Source of truth is `https://tomrosscd.github.io/sidecar/prompts.json`, fetched at build time and validated; invalid data fails the build. No committed copy.
+- Source of truth is `prompts.json` on Cloudflare Pages (`PROMPTS_URL`, default `https://convert-sidecar-prompts.pages.dev/prompts.json`), fetched at build time and validated; invalid data fails the build. No committed copy.
 - Copied prompt text must match the Sidecar Extension exactly for the same inputs.
 
 ## Code

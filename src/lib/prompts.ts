@@ -1,7 +1,14 @@
 import { validatePayload } from './validate-prompts'
 import type { PromptsPayload } from './types'
 
-export const PROMPTS_URL = 'https://tomrosscd.github.io/sidecar/prompts.json'
+const DEFAULT_PROMPTS_URL = 'https://convert-sidecar-prompts.pages.dev/prompts.json'
+
+/** The PROMPTS_URL environment variable overrides the default, so a build can read another copy. */
+export function promptsUrl(env: Record<string, string | undefined> = process.env): string {
+  return env.PROMPTS_URL?.trim() || DEFAULT_PROMPTS_URL
+}
+
+export const PROMPTS_URL = promptsUrl()
 
 let cached: Promise<PromptsPayload> | undefined
 

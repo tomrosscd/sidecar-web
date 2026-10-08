@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: { default: SITE_NAME, template: `%s · ${SITE_NAME}` },
   description: SITE_DESCRIPTION,
   icons: { icon: withBase('/brand/sidecar-icon.svg') },
-  // Applies to every page. GitHub Pages ignores a project-level robots.txt, so this is the control.
+  // Applies to every page. Public/_headers and robots.txt say the same, for hosts that honour them.
   robots: { index: false, follow: false },
 }
 
