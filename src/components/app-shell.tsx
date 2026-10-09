@@ -2,12 +2,14 @@
 
 import { Button, CommandPalette, Icon, WorkspaceShell, type AppEntry, type SidebarEntry } from '@convert/product-ui'
 import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { CURRENT_APP_ID, appMark, suiteApps } from '@/config/apps'
 import { EXTENSION_URL, SHOW_SKILLS } from '@/config/site'
 import { withBase } from '@/lib/base-path'
 import { routeLinkClick } from '@/lib/client-navigation'
 import { BookmarkIcon } from './icons'
+import { PromptPanelContent } from './prompt-panel'
+import { useView } from './view-provider'
 import type { SearchEntry } from '@/lib/search-entries'
 
 const items: readonly SidebarEntry[] = [
@@ -39,6 +41,8 @@ export function AppShell({ children, searchEntries }: { children: ReactNode; sea
   const [searchOpen, setSearchOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
+  const { selected, closePrompt } = useView()
+  const panelReturnFocus = useRef<HTMLElement | null>(null)
 
   // The one owner of Cmd/Ctrl+K.
   useEffect(() => {
@@ -63,6 +67,14 @@ export function AppShell({ children, searchEntries }: { children: ReactNode; sea
         currentAppId={CURRENT_APP_ID}
         onSearch={() => setSearchOpen(true)}
         collapsible
+        // The prompt opened from any page is shown as a second canvas beside it (a modal when space is tight).
+        aside={{
+          open: !!selected,
+          onOpenChange: (open) => !open && closePrompt(),
+          heading: selected?.title ?? 'Prompt',
+          panel: selected ? <PromptPanelContent prompt={selected} /> : null,
+          returnFocusRef: panelReturnFocus,
+        }}
         footer={
           <Button
             size="sm"
