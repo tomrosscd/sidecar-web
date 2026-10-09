@@ -63,7 +63,7 @@ export function AppShell({ children, searchEntries }: { children: ReactNode; sea
         currentAppId={CURRENT_APP_ID}
         onSearch={() => setSearchOpen(true)}
         collapsible
-        footer={
+        headerActions={
           <Button
             size="sm"
             variant="primary"
