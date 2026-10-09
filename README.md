@@ -12,7 +12,7 @@ Status: M1 to M7 built and in review (stacked PRs). See [docs/PLAN.md](docs/PLAN
 - A hidden skills library, built only when `NEXT_PUBLIC_SHOW_SKILLS=true`.
 - `SUBMIT_URL` and the extension link are in `src/config/site.ts`.
 
-Because the data is fetched at build, a new prompt appears on the site after the next build. Cloudflare rebuilds on every push to `main`. After changing `prompts.json` in the sidecar repo, trigger a rebuild from the Cloudflare project's Deployments page (or a deploy hook), and the same for a change to the shared app list, which is also read at build time.
+Because the data is fetched at build, a new prompt appears on the site after the next build. Cloudflare rebuilds on every push to `main`. After changing `prompts.json` in the sidecar repo, or the shared app list in `convert-apps`, rebuild by following [RELEASE.md](RELEASE.md), which also says what to record each time.
 
 ## Run locally
 
