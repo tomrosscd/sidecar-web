@@ -5,7 +5,8 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState, type ReactNode } from 'react'
 import { CURRENT_APP_ID, appMark, suiteApps } from '@/config/apps'
 import { EXTENSION_URL, SHOW_SKILLS } from '@/config/site'
-import { basePath, withBase } from '@/lib/base-path'
+import { withBase } from '@/lib/base-path'
+import { routeLinkClick } from '@/lib/client-navigation'
 import { BookmarkIcon } from './icons'
 import type { SearchEntry } from '@/lib/search-entries'
 
@@ -71,11 +72,7 @@ export function AppShell({ children, searchEntries }: { children: ReactNode; sea
             Get the extension
           </Button>
         }
-        onNavigate={(item, event) => {
-          if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return
-          event.preventDefault()
-          router.push(item.href.slice(basePath.length) || '/')
-        }}
+        onNavigate={(item, event) => routeLinkClick(router.push, item.href, event)}
       >
         {children}
       </WorkspaceShell>
