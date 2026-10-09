@@ -12,7 +12,7 @@ Status: M1 to M7 built and in review (stacked PRs). See [docs/PLAN.md](docs/PLAN
 - A hidden skills library, built only when `NEXT_PUBLIC_SHOW_SKILLS=true`.
 - `SUBMIT_URL` and the extension link are in `src/config/site.ts`.
 
-Because the data is fetched at build, a new prompt appears on the site after the next build. Run the Pages workflow (it has `workflow_dispatch`) after changing `prompts.json`.
+Because the data is fetched at build, a new prompt appears on the site after the next build. Cloudflare rebuilds on every push to `main`. After changing `prompts.json` in the sidecar repo, trigger a rebuild from the Cloudflare project's Deployments page (or a deploy hook), and the same for a change to the shared app list, which is also read at build time.
 
 ## Run locally
 
@@ -44,13 +44,9 @@ The site is a static export, built on Cloudflare Pages at the domain root (leave
 - Build command `node scripts/fetch-product-ui.mjs && node scripts/fetch-apps.mjs && pnpm install --frozen-lockfile && pnpm build`, output directory `out`. Cloudflare's automatic install runs before the build command and fails because the Product UI archive is not in `vendor/` yet, so set `SKIP_DEPENDENCY_INSTALL=1` and install in the build command after the fetch.
 - Variables: `SKIP_DEPENDENCY_INSTALL` (1), `NODE_VERSION` (22), `GH_TOKEN` (a read-only token for the private Product UI and app list repositories; `pnpm product-ui` and `pnpm apps` use the GitHub API when it is set, so the build needs no `gh` CLI) and, optionally, `PROMPTS_URL`.
 
-`.github/workflows/pages.yml` still builds a GitHub Pages copy with a base path until it is removed. To preview that build locally:
+There is no GitHub Pages deployment. `.github/workflows/ci.yml` is manual only and fetches Product UI with the `PRODUCT_UI_TOKEN` Actions secret, a read-only token for `tomrosscd/cd-product-ui`.
 
-```sh
-NEXT_PUBLIC_BASE_PATH=/sidecar-web pnpm build
-```
-
-Both workflows fetch Product UI using the `PRODUCT_UI_TOKEN` Actions secret, a read-only token for `tomrosscd/cd-product-ui`.
+Base path support (`NEXT_PUBLIC_BASE_PATH`) remains for hosting under a sub-path, but nothing uses it now.
 
 ## Not indexed
 
