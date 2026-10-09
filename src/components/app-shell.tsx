@@ -6,14 +6,13 @@ import { useEffect, useState, type ReactNode } from 'react'
 import { CURRENT_APP_ID, appMark, suiteApps } from '@/config/apps'
 import { EXTENSION_URL, SHOW_SKILLS } from '@/config/site'
 import { basePath, withBase } from '@/lib/base-path'
-import { BookmarkIcon } from './icons'
 import type { SearchEntry } from '@/lib/search-entries'
 
 const items: readonly SidebarEntry[] = [
   { id: 'library', label: 'Prompt library', href: withBase('/'), icon: <Icon name="overview" /> },
   { id: 'collections', label: 'Collections', href: withBase('/collections/'), icon: <Icon name="grid" /> },
   ...(SHOW_SKILLS ? [{ id: 'skills', label: 'Skills', href: withBase('/skills/'), icon: <Icon name="list" /> }] : []),
-  { id: 'saved', label: 'Saved', href: withBase('/saved/'), icon: <BookmarkIcon /> },
+  { id: 'saved', label: 'Saved', href: withBase('/saved/'), icon: <Icon name="bookmark" /> },
   { id: 'extension', label: 'Extension', href: withBase('/extension/'), icon: <Icon name="download" /> },
 ]
 
