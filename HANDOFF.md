@@ -3,11 +3,11 @@
 ## Resume here (updated 9 October 2026, Claude Code, Sonnet 5.5)
 
 - Brief: `convert-platform/docs/briefs/02-sidecar-web-cloudflare.md`, milestone M3 (agent part).
-- Branch: `switch-to-cloudflare`, last commit: see `git log -1` (the commit that adds `RELEASE.md`). PR: [#22](https://github.com/tomrosscd/sidecar-web/pull/22), open, not merged. Related: [convert-apps#1](https://github.com/tomrosscd/convert-apps/pull/1), open, not merged.
+- Branch: `switch-to-cloudflare`, last commit `b3aa12b` (adds `RELEASE.md`), plus a small handoff touch-up after it. PR: [#22](https://github.com/tomrosscd/sidecar-web/pull/22), open, not merged. Related, all open and not merged: [convert-apps#1](https://github.com/tomrosscd/convert-apps/pull/1) (switcher address), [convert-apps#2](https://github.com/tomrosscd/convert-apps/pull/2) and [sidecar#6](https://github.com/tomrosscd/sidecar/pull/6) (README rebuild reminders).
 - State: the release checklist ([RELEASE.md](RELEASE.md)) exists, so the daily rebuild that `pages.yml` provided has a replacement. The rollback steps and last good deployment are below. The agent work for M3 is done.
 - Next step (Tom): set up Cloudflare Access with Google sign-in on the main and preview addresses and confirm sign-in works; confirm the deployment ID below; merge #22 and convert-apps#1; rebuild once using `RELEASE.md` and fill in the first row of the release record; after a few stable days, move to M4.
 - Blockers or questions for Tom: Access is not set up yet (`https://convert-sidecar-web.pages.dev/` returns 200 with no sign-in on 9 October 2026). The deployment ID below needs checking in the dashboard.
-- Verified this session: `pnpm check` (see PR #22 for the result). The prompts address returns `updated` 2026-10-05 and 74 prompts.
+- Verified this session: `pnpm check` and `pnpm format:check` pass (12 test files, 479 tests). The prompts address returns `updated` 2026-10-05 and 74 prompts.
 - Not verified: the Cloudflare dashboard (no access from here), Access sign-in, the rollback procedure itself, the preview address gate.
 - Decisions made: D3, a manual release checklist replaces the daily Pages rebuild (review R4-10). No automation unless the checklist gets missed.
 
