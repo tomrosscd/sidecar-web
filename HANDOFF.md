@@ -8,6 +8,7 @@
 - Next step (Tom): run the commands in "Google Cloud setup" below, run `pnpm release` once, deploy the first Cloud Run service, sign in, and check a prompt page. Then tell the agent the service address.
 - After that (agent): change the `sidecar-web` address in `convert-apps` (`apps.json`) to the Cloud Run address, rebuild, and record the first release row. Then retire the Cloudflare Pages project `convert-sidecar-web`: it is public today, so delete it (or at least disable its production deployments) once the Cloud Run site works. Leave `convert-sidecar-prompts`.
 - Later: both repos go private, as before.
+- Verified 11 October 2026, without Docker: `pnpm check` on `main` passes (491 tests); `server/static-server.mjs` run on a free port against a fresh build. Pages (with and without a trailing slash), the 404 page, `robots.txt`, noindex, nosniff and referrer headers, long-cache `_next/static` files, POST refused (405), HEAD, and six path-traversal attempts (all 404, none read a file outside `out/`). In a browser through that server, sidebar and collection navigation work without a page reload and with no console errors. Not verified: the Docker build, Cloud Run and IAP.
 
 ## Google Cloud setup (Tom)
 
