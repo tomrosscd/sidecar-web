@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useMemo } from 'react'
 import { useSaved } from '@/lib/use-saved'
 import { PromptCard } from './prompt-card'
-import { PromptPanelHost } from './prompt-panel'
 import { TimeframeControls } from './timeframe-controls'
 import { useView } from './view-provider'
 
@@ -19,41 +18,39 @@ export function SavedPrompts() {
   }, [prompts, saved])
 
   return (
-    <PromptPanelHost>
-      <PageLayout
-        headingOwner="page"
-        heading="Saved prompts"
-        description="Prompts you have saved on this device. They are stored in this browser only, so they will not follow you to another browser or computer."
-        footer={<p role="status">{list.length} saved</p>}
-      >
-        <Stack gap={24}>
-          {!available && (
-            <Alert heading="Saving is not available" tone="warning">
-              This browser is blocking storage, so saved prompts will be lost when you close the page.
-            </Alert>
-          )}
-          {list.length === 0 ? (
-            <EmptyState
-              heading="No saved prompts yet"
-              description="Use Save on any prompt and it will appear here."
-              action={
-                <Link href="/" className="cui-button cui-button-primary cui-button-sm">
-                  Browse the library
-                </Link>
-              }
-            />
-          ) : (
-            <>
-              <TimeframeControls />
-              <Grid columns={2} minItemWidth={380} gap={16}>
-                {list.map((p) => (
-                  <PromptCard key={p.slug} prompt={p} />
-                ))}
-              </Grid>
-            </>
-          )}
-        </Stack>
-      </PageLayout>
-    </PromptPanelHost>
+    <PageLayout
+      headingOwner="page"
+      heading="Saved prompts"
+      description="Prompts you have saved on this device. They are stored in this browser only, so they will not follow you to another browser or computer."
+      footer={<p role="status">{list.length} saved</p>}
+    >
+      <Stack gap={24}>
+        {!available && (
+          <Alert heading="Saving is not available" tone="warning">
+            This browser is blocking storage, so saved prompts will be lost when you close the page.
+          </Alert>
+        )}
+        {list.length === 0 ? (
+          <EmptyState
+            heading="No saved prompts yet"
+            description="Use Save on any prompt and it will appear here."
+            action={
+              <Link href="/" className="cui-button cui-button-primary cui-button-sm">
+                Browse the library
+              </Link>
+            }
+          />
+        ) : (
+          <>
+            <TimeframeControls />
+            <Grid columns={2} minItemWidth={380} gap={16}>
+              {list.map((p) => (
+                <PromptCard key={p.slug} prompt={p} />
+              ))}
+            </Grid>
+          </>
+        )}
+      </Stack>
+    </PageLayout>
   )
 }
