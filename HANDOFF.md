@@ -1,47 +1,90 @@
 # Handoff
 
-## Resume here (updated 9 October 2026, Claude Code, Sonnet 5.5)
+## Resume here (updated 10 October 2026, Claude Code, Sonnet 5.5)
 
-- Brief: `convert-platform/docs/briefs/02-sidecar-web-cloudflare.md`, milestone M3 (agent part).
-- Branch: `switch-to-cloudflare`, last commit `b3aa12b` (adds `RELEASE.md`), plus a small handoff touch-up after it. PR: [#22](https://github.com/tomrosscd/sidecar-web/pull/22), open, not merged. Related, all open and not merged: [convert-apps#1](https://github.com/tomrosscd/convert-apps/pull/1) (switcher address), [convert-apps#2](https://github.com/tomrosscd/convert-apps/pull/2) and [sidecar#6](https://github.com/tomrosscd/sidecar/pull/6) (README rebuild reminders).
-- State: the release checklist ([RELEASE.md](RELEASE.md)) exists, so the daily rebuild that `pages.yml` provided has a replacement. The rollback steps and last good deployment are below. The agent work for M3 is done.
-- Next step (Tom): set up Cloudflare Access with Google sign-in on the main and preview addresses and confirm sign-in works; confirm the deployment ID below; merge #22 and convert-apps#1; rebuild once using `RELEASE.md` and fill in the first row of the release record; after a few stable days, move to M4.
-- Blockers or questions for Tom: Access is not set up yet (`https://convert-sidecar-web.pages.dev/` returns 200 with no sign-in on 9 October 2026). The deployment ID below needs checking in the dashboard.
-- Verified this session: `pnpm check` and `pnpm format:check` pass (12 test files, 479 tests). The prompts address returns `updated` 2026-10-05 and 74 prompts.
-- Not verified: the Cloudflare dashboard (no access from here), Access sign-in, the rollback procedure itself, the preview address gate.
-- Decisions made: D3, a manual release checklist replaces the daily Pages rebuild (review R4-10). No automation unless the checklist gets missed.
+- Decision (Tom, 10 October 2026): no Cloudflare Access or Zero Trust (it needs a billing account). Sidecar Web moves to Cloud Run behind Google IAP, like Growth Vault. `prompts.json` stays on Cloudflare Pages, public, for the extension.
+- Branch: `move-to-cloud-run`. It adds `server/static-server.mjs` (serves `out/`, noindex headers, tested in `tests/static-server.test.ts`), `Dockerfile`, `cloudbuild.yaml`, `.gcloudignore`, `.dockerignore`, `.env.release.example`, `scripts/release.sh` (`pnpm release`), and rewrites `RELEASE.md`. `public/_headers` is removed because the server sends those headers.
+- State: nothing has been run against Google Cloud, and the Docker image has not been built (no Docker on the agent's machine). The static server is covered by tests.
+- Next step (Tom): run the commands in "Google Cloud setup" below, run `pnpm release` once, deploy the first Cloud Run service, sign in, and check a prompt page. Then tell the agent the service address.
+- After that (agent): change the `sidecar-web` address in `convert-apps` (`apps.json`) to the Cloud Run address, rebuild, and record the first release row. Then retire the Cloudflare Pages project `convert-sidecar-web`: it is public today, so delete it (or at least disable its production deployments) once the Cloud Run site works. Leave `convert-sidecar-prompts`.
+- Later: both repos go private, as before.
 
-## Last good deployment
+## Google Cloud setup (Tom)
 
-| What                     | Value                                                                                 |
-| ------------------------ | ------------------------------------------------------------------------------------- |
-| Cloudflare deployment ID | `7b48c384-bdfc-4cb0-b3a9-3efdb8cad881` **TOM TO CONFIRM in the dashboard**            |
-| Source commit            | `e7da9b1` (`main`)                                                                    |
-| Where the ID came from   | The "Cloudflare Pages" commit status on `e7da9b1` in GitHub, 8 October 2026 22:50 UTC |
+Agents never change IAM or live services, and none of this has been run. Replace the placeholders. Every command names the project. The values are Google Cloud details, so they stay out of git: use them in your terminal and in `.env.release`, not in a commit. Use the same project, region, build service account and staging bucket as Growth Vault and Great Cart.
 
-The agent could not open the Cloudflare dashboard, so it read the ID from the GitHub commit status link. Check that it is the latest **production** deployment, that it is marked successful, and replace this row if not. Re-record it after the first rebuild following the merge of #22.
+| Placeholder                    | Meaning                                              |
+| ------------------------------ | ---------------------------------------------------- |
+| `PROJECT_ID`, `PROJECT_NUMBER` | The Google Cloud project that already hosts the apps |
+| `REGION`                       | The same region as the other apps                    |
+| `BUILDER_ACCOUNT`              | The build service account the other apps already use |
+| `STAGING_BUCKET`               | The build staging bucket the other apps already use  |
+
+Sidecar Web needs no storage bucket and no environment variables: it serves files and holds no data. Its runtime account needs no roles.
+
+```bash
+gcloud iam service-accounts create sidecar-web-runtime --project=PROJECT_ID --display-name="Sidecar Web runtime"
+```
+
+```bash
+gcloud artifacts repositories create sidecar-web --repository-format=docker --location=REGION --project=PROJECT_ID
+```
+
+```bash
+gcloud artifacts repositories add-iam-policy-binding sidecar-web --location=REGION --project=PROJECT_ID --member=serviceAccount:BUILDER_ACCOUNT --role=roles/artifactregistry.writer
+```
+
+Fill in `.env.release` (copy `.env.release.example`), then run `pnpm release` once. It builds and uploads the image but the first `gcloud run services update` fails because the service does not exist yet. Create the service from the image instead:
+
+```bash
+gcloud run deploy sidecar-web --image=REGION-docker.pkg.dev/PROJECT_ID/sidecar-web/app:COMMIT_SHA --region=REGION --project=PROJECT_ID --service-account=sidecar-web-runtime@PROJECT_ID.iam.gserviceaccount.com --no-allow-unauthenticated --iap --min-instances=0 --max-instances=2
+```
+
+If `--iap` is not accepted on your gcloud version, deploy without it, then in the Cloud Run console open the service, Security, and choose **Require authentication, then Identity-Aware Proxy (IAP)**, as for Growth Vault. Never allow unauthenticated access and never add `allUsers`.
+
+**IAP access: Tom only to start.** Grant yourself, and nobody else, until the checks below pass:
+
+```bash
+gcloud iap web add-iam-policy-binding --resource-type=cloud-run --service=sidecar-web --region=REGION --project=PROJECT_ID --member=user:tom@convertdigital.com.au --role=roles/iap.httpsResourceAccessor
+```
+
+Check who has access:
+
+```bash
+gcloud iap web get-iam-policy --resource-type=cloud-run --service=sidecar-web --region=REGION --project=PROJECT_ID
+```
+
+Google's "You don't have access" page means the person is not on that list. Opening it to staff is a launch step: grant `domain:YOUR_STAFF_DOMAIN` the **IAP-secured Web App User** role, as in the launch checklist in `convert-platform/docs/suite-standards.md`.
+
+Check before telling anyone: open the service address in a private window (it should ask for Google sign-in), sign in as yourself and open a prompt page, then try a second Google account that is not on the list (it should be refused).
+
+The Cloud Run spend cap covers every Cloud Run service in the project.
 
 ## Rollback
 
-Never restore public access as a recovery shortcut.
+Never allow unauthenticated access as a recovery shortcut.
 
-- **Sidecar Web on Cloudflare is bad:** in the Cloudflare dashboard, open the `convert-sidecar-web` project, then Deployments. Find the last good deployment above, open its menu and choose **Rollback to this deployment**. Cloudflare Pages keeps every deployment.
-- **Fix forward** if the cause is in the code or data: correct it on `main` (or in `prompts.json`) and rebuild as in [RELEASE.md](RELEASE.md).
-- **App switcher points at a bad address:** change the one `href` for the `sidecar-web` entry in `convert-apps` back. Before the GitHub Pages site is switched off, that is the quick revert.
-- **Cloudflare Access breaks sign-in:** fix the Access policy. Do not remove Access.
-- **After GitHub Pages is switched off** there is no Pages fallback. Recovery is a Cloudflare rollback or a fix forward.
+- **A release is bad:** point the service at the last good image. The tags are the short commit hashes in the release record below.
+
+```bash
+gcloud run services update sidecar-web --image=REGION-docker.pkg.dev/PROJECT_ID/sidecar-web/app:OLD_TAG --region=REGION --project=PROJECT_ID
+```
+
+- **Fix forward** if the cause is in the code or data: correct it on `main` (or in `prompts.json`) and release again as in [RELEASE.md](RELEASE.md).
+- **App switcher points at a bad address:** change the one `href` for the `sidecar-web` entry in `convert-apps` back.
+- **Sign-in breaks:** fix the IAP access list. Do not remove IAP.
 
 ## Release record
 
-One row per rebuild. See [RELEASE.md](RELEASE.md) for how to fill it in.
+One row per release. See [RELEASE.md](RELEASE.md) for how to fill it in. No Cloud Run release has been recorded yet.
 
-| Date                                            | `prompts.json` `updated` | Prompts | `convert-apps` commit                                             | Cloudflare deployment ID                            | By  |
-| ----------------------------------------------- | ------------------------ | ------- | ----------------------------------------------------------------- | --------------------------------------------------- | --- |
-| 2026-10-08 (last known, not a recorded rebuild) | 2026-10-05               | 74      | `104ad60` (current `main`; the one in the build was not recorded) | `7b48c384-bdfc-4cb0-b3a9-3efdb8cad881` (to confirm) | n/a |
+| Date | `prompts.json` `updated` | Prompts | `convert-apps` commit | Image tag | By  |
+| ---- | ------------------------ | ------- | --------------------- | --------- | --- |
+|      |                          |         |                       |           |     |
 
 ## Earlier: Product UI 1.6.0 upgrade, 8 October 2026
 
-Status: PR open, not merged, not deployed. The live site is not upgraded until the owner merges and the Pages deployment succeeds.
+Status: historical (the 1.6.0 upgrade; the site is now on 1.7.0).
 
 - Branch: `upgrade-product-ui-1.6.0` (from `main` at `ba82e53`)
 - Upgrade commit: `2268889`

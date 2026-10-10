@@ -1,0 +1,9 @@
+# Allowlist: only the compiled site and the server. Never source, vendor archives or credentials.
+**
+!Dockerfile
+!.dockerignore
+!cloudbuild.yaml
+!out/
+!out/**
+!server/
+!server/static-server.mjs

@@ -1,0 +1,17 @@
+# The Artifact Registry repository sidecar-web must exist in the selected region.
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - -f
+      - Dockerfile
+      - -t
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/sidecar-web/app:${_TAG}
+      - .
+images:
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/sidecar-web/app:${_TAG}
+substitutions:
+  _REGION: REGION
+  _TAG: initial
+options:
+  logging: CLOUD_LOGGING_ONLY

@@ -13,12 +13,7 @@ describe('promptsUrl', () => {
   })
 })
 
-describe('noindex files served from public/', () => {
-  it('sends X-Robots-Tag on every path', () => {
-    const headers = readFileSync('public/_headers', 'utf8')
-    expect(headers).toMatch(/^\/\*\n {2}X-Robots-Tag: noindex, nofollow, noarchive, nosnippet\n$/)
-  })
-
+describe('noindex files in public/', () => {
   it('disallows everything in robots.txt', () => {
     expect(readFileSync('public/robots.txt', 'utf8')).toBe('User-agent: *\nDisallow: /\n')
   })
