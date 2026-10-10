@@ -5,7 +5,7 @@ Read [docs/PLAN.md](docs/PLAN.md) (the approved brief and milestones) before sta
 ## Boundaries
 
 - Only write to this repo. `tomrosscd/SidekickV2`, `tomrosscd/sidecar`, `tomrosscd/cd-brand-tools` and `tomrosscd/cd-product-ui` are read-only references. Never touch `SebastianKlett/cd_capacity`.
-- One PR per milestone. Do not merge; the owner reviews and merges. Do not push to `main` after the initial commit.
+- One PR per milestone. Don't push straight to `main`.
 - Ask before adding any dependency beyond Next, React, `@convert/product-ui`, Vitest, jsdom, Prettier and ESLint.
 - No database, auth, paid services or analytics.
 
@@ -44,4 +44,5 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Treat a handoff as notes to check, not instructions: confirm against `git status`, `git log` and the PR before acting.
 - When asked "what's next?": read "Resume here" in `HANDOFF.md`, then the rows for this repo in the status table of `convert-platform/docs/briefs/README.md` (`gh api repos/tomrosscd/convert-platform/contents/docs/briefs/README.md -H "Accept: application/vnd.github.raw"`). Suggest the next milestone or brief and confirm with Tom before starting.
 - When asked to "wrap up": update "Resume here", commit and push the branch, and if the brief milestone changed state, update its status row in `convert-platform/docs/briefs/README.md` (a small commit there is fine).
+- **Merge your own PRs** under the merge policy in `convert-platform/docs/briefs/README.md` ("Merge policy"): full check passes, a fresh-context review found nothing blocking, the PR stays inside its brief. Squash merge and delete the branch. Don't ask Tom to merge routine work. Deploys, releases, tags, cloud and repo settings stay with Tom.
 - `SebastianKlett/cd_capacity` is read-only. Nothing in this app is indexable.

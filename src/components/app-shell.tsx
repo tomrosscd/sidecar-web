@@ -75,7 +75,7 @@ export function AppShell({ children, searchEntries }: { children: ReactNode; sea
           panel: selected ? <PromptPanelContent prompt={selected} /> : null,
           returnFocusRef: panelReturnFocus,
         }}
-        footer={
+        headerActions={
           <Button
             size="sm"
             variant="primary"
