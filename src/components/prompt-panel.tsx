@@ -1,8 +1,8 @@
 'use client'
 
-import { Button, CollectionPanel, KeyValueList, Stack } from '@convert/product-ui'
+import { Button, KeyValueList, Stack } from '@convert/product-ui'
 import Link from 'next/link'
-import { useRef, type ReactElement, type ReactNode, type RefObject } from 'react'
+import type { ReactNode } from 'react'
 import { withBase } from '@/lib/base-path'
 import { copyText } from '@/lib/copy-text'
 import type { Prompt } from '@/lib/types'
@@ -108,28 +108,5 @@ export function PromptPanelContent({ prompt, page = false }: { prompt: Prompt; p
         )}
       </div>
     </Stack>
-  )
-}
-
-/** Wraps a collection so the selected prompt opens in a docked side panel (a modal when space is tight). */
-export function PromptPanelHost({
-  children,
-  returnFocusRef,
-}: {
-  children: ReactNode
-  returnFocusRef?: RefObject<HTMLElement | null>
-}): ReactElement {
-  const { selected, closePrompt } = useView()
-  const fallback = useRef<HTMLElement | null>(null)
-  return (
-    <CollectionPanel
-      open={!!selected}
-      onOpenChange={(open) => !open && closePrompt()}
-      heading={selected?.title ?? 'Prompt'}
-      panel={selected ? <PromptPanelContent prompt={selected} /> : null}
-      returnFocusRef={returnFocusRef ?? fallback}
-    >
-      {children}
-    </CollectionPanel>
   )
 }
