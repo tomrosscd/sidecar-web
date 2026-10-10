@@ -1,10 +1,11 @@
 'use client'
 
-import { Badge, Breadcrumbs, Button, Card, KeyValueList, PageLayout, Stack } from '@convert/product-ui'
+import { Badge, Button, Card, KeyValueList, PageLayout, Stack } from '@convert/product-ui'
 import { withBase } from '@/lib/base-path'
 import { copyText } from '@/lib/copy-text'
 import type { Skill } from '@/lib/skills'
 import styles from './skill-detail.module.css'
+import { RouterBreadcrumbs } from './router-breadcrumbs'
 import { useToast } from './toast-provider'
 
 export function SkillDetail({ skill }: { skill: Skill }) {
@@ -35,7 +36,7 @@ export function SkillDetail({ skill }: { skill: Skill }) {
       headingOwner="page"
       heading={skill.title}
       description={skill.summary}
-      context={<Breadcrumbs items={[{ label: 'Skills', href: withBase('/skills/') }, { label: skill.title }]} />}
+      context={<RouterBreadcrumbs items={[{ label: 'Skills', href: withBase('/skills/') }, { label: skill.title }]} />}
       actions={
         <Button
           variant="primary"

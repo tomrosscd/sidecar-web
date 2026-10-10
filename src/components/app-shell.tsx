@@ -2,10 +2,13 @@
 
 import { Button, CommandPalette, Icon, WorkspaceShell, type AppEntry, type SidebarEntry } from '@convert/product-ui'
 import { usePathname, useRouter } from 'next/navigation'
-import { useEffect, useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { CURRENT_APP_ID, appMark, suiteApps } from '@/config/apps'
 import { EXTENSION_URL, SHOW_SKILLS } from '@/config/site'
-import { basePath, withBase } from '@/lib/base-path'
+import { withBase } from '@/lib/base-path'
+import { routeLinkClick } from '@/lib/client-navigation'
+import { PromptPanelContent } from './prompt-panel'
+import { useView } from './view-provider'
 import type { SearchEntry } from '@/lib/search-entries'
 
 const items: readonly SidebarEntry[] = [
@@ -37,6 +40,8 @@ export function AppShell({ children, searchEntries }: { children: ReactNode; sea
   const [searchOpen, setSearchOpen] = useState(false)
   const pathname = usePathname()
   const router = useRouter()
+  const { selected, closePrompt } = useView()
+  const panelReturnFocus = useRef<HTMLElement | null>(null)
 
   // The one owner of Cmd/Ctrl+K.
   useEffect(() => {
@@ -61,7 +66,15 @@ export function AppShell({ children, searchEntries }: { children: ReactNode; sea
         currentAppId={CURRENT_APP_ID}
         onSearch={() => setSearchOpen(true)}
         collapsible
-        footer={
+        // The prompt opened from any page is shown as a second canvas beside it (a modal when space is tight).
+        aside={{
+          open: !!selected,
+          onOpenChange: (open) => !open && closePrompt(),
+          heading: selected?.title ?? 'Prompt',
+          panel: selected ? <PromptPanelContent prompt={selected} /> : null,
+          returnFocusRef: panelReturnFocus,
+        }}
+        headerActions={
           <Button
             size="sm"
             variant="primary"
@@ -70,11 +83,7 @@ export function AppShell({ children, searchEntries }: { children: ReactNode; sea
             Get the extension
           </Button>
         }
-        onNavigate={(item, event) => {
-          if (event.metaKey || event.ctrlKey || event.shiftKey || event.button !== 0) return
-          event.preventDefault()
-          router.push(item.href.slice(basePath.length) || '/')
-        }}
+        onNavigate={(item, event) => routeLinkClick(router.push, item.href, event)}
       >
         {children}
       </WorkspaceShell>
