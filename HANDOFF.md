@@ -1,8 +1,45 @@
-# Handoff: Product UI 1.6.0 upgrade
+# Handoff
 
-## Resume here: checks are manual, 8 October 2026
+## Resume here (updated 9 October 2026, Claude Code, Sonnet 5.5)
 
-Branch `ci/manual-checks`, PR open, not merged. `.github/workflows/ci.yml` now runs only on manual dispatch, because the account's free Actions minutes ran out. Before merging any PR, run `pnpm format:check` and `pnpm check` locally and record what passed. The deploy workflow still runs on push to `main` and is unchanged. Not verified: the workflow has not been dispatched on GitHub. The YAML was only parsed locally.
+- Brief: `convert-platform/docs/briefs/02-sidecar-web-cloudflare.md`, milestone M3 (agent part).
+- Branch: `switch-to-cloudflare`, last commit `b3aa12b` (adds `RELEASE.md`), plus a small handoff touch-up after it. PR: [#22](https://github.com/tomrosscd/sidecar-web/pull/22), open, not merged. Related, all open and not merged: [convert-apps#1](https://github.com/tomrosscd/convert-apps/pull/1) (switcher address), [convert-apps#2](https://github.com/tomrosscd/convert-apps/pull/2) and [sidecar#6](https://github.com/tomrosscd/sidecar/pull/6) (README rebuild reminders).
+- State: the release checklist ([RELEASE.md](RELEASE.md)) exists, so the daily rebuild that `pages.yml` provided has a replacement. The rollback steps and last good deployment are below. The agent work for M3 is done.
+- Next step (Tom): set up Cloudflare Access with Google sign-in on the main and preview addresses and confirm sign-in works; confirm the deployment ID below; merge #22 and convert-apps#1; rebuild once using `RELEASE.md` and fill in the first row of the release record; after a few stable days, move to M4.
+- Blockers or questions for Tom: Access is not set up yet (`https://convert-sidecar-web.pages.dev/` returns 200 with no sign-in on 9 October 2026). The deployment ID below needs checking in the dashboard.
+- Verified this session: `pnpm check` and `pnpm format:check` pass (12 test files, 479 tests). The prompts address returns `updated` 2026-10-05 and 74 prompts.
+- Not verified: the Cloudflare dashboard (no access from here), Access sign-in, the rollback procedure itself, the preview address gate.
+- Decisions made: D3, a manual release checklist replaces the daily Pages rebuild (review R4-10). No automation unless the checklist gets missed.
+
+## Last good deployment
+
+| What                     | Value                                                                                 |
+| ------------------------ | ------------------------------------------------------------------------------------- |
+| Cloudflare deployment ID | `7b48c384-bdfc-4cb0-b3a9-3efdb8cad881` **TOM TO CONFIRM in the dashboard**            |
+| Source commit            | `e7da9b1` (`main`)                                                                    |
+| Where the ID came from   | The "Cloudflare Pages" commit status on `e7da9b1` in GitHub, 8 October 2026 22:50 UTC |
+
+The agent could not open the Cloudflare dashboard, so it read the ID from the GitHub commit status link. Check that it is the latest **production** deployment, that it is marked successful, and replace this row if not. Re-record it after the first rebuild following the merge of #22.
+
+## Rollback
+
+Never restore public access as a recovery shortcut.
+
+- **Sidecar Web on Cloudflare is bad:** in the Cloudflare dashboard, open the `convert-sidecar-web` project, then Deployments. Find the last good deployment above, open its menu and choose **Rollback to this deployment**. Cloudflare Pages keeps every deployment.
+- **Fix forward** if the cause is in the code or data: correct it on `main` (or in `prompts.json`) and rebuild as in [RELEASE.md](RELEASE.md).
+- **App switcher points at a bad address:** change the one `href` for the `sidecar-web` entry in `convert-apps` back. Before the GitHub Pages site is switched off, that is the quick revert.
+- **Cloudflare Access breaks sign-in:** fix the Access policy. Do not remove Access.
+- **After GitHub Pages is switched off** there is no Pages fallback. Recovery is a Cloudflare rollback or a fix forward.
+
+## Release record
+
+One row per rebuild. See [RELEASE.md](RELEASE.md) for how to fill it in.
+
+| Date                                            | `prompts.json` `updated` | Prompts | `convert-apps` commit                                             | Cloudflare deployment ID                            | By  |
+| ----------------------------------------------- | ------------------------ | ------- | ----------------------------------------------------------------- | --------------------------------------------------- | --- |
+| 2026-10-08 (last known, not a recorded rebuild) | 2026-10-05               | 74      | `104ad60` (current `main`; the one in the build was not recorded) | `7b48c384-bdfc-4cb0-b3a9-3efdb8cad881` (to confirm) | n/a |
+
+## Earlier: Product UI 1.6.0 upgrade, 8 October 2026
 
 Status: PR open, not merged, not deployed. The live site is not upgraded until the owner merges and the Pages deployment succeeds.
 

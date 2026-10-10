@@ -3,7 +3,8 @@ name: CI
 # Manual only. The account is on the GitHub free plan (2,000 Actions minutes a month, shared by every private
 # repository) and ran out, so checks no longer run on every pull request and push. Run `pnpm format:check` and
 # `pnpm check` locally before merging, and record what passed in the PR. Start this workflow by hand from the
-# Actions tab when you want a clean-room run. The deploy workflow is unchanged.
+# Actions tab when you want a clean-room run. Cloudflare
+# builds and deploys the site, so there is no deploy workflow here.
 on:
   workflow_dispatch:
 
