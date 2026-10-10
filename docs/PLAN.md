@@ -114,9 +114,36 @@ Read first:
 - `pnpm check` green. Deploy, and confirm the live site loads under `/sidecar-web/` with noindex on every page.
 - Update the README and `docs/PLAN.md` with status.
 
+**M8: Public teaser tier (planned, not started)**
+
+Not started until the Cloud Run and IAP move is live and Tom has chosen which prompts are public. It reverses the 8 October 2026 decision that nothing in the suite is public or indexable, so Tom records that change in `convert-platform/docs/decisions.md` first.
+
+Goal: a limited set of prompts is visible to the public as a lead-generation page. The rest are shown as teasers ("Convert staff only", get in touch with Convert to learn more). The full library stays internal, behind IAP.
+
+Rules that cannot bend:
+
+- **Hidden prompt text never reaches a public client.** No CSS blur, no hidden DOM, no data in the public JSON. The public build does not contain it.
+- The extension feed, `prompts.json` on Cloudflare Pages, stays public-safe: it holds `visibility: public` prompts only.
+- IAP covers a whole Cloud Run service, so the public surface is a separate site, not a path on the internal one.
+
+Work:
+
+- Add `visibility: 'public' | 'internal'` to the `prompts.json` schema (the plan already allows it as an optional field). Validation: a missing value means `internal`. The extension feed build rejects `internal` prompts, as it does today. Tom chooses which prompts are public.
+- A `PUBLIC_MODE` build from the same codebase, output to its own folder. In that mode the data layer keeps public prompts in full. For internal prompts it keeps only `slug`, `title`, `category` and a one-line summary, and drops `body`, `description`, `placeholders` and `followUp`. Test that no internal prompt text appears anywhere in the output (`out-public/` files, search index, palette data, route payloads).
+- Public pages show the teasers with a "Convert staff only" label and two actions: "Sign in" (a link to the internal address) and "Get in touch with Convert" (a link to `site.ts`, default a `mailto:`). Copy and the contact address come from Tom. Collections list their public prompts in full and their internal ones as teasers.
+- Hide staff-only features on the public build: saved prompts and the timeframe builder stay, if they work for public prompts only; the skills library stays off.
+- Hosting: the public build deploys to Cloudflare Pages (free, no billing needed for a static site), at a new project such as `convert-sidecar-public`. Give it a "Release" step in `RELEASE.md` alongside the internal one. Indexing is allowed on this site only: replace `noindex` with normal metadata, add a sitemap and robots.txt, and keep the internal site `noindex`.
+- A lead form needs a server and is a later step. `suite-standards.md` already says how a static site posts through a service.
+
+Acceptance:
+
+- Public build: `rg` for the body text of every internal prompt returns nothing in `out-public/`.
+- Internal build: unchanged behaviour for staff; all prompts visible.
+- `pnpm check` green for both builds. Record viewports checked (1440, 1024, 390, 320).
+
 ## Out of scope
 
-Login, gating, admin, submissions workflow, version history, analytics, editing `prompts.json` (it lives in the sidecar repo), and any change to other repos.
+Login and gating (IAP does it outside the app; the public tier is M8), admin, submissions workflow, version history, analytics, editing `prompts.json` (it lives in the sidecar repo), and any change to other repos.
 
 ## When you finish each milestone
 
@@ -134,3 +161,5 @@ Then stop and wait for me.
 All seven milestones are merged and the site is live on Product UI 1.7.0. Build and upgrade records are in HANDOFF.md and the pull requests.
 
 Next: the site moves from GitHub Pages to Cloud Run behind Google's Identity-Aware Proxy (IAP), like Growth Vault, and this repository becomes private. The prompt file stays on Cloudflare Pages with no sign-in, so the extension keeps working throughout: it falls back to its cached prompts. (Cloudflare Access was dropped on 10 October 2026: Zero Trust needs a billing account, and Google Cloud already has one.)
+
+Planned: M8, a public teaser tier. It is written up above and waits for the Cloud Run move to go live.
