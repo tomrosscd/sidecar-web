@@ -1,9 +1,10 @@
 'use client'
 
-import { Breadcrumbs, PageLayout } from '@convert/product-ui'
+import { PageLayout } from '@convert/product-ui'
 import { withBase } from '@/lib/base-path'
 import type { ResolvedCollection } from '@/lib/collections'
 import { PromptPanelHost } from './prompt-panel'
+import { RouterBreadcrumbs } from './router-breadcrumbs'
 import { WorkflowFlow } from './workflow-flow'
 
 export function CollectionDetail({ collection }: { collection: ResolvedCollection }) {
@@ -14,7 +15,7 @@ export function CollectionDetail({ collection }: { collection: ResolvedCollectio
         heading={collection.title}
         description={collection.description}
         context={
-          <Breadcrumbs
+          <RouterBreadcrumbs
             items={[{ label: 'Collections', href: withBase('/collections/') }, { label: collection.title }]}
           />
         }
