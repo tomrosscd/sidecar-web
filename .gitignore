@@ -42,3 +42,6 @@ next-env.d.ts
 
 # Product UI archive fetched by scripts/fetch-product-ui.mjs (private repo, never commit)
 /vendor
+
+# Release settings hold Google Cloud details. The example file is committed.
+!.env.release.example

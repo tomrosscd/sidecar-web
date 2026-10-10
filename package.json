@@ -13,7 +13,9 @@
     "format:check": "prettier --check .",
     "check": "pnpm type-check && pnpm lint && pnpm test && pnpm build",
     "product-ui": "node scripts/fetch-product-ui.mjs",
-    "apps": "node scripts/fetch-apps.mjs"
+    "apps": "node scripts/fetch-apps.mjs",
+    "release": "bash scripts/release.sh",
+    "serve": "node server/static-server.mjs"
   },
   "dependencies": {
     "@convert/product-ui": "file:vendor/convert-product-ui-1.7.0.tgz",

@@ -12,7 +12,7 @@ Status: M1 to M7 built and in review (stacked PRs). See [docs/PLAN.md](docs/PLAN
 - A hidden skills library, built only when `NEXT_PUBLIC_SHOW_SKILLS=true`.
 - `SUBMIT_URL` and the extension link are in `src/config/site.ts`.
 
-Because the data is fetched at build, a new prompt appears on the site after the next build. Cloudflare rebuilds on every push to `main`. After changing `prompts.json` in the sidecar repo, or the shared app list in `convert-apps`, rebuild by following [RELEASE.md](RELEASE.md), which also says what to record each time.
+Because the data is fetched at build, a new prompt appears on the site after the next build. Nothing rebuilds it on a push or on a schedule. After changing `prompts.json` in the sidecar repo, or the shared app list in `convert-apps`, rebuild by following [RELEASE.md](RELEASE.md), which also says what to record each time.
 
 ## Run locally
 
@@ -39,18 +39,19 @@ Parity with the extension: `tests/fixtures/extension-parity.json` is generated f
 
 ## Hosting
 
-The site is a static export, built on Cloudflare Pages at the domain root (leave `NEXT_PUBLIC_BASE_PATH` unset) and gated by Cloudflare Access. Cloudflare build settings:
+The site is a static export served from Cloud Run at the domain root (leave `NEXT_PUBLIC_BASE_PATH` unset), behind Google's Identity-Aware Proxy (IAP), the same sign-in as Growth Vault and Great Cart. `server/static-server.mjs` serves `out/` and adds the noindex and security headers. It has no sign-in code: IAP decides who gets in.
 
-- Build command `node scripts/fetch-product-ui.mjs && node scripts/fetch-apps.mjs && pnpm install --frozen-lockfile && pnpm build`, output directory `out`. Cloudflare's automatic install runs before the build command and fails because the Product UI archive is not in `vendor/` yet, so set `SKIP_DEPENDENCY_INSTALL=1` and install in the build command after the fetch.
-- Variables: `SKIP_DEPENDENCY_INSTALL` (1), `NODE_VERSION` (22), `GH_TOKEN` (a read-only token for the private Product UI and app list repositories; `pnpm product-ui` and `pnpm apps` use the GitHub API when it is set, so the build needs no `gh` CLI) and, optionally, `PROMPTS_URL`.
+Tom releases from his machine with `pnpm release`, which rebuilds from the latest prompts and app list, runs the checks, builds the image in Cloud Build and points the service at it. Settings live in `.env.release` (gitignored; copy `.env.release.example`). The Google Cloud setup and the release steps are in [RELEASE.md](RELEASE.md) and [HANDOFF.md](HANDOFF.md).
 
-There is no GitHub Pages deployment. `.github/workflows/ci.yml` is manual only and fetches Product UI with the `PRODUCT_UI_TOKEN` Actions secret, a read-only token for `tomrosscd/cd-product-ui`.
+`prompts.json` stays on Cloudflare Pages at `convert-sidecar-prompts.pages.dev`, with no sign-in, because the browser extension can't sign in. It holds public-safe prompts only. This site is not hosted there.
+
+There is no GitHub Pages or Cloudflare deployment of the site. `.github/workflows/ci.yml` is manual only and fetches Product UI with the `PRODUCT_UI_TOKEN` Actions secret, a read-only token for `tomrosscd/cd-product-ui`. Locally, `pnpm product-ui` and `pnpm apps` use your `gh` login, or `GH_TOKEN` if set.
 
 Base path support (`NEXT_PUBLIC_BASE_PATH`) remains for hosting under a sub-path, but nothing uses it now.
 
 ## Not indexed
 
-Every page is `noindex, nofollow` through `metadata.robots` in the root layout, and there is no sitemap. `public/_headers` sends `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet` and `public/robots.txt` disallows everything, for hosts that honour them.
+Every page is `noindex, nofollow` through `metadata.robots` in the root layout, and there is no sitemap. `server/static-server.mjs` sends `X-Robots-Tag: noindex, nofollow, noarchive, nosnippet` on every response and `public/robots.txt` disallows everything.
 
 ## Apps
 

@@ -133,4 +133,4 @@ Then stop and wait for me.
 
 All seven milestones are merged and the site is live on Product UI 1.7.0. Build and upgrade records are in HANDOFF.md and the pull requests.
 
-Next: the site and the prompt file move from GitHub Pages to Cloudflare, behind sign-in, and this repository becomes private. The extension keeps working throughout: it falls back to its cached prompts.
+Next: the site moves from GitHub Pages to Cloud Run behind Google's Identity-Aware Proxy (IAP), like Growth Vault, and this repository becomes private. The prompt file stays on Cloudflare Pages with no sign-in, so the extension keeps working throughout: it falls back to its cached prompts. (Cloudflare Access was dropped on 10 October 2026: Zero Trust needs a billing account, and Google Cloud already has one.)
